@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { User } from '../../../models/user';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,7 +9,7 @@ import { User } from '../../../models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public http: Http) { }
+  constructor(private router: Router, public http: Http) { }
   token: String = window.localStorage.getItem('token');
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
@@ -28,7 +28,14 @@ export class HeaderComponent implements OnInit {
           id: data._id, name: data.name,
           password: data.password, email: data.email, date_of_birth: data.date_of_birth,
           occupation: data.occupation, gender: data.gender
-        }; console.log(this.loggedInUser);
+        };
       });
   }
+
+  logout() {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('id');
+    this.router.navigate(['']);
+  }
+
 }

@@ -20,7 +20,6 @@ export class ChatService {
   }
 
   saveNewPost(post, headers) {
-
     return this.http.options('http://localhost:3000/posts', {
       method: 'POST',
       body: post,
@@ -28,6 +27,12 @@ export class ChatService {
     })
   }
 
+  getOneChat(headers, chat) {
+    return this.http.options('http://localhost:3000/chats/' + chat._id, {
+      method: 'GET',
+      headers: headers
+    })
+  }
   getAvatars(userId, headers) {
     return this.http.options('http://localhost:3000/avatars/' + userId, {
       method: 'GET',
@@ -48,8 +53,5 @@ export class ChatService {
       method: 'GET',
       headers: headers
     })
-
   }
-
-
 }

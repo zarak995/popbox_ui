@@ -2,19 +2,8 @@
   <div style="margin: 10px; float: left">
     <div style="border: solid black 2px; padding:5px">Pop|Box</div>
   </div>
-  <div style=" margin: 10px; float: right">
+  <div (click)="logout()" style="margin: 10px; float: right">
     <h6 style="font-size: 90%; text-align: right">{{loggedInUser.name}}</h6>
     <h6 style="font-size: 90%; text-align: right">{{loggedInUser.email}}</h6>
   </div>
-  <!--
-  <div style="float:right;">
-    <div (click)=getProfile(); style="display: inline-block; width:300px;">
-      <h3 style="text-align: right">{{loggedInUser.name}}</h3>
-      <h5 style="text-align: right">{{loggedInUser.email}}</h5>
-    </div>
-  </div>
-</div>
-<div style="border-bottom:yellow solid 3px">
-  <span style="padding-bottom: 0px;"></span>
-</div>-->
 </div>

@@ -1,89 +1,98 @@
-    <div *ngIf="isAvatarModal" id="myModal" class="modal">
-        <div id="myCont" class="modal-content">
-            <header style="width:100%; background-color: lightblue"> Change Avatar Name </header>
+<div *ngIf="isAvatarModal" id="myModal" class="modal">
+    <div id="myCont" class="modal-content">
+        <header style="width:100%; background-color: lightblue"> Change Avatar Name </header>
 
-            <body style="width: 65%; margin :30px">
-                <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
-            </body>
-            <footer style="text-align: right">
-                <button class="btn" (click)="createNewAvatar()"> Submit </button>
-                <button class="btn" (click)="closeModal()"> Cancel </button>
-            </footer>
-        </div>
+        <body style="width: 65%; margin :20px">
+            <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+        </body>
+        <footer style="text-align: right">
+            <button class="btn" (click)="createNewAvatar()"> Submit </button>
+            <button class="btn" (click)="closeModal()"> Cancel </button>
+        </footer>
     </div>
+</div>
 
-    <div *ngIf="isChatModal" id="myModal" class="modal">
-        <div id="myCont" class="modal-content">
-            <header style="width:100%; background-color: lightblue"> Post </header>
+<div *ngIf="isChatModal" id="myModal" class="modal">
+    <div id="myCont" class="modal-content">
+        <header style="width:100%; background-color: lightblue"> Post </header>
 
-            <body style="width: 65%; margin :30px">
-                <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
-            </body>
-            <footer style="text-align: right">
-                <button class="btn" (click)="saveNewAvatar()"> Submit </button>
-                <button class="btn" (click)="closeModal()"> Cancel </button>
-            </footer>
-        </div>
+        <body style="width: 65%; margin :30px">
+            <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+        </body>
+        <footer style="text-align: right">
+            <button class="btn" (click)="saveNewAvatar()"> Submit </button>
+            <button class="btn" (click)="closeModal()"> Cancel </button>
+        </footer>
     </div>
+</div>
 
-    <div style="z-index: -1; position:absolute; left:22%; top:60px; margin:1%; display:inline-block; width:55%; border: solid 2px lightblue">
-        <div style="display:inline-block; width:100%;">
-            <header style="margin: 5%; width:90%;">
-                <div style="padding:10px; border: solid 1px lightgray">
-                    <div *ngFor="let item of listOfAvatars">
+<div style="z-index: -1; position:absolute; left:22%; top:60px; margin:1%; display:inline-block; width:55%; border: solid 2px lightblue">
+    <div style="display:inline-block; width:100%;">
+        <header style="margin: 5%; width:90%;">
+            <div style="padding:10px; border: solid 1px lightgray">
+                <div *ngFor="let item of listOfAvatars">
 
-                        <body (click)="openAvatarModal()" style="display: inline-block; font-size:70%">Posting as
-                            <strong> {{item.name}} </strong>
-                        </body>
-                    </div>
-                    <input type="text" style="border:0px; width: 100%" [(ngModel)]="chatTitle" placeholder="Title" />
-                    <textarea style="border:0px; opacity:0.1; background-color:lightgray; width: 100%" [(ngModel)]="chatBody" placeholder="Body"></textarea>
-                    <button style="display: block" class="btn" (click)="createNewChat()"> post </button>
+                    <body (click)="openAvatarModal()" style="display: inline-block; font-size:70%">Posting as
+                        <strong> {{item.name}} </strong>
+                    </body>
                 </div>
-            </header>
-            <div *ngFor="let chat of listOfChats">
-                <div style="margin-left: 5%; margin-bottom: 2%; width:90%; border: solid lightgray 1px">
-                    <header style="height:30px; background: lightblue; border: solid lightblue 1px">
-                        <div *ngIf="chat.likes.length > 0" style="margin-left: 10px;float: left; text-align:left">
-                            {{chat.likes.length}}
-                            <i style="display:inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-arrow-up"></i>
-                            <h5 style="display:inline-block; margin-left:20px"> {{chat.title}}</h5>
+                <input type="text" style="border:0px; width: 100%" [(ngModel)]="chatTitle" placeholder="Title" />
+                <textarea style="border:0px; opacity:0.1; background-color:lightgray; width: 100%" [(ngModel)]="chatBody" placeholder="Body"></textarea>
+                <button style="display: block" class="btn" (click)="createNewChat()"> post </button>
+            </div>
+        </header>
+        <div *ngFor="let chat of listOfChats">
+            <div style="margin-left: 5%; margin-bottom: 2%; width:90%; border: solid lightgray 1px">
+                <header style="height:30px; background: lightblue; border: solid lightblue 1px">
+                    <div *ngIf="chat.likes.length > 0" style="width:70%; margin-left: 10px;float: left; text-align:left">
+                        <div style="width:17%; float:left;">
+                            <label> {{chat.likes.length}}</label>
+                            <i style="display: inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-heart"></i>
                         </div>
-                        <div *ngIf="chat.likes.length == 0" style="margin-left: 10px;float: left; text-align:left">
-                            <i style="display:inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-arrow-up"></i>
-                            <h5 style="display:inline-block; margin-left:20px"> {{chat.title}}</h5>
-                        </div>
-                        <div style="margin-right: 10px; float:right">
-                            {{chat.owner.name}}
-                        </div>
-                    </header>
-                    <hr>
-                    <p (click)="openChatModal()" style="margin-left: 10px; margin-bottom: 10px;">
-                        {{chat.body}}
-                    </p>
-                    <div style="max-height:150px; overflow-y:auto;">
-                        <div *ngFor="let item of chat.post">
-                            <div style="display:inline-block; margin-left:5%;width:80%; margin-bottom:1%;  color:gray;">
-                                <h6 style="font-size:80%; margin:0px; display:inline-block">
-                                    <strong class="avatar_name">{{item.avatar.name}}</strong>
-                                </h6>
-                                _+ {{item.body}}
-                            </div>
-                            <div style="width:13%;  text-align:right; display:inline-block; font-size:60%; color:gray; ">
-                                <i>
-                                    <h6 style="font-size: 80%; margin-right:0px;">{{item.createdDate}}</h6>
-                                </i>
-                            </div>
+                        <div style="width:80%; float:left;">
+                            <h5 style="margin-left:20px"> {{chat.title}}</h5>
                         </div>
                     </div>
-                    <footer style="width:100%; color:gray; border:solid lightgray 1px; text-align: left">
-                        <i style="margin:1%;" class="fa fa-heart"></i>
-                        <i style="margin:1%;" class="fa fa-share"></i>
-                        <i style="margin:1%" (click)="colourPosts()" class="fa fa-arrow-up"></i>
-                        <input type="text" [ngModel]="message" (ngModelChange)="postMessageChanged($event,chat._id)" style="margin: 1%; width: 60%">
-                        <i class="fa fa-send" (click)="createNewPost(chat._id)"></i>
-                    </footer>
+
+                    <div *ngIf="chat.likes.length == 0" style="width:70%; margin-left: 10px;float: left; text-align:left">
+                        <div style="width:17%; float:left;">
+                            <label></label>
+                            <i style="display: inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-heart"></i>
+                        </div>
+                        <div style="width:80%; float:left;">
+                            <h5 style="margin-left:20px"> {{chat.title}}</h5>
+                        </div>
+                    </div>
+                    <div style="text-align:right; width:27%; float:right;">
+                        <label> {{chat.owner.name}} </label>
+                    </div>
+                </header>
+                <hr>
+                <p (click)="openChatModal()" style="margin-left: 10px; margin-bottom: 10px;">
+                    {{chat.body}}
+                </p>
+                <div style="max-height:150px; overflow-y:auto;">
+                    <div *ngFor="let item of chat.post">
+                        <div style="display:inline-block; margin-left:5%;width:80%; margin-bottom:1%;  color:gray;">
+                            <h6 style="font-size:80%; margin:0px; display:inline-block">
+                                <strong class="avatar_name">{{item.avatar.name}}</strong>
+                            </h6>
+                            _+ {{item.body}}
+                        </div>
+                        <div style="width:13%;  text-align:right; display:inline-block; font-size:60%; color:gray; ">
+                            <i>
+                                <h6 style="font-size: 80%; margin-right:0px;">{{item.createdDate}}</h6>
+                            </i>
+                        </div>
+                    </div>
                 </div>
+                <footer style="width:100%; color:gray; border:solid lightgray 1px; text-align: left">
+                    <i style="margin:1%;" (click)="viewOneChat(chat)" class="fa fa-share"></i>
+                    <i style="margin:1%" (click)="colourPosts()" class="fa fa-arrow-up"></i>
+                    <input type="text" [ngModel]="message" (ngModelChange)="postMessageChanged($event,chat._id)" style="margin: 1%; width: 80%">
+                    <i class="fa fa-send" (click)="createNewPost(chat)"></i>
+                </footer>
             </div>
         </div>
     </div>
+</div>
