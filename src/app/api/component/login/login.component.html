@@ -1,0 +1,30 @@
+<div class="jumbotron">
+  <header>
+    <h1> Suggestion-Box </h1>
+  </header>
+  <section class="firstMainSection">
+    <div style="border: solid white 1px; height: 200px"> </div>
+    <div>
+      <header style="margin: 10px;">
+        <h5> Login</h5>
+      </header>
+
+      <form [formGroup]="loginForm" (submit)="authenticate()">
+        <div class="form-group" style="margin: 10px; width: 93%" [ngClass]="{'has-danger': loginForm.controls.username.invalid && loginForm.controls.username.dirty,
+      'has-success': loginForm.controls.username.valid && loginForm.controls.username.dirty}">
+          <input id="login_txtusername" formControlName="username" class="form-control" placeholder="Enter email" type="text">
+        </div>
+
+        <div class="form-group" style="margin: 10px; width: 93%" [ngClass]="{'has-danger': loginForm.controls.password.invalid && loginForm.controls.password.dirty,
+        'has-success': loginForm.controls.password.valid && loginForm.controls.password.dirty}">
+          <input formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
+            type="text">
+        </div>
+        <div style="margin: 10px;">
+          <input type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-action" value="Sign in">
+        </div>
+      </form>
+    </div>
+  </section>
+  <app-register></app-register>
+</div>

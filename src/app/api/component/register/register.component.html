@@ -1,0 +1,78 @@
+
+  <section class="secondMainSection">
+    <header style="margin-left: 10px; margin-top: 5%;">
+      <h2> Register <h6 style="font-size: small">(all fields are required <strong> --*-- </strong>)</h6></h2>
+    </header>
+    <form [formGroup]="registerForm">
+      <div class="row registerRow">
+        <div style="width:48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.name.invalid && registerForm.controls.name.dirty,
+        'has-success': registerForm.controls.name.valid && registerForm.controls.name.dirty}">
+          <input class="form-control" formControlName="name" placeholder="Enter Name">
+        </div>
+        <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.email.invalid && registerForm.controls.email.dirty,
+      'has-success': registerForm.controls.email.valid && registerForm.controls.email.dirty}">
+          <input class="form-control" formControlName="email" placeholder="Enter email">
+        </div>
+      </div>
+
+      <div style="margin-left:10px; margin-bottom:10px; width:96%; border:solid white 1px">
+        <h6 class="dobH6Style"> Date of Birth</h6>
+        <div class="row registerRow">
+          <div style="width: 32%;" class="form-group" [ngClass]="{'has-danger': registerForm.controls.year.invalid && registerForm.controls.year.dirty,
+      'has-success': registerForm.controls.year.valid && registerForm.controls.year.dirty}">
+            <select options="years" formControlName="year" class="form-control" id="reg_year">              
+                <option>--Year--</option>
+                <option *ngFor="let item of years">{{item}}</option>
+        </select>
+          </div>
+          <div style="width:32%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.month.invalid && registerForm.controls.month.dirty,
+        'has-success': registerForm.controls.month.valid && registerForm.controls.month.dirty}">
+            <select options="months" formControlName="month" class="form-control" id="reg_month">
+                  <option>--Month--</option>
+                  <option *ngFor="let item of months">{{item.value}}</option>
+          </select>
+          </div>
+          <div style="width:32%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.day.invalid && registerForm.controls.day.dirty,
+        'has-success': registerForm.controls.day.valid && registerForm.controls.day.dirty}">
+            <select formControlName="day" class="form-control" name="reg_day">
+                    <option>--Day--</option>
+                    <option *ngFor="let item of days">{{item}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row registerRow">
+        <div style="width:63%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.occupation.invalid && registerForm.controls.occupation.dirty,
+            'has-success': registerForm.controls.occupation.valid && registerForm.controls.occupation.dirty}">
+          <input class="form-control" formControlName="occupation" type="text" name="reg_fullname" placeholder="Enter occupation">
+        </div>
+
+        <div style="width:33%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
+              'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
+          <select formControlName="gender" class="form-control" name="reg_gender">
+                      <option selected>--Select Gender--</option>
+                      <option value="M"> Male </option>
+                      <option value="F">Female</option>
+                      <option value="O"> Other</option>
+                  </select>
+        </div>
+      </div>
+
+      <div class="row registerRow">
+        <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.pass.invalid && registerForm.controls.pass.dirty,
+        'has-success': registerForm.controls.pass.valid && registerForm.controls.pass.dirty}">
+          <input class="form-control" formControlName="pass" placeholder="Enter Password">
+        </div>
+        <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.cpass.invalid && registerForm.controls.cpass.dirty,
+          'has-success': registerForm.controls.cpass.valid && registerForm.controls.cpass.dirty}">
+          <input class="form-control" formControlName="cpass" type="cpass" name="reg_cpass" placeholder="Confirm Password">
+        </div>
+      </div>
+
+      <div cass="row registerRow">
+        <button style=" margin-right:12px; margin-left: 5px;float:right;" class="btn btn-primary"> Cancel </button>
+        <input type="submit" style="float:right;" (click)="addNewUser()" [disabled]="!registerForm.valid" class="btn btn-primary btn-action" value="Submit"> 
+      </div>
+    </form>
+  </section>
