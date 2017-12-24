@@ -15,6 +15,7 @@ import { element } from 'protractor';
 import * as moment from 'moment';
 import { DatePipe } from '@angular/common/src/pipes';
 import { ChatService } from '../chat/chat.service';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -44,6 +45,7 @@ export class ChatComponent implements OnInit {
   currentAvatar: Avatar;
   changedChat: String;
   message: String = "";
+  selectedChat: any = {};
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
 
@@ -51,22 +53,30 @@ export class ChatComponent implements OnInit {
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
 
+  elementScroll() {
+    let chatDivs = document.getElementsByClassName('chat_card') as HTMLCollectionOf<HTMLElement>;
+    let maxChatsDivs = chatDivs.length;
+    if (maxChatsDivs != 0) {
+      for (var x = 0; x < maxChatsDivs; x++) {
+        chatDivs[x].scrollTop = chatDivs[x].scrollHeight;
+      }
+    }
+  }
+
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
       this.getChats();
       this.getAvatars();
+      this.elementScroll()
     } else {
       this.router.navigate(['']);
     }
   }
 
   viewOneChat(chat: any) {
-    this.chatservice.getOneChat(this.headers, chat)
-      .map(res => res.json())
-      .subscribe(data => {
-        console.log(data);
-      })
+
   }
+
 
   getAvatars() {
     this.currentAvatar = null;
@@ -81,18 +91,30 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  sortChatsAndPosts(Posts: any) {
+    for (var i = 0; i < Posts.length; i++) {
+      Posts[i].createdDate = moment(Posts[i].createdDate).fromNow();
+    }
+    return Posts;
+  }
+
   getChats() {
     this.listOfChats = [];
     this.chatservice.getChats(this.headers)
       .map(res => res.json())
       .subscribe(data => {
         data.forEach(element => {
-          if (element.post !== null && element.post.length > 0) {
-            for (var i = 0; i < element.post.length; i++) {
-              element.post[i].createdDate = moment(element.post[i].createdDate).fromNow();
-            }
-          }
           this.listOfChats.push(element);
+        });
+        this.listOfChats = this.listOfChats.reverse();
+        this.listOfChats.forEach(element => {
+          if (element.post !== null) {
+            element.createdDate = moment(element.createdDate).fromNow();
+            if (element.post.length > 0) {
+              element.post = this.sortChatsAndPosts(element.post);
+            }
+
+          }
         });
       })
   }
@@ -100,7 +122,8 @@ export class ChatComponent implements OnInit {
     this.avatar = new Avatar(null, this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
       .map(res => res.json())
-      .subscribe(data => console.log(data))
+      .subscribe(data => { })
+    //Need to change this code below
     this.getAvatars();
     this.closeModal();
   }
@@ -111,106 +134,36 @@ export class ChatComponent implements OnInit {
     if (this.postBody.chatId === chat._id) {
       let max = this.listOfChats.length;
       for (var x = 0; x < max; x++) {
-        if (this.listOfChats[x]._id == chat._id) {
-          let postMax = this.listOfChats[x].post.length;
-          if (this.listOfChats[x].owner.user == this.id) {
+        if (this.listOfChats[x]._id === chat._id) {
+          let maxPost = this.listOfChats[x].post.length;
+          if (this.listOfChats[x].owner._id === this.id) {
             this.post = new Post(this.postBody.chatId, this.listOfChats[x].owner._id, this.postBody.body, Date.now);
-            this.chatservice.saveNewPost(this.post, this.headers)
-              .map(res => res.json())
-              .subscribe((data) => {
-                this.chatservice.getOneChat(this.headers, data)
-                  .map(res => res.json())
-                  .subscribe(data => {
-                    let max = this.listOfChats.length;
-                    for (var i = 0; i < this.listOfChats.length; i++) {
-                      if (this.listOfChats[i]._id === data._id) {
-                        this.listOfChats[i].post = data.post;
-                        let cmax = this.listOfChats[i].post.length;
-                        for (var k = 0; k < cmax; k++) {
-                          this.listOfChats[i].post[k].createdDate = moment(this.listOfChats[i].post[k].createdDate).fromNow();
-                        }
-                      }
-                    }
-                    return;
-                  })
-                return;
-              });
-          }
-          else if (postMax < 0) {
+          } else {
             this.post = new Post(this.postBody.chatId, this.currentAvatar.id, this.postBody.body, Date.now);
-            this.chatservice.saveNewPost(this.post, this.headers)
-              .map(res => res.json())
-              .subscribe((data) => {
-                this.chatservice.getOneChat(this.headers, data)
-                  .map(res => res.json())
-                  .subscribe(data => {
-                    let max = this.listOfChats.length;
-                    for (var i = 0; i < this.listOfChats.length; i++) {
-                      if (this.listOfChats[i]._id === data._id) {
-                        this.listOfChats[i].post = data.post;
-                        let cmax = this.listOfChats[i].post.length;
-                        for (var k = 0; k < cmax; k++) {
-                          this.listOfChats[i].post[k].createdDate = moment(this.listOfChats[i].post[k].createdDate).fromNow();
-                        }
-                      }
-                    }
-                    return;
-                  })
-                return;
-              });
-          } else if (postMax > 0) {
-            for (var y = 0; y < postMax; y++) {
-              if (this.listOfChats[x].post[y].avatar.user === this.id) {
+            for (var y = 0; y < maxPost; y++) {
+              if (maxPost > 0 && this.listOfChats[x].post[y].avatar.user === this.id) {
                 this.post = new Post(this.postBody.chatId, this.listOfChats[x].post[y].avatar._id, this.postBody.body, Date.now);
-                this.chatservice.saveNewPost(this.post, this.headers)
-                  .map(res => res.json())
-                  .subscribe((data) => {
-                    this.chatservice.getOneChat(this.headers, data)
-                      .map(res => res.json())
-                      .subscribe(data => {
-                        let max = this.listOfChats.length;
-                        for (var i = 0; i < this.listOfChats.length; i++) {
-                          if (this.listOfChats[i]._id === data._id) {
-                            this.listOfChats[i].post = data.post;
-                            let cmax = this.listOfChats[i].post.length;
-                            for (var k = 0; k < cmax; k++) {
-                              this.listOfChats[i].post[k].createdDate = moment(this.listOfChats[i].post[k].createdDate).fromNow();
-                            }
-                          }
-                        }
-                        return;
-                      })
-                    return;
-                  });
-                break;
-              } else if (y == postMax - 1) {
-                debugger;
-                this.post = new Post(this.postBody.chatId, this.currentAvatar.id, this.postBody.body, Date.now);
-                this.chatservice.saveNewPost(this.post, this.headers)
-                  .map(res => res.json())
-                  .subscribe((data) => {
-                    this.chatservice.getOneChat(this.headers, data)
-                      .map(res => res.json())
-                      .subscribe(data => {
-                        let max = this.listOfChats.length;
-                        for (var i = 0; i < this.listOfChats.length; i++) {
-                          if (this.listOfChats[i]._id === data._id) {
-                            this.listOfChats[i].post = data.post;
-                            let cmax = this.listOfChats[i].post.length;
-                            for (var k = 0; k < cmax; k++) {
-                              this.listOfChats[i].post[k].createdDate = moment(this.listOfChats[i].post[k].createdDate).fromNow();
-                            }
-                          }
-                        }
-                        return;
-                      })
-                    return;
-                  });
                 break;
               }
+
             }
 
+
           }
+          this.chatservice.saveNewPost(this.post, this.headers)
+            .map(res => res.json())
+            .subscribe((data) => {
+              let max = this.listOfChats.length;
+              for (var i = 0; i < this.listOfChats.length; i++) {                
+                if (this.listOfChats[i]._id === data._id) {
+                  this.listOfChats[i] = data;
+                  this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow()
+                  this.listOfChats[i].post.forEach(element => {
+                    element.createdDate = moment(element.createdDate).fromNow();
+                  });
+                }
+              }
+            });
           break;
         }
       }
@@ -218,11 +171,14 @@ export class ChatComponent implements OnInit {
   }
 
   createNewChat() {
+    debugger;
     this.chat = new Chat(this.chatTitle, this.chatBody, this.currentAvatar.id);
+    console.log(this.chat);
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
-      .subscribe(data => console.log(data));
-    this.getChats();
+      .subscribe(data => {
+        this.listOfChats.push(data)
+      })
   }
 
   createNewChatlike(chatID: any) {
@@ -230,38 +186,20 @@ export class ChatComponent implements OnInit {
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
         let maxLikes = this.listOfChats[i].likes.length;
-        if (maxLikes == 0) {
-          /*for (var x = 0; x < maxLikes; x++) {
-            if (this.listOfChats[i].likes[x].user == this.id) {
-              break;
-            }
-          }
-          break;*/
-          this.listOfChats[i].likes.push(this.currentAvatar.id);
-          console.log(this.listOfChats[i]);
-          this.chatservice.saveNewChatlike(this.listOfChats[i], this.headers)
-            .map(res => res.json())
-            .subscribe(data => {
-              this.listOfChats[i] = data;
-            });
-        } else if (maxLikes > 0) {
-          debugger;
-          for (var j = 0; j < maxLikes; j++) {
-            if (this.listOfChats[i].likes[j].user === this.id) {
-
-              break;
-            }
-            else if (j == maxLikes - 1) {
-              this.listOfChats[i].likes.push(this.currentAvatar.id);
-              console.log(this.listOfChats[i]);
-              this.chatservice.saveNewChatlike(this.listOfChats[i], this.headers)
-                .map(res => res.json())
-                .subscribe(data => {
-                  this.listOfChats[i] = data;
-                });
-            }
+        for (var j = 0; j < maxLikes; j++) {
+          if (this.listOfChats[i].likes[j].user === this.id) {
+            return;
           }
         }
+        this.listOfChats[i].likes.push(this.currentAvatar.id);
+        this.chatservice.saveNewChatlike(this.listOfChats[i], this.headers)
+          .map(res => res.json())
+          .subscribe(data => {
+            this.listOfChats[i] = data;
+            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow();            this.listOfChats[i].post.forEach(element => {
+              element.createdDate = moment(element.createdDate).fromNow();
+            });
+          });
         break;
       }
     }
@@ -287,14 +225,21 @@ export class ChatComponent implements OnInit {
       for (var i = 0; i < post.length; i++) {
         post[i].style.color = "yellow";
       }
-
     }
   }
-  openChatModal() {
+  openChatModal(chat) {
+    this.selectedChat = chat;
     this.isChatModal = true;
-    let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
+    let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
+    }
+  }
+
+  closeChatModal() {
+    let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "none";
     }
   }
 
@@ -304,6 +249,7 @@ export class ChatComponent implements OnInit {
       modal[0].style.display = "none";
     }
   }
+
   getProfile() {
     this.router.navigate(['/profile']);
   }

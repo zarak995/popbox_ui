@@ -1,0 +1,24 @@
+.logged-on-user{
+    font-size: 90%; 
+    text-align: right
+}
+.header-main-header{
+    position:fixed; 
+    height:60px;
+    width: 100%; 
+    background-color:khaki; 
+    font-size: 90%;
+}
+
+@media screen and (max-width: 480px)
+  {
+      .header-main-header{
+        font-size: 50%;
+        height:50px;
+      }
+
+      .logged-on-user{
+          font-size: 50;
+      }
+    
+}

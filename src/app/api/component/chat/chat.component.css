@@ -10,10 +10,6 @@ body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
-.avatar_name{
-    /* */
-    font-family: Georgia, 'Times New Roman', Times, serif
-}
 .modal {
     display: none;
     /* Hidden by default */
@@ -68,6 +64,351 @@ body::-webkit-scrollbar-thumb {
     padding: 0px;
     border: solid white 1px;
     border-radius: 0px;
-    background-color:yellow; 
+    background-color:khaki; 
     color: black;
 }
+
+.chatModal {
+    display:block;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.chatModal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    font-size: 120%;
+   max-height: 500px;
+}
+
+.chat-footer{
+    width:100%; 
+    color:gray; 
+    border-top:solid lightgray 1px; 
+    text-align: left
+}
+
+.comment-date-created{
+    width:13%; 
+    text-align:right; 
+    display:inline-block; 
+    font-size:60%; 
+    color:gray; 
+}
+
+.chat-modal-tittle{
+    margin-top: 15px; 
+    float:left;
+}
+
+
+.chat-modal-body{
+    max-height:200px; 
+    margin-bottom: 10px; 
+    font-size: 130%;
+}
+
+.chat-modal-comment-body{
+    color:gray; 
+    overflow-y: auto; 
+    margin-bottom: 5px; 
+    border: solid 1px khaki; 
+    max-height:200px;
+}
+
+.chat-modal-avatar-name{
+    font-size:80%; 
+    margin:0px; 
+    display:inline-block;
+}
+.chat-modal-input {
+    text-align:center; 
+    width:100%; 
+    margin-bottom:5px;
+}
+.chat-modal-header{
+    width:100%; 
+    text-align:center; 
+    margin-bottom:10px; 
+    background-color: khaki;
+}
+.avatar-modal-header {
+    width:100%; 
+    background-color: khaki;
+}
+.avatar-modal-outer{
+    width: 65%; 
+    margin :20px;
+}
+.avatar-modal-input{
+    width:100%;
+    border:none; 
+    border-bottom: solid 1px lightgray;
+}
+
+.chat-outer-div {
+    display:inline-block; 
+    width:100%;
+}
+.new-chat-as-header{
+    margin: 5%; 
+    width:90%;
+}
+.new-chat-outer-div{
+    padding:10px; 
+    border: solid 1px lightgray;
+}
+.avatar-name {
+    font-size: 70%; 
+    float:right;
+}
+.input-no-border-100{
+    border: solid  lightgray 1px; 
+    width: 100%;
+    margin-bottom:2px; 
+
+}
+.chat-card-main-div{
+    margin-left: 5%; 
+    margin-bottom: 2%; 
+    width:90%; 
+    border: solid lightgray 1px;
+}
+
+.chat-card-header-div{
+    height:30px; 
+    background:khaki; 
+    border: solid crimson 1px;
+}
+
+.chat-likes-div{
+    width:17%; 
+    float:left;
+}
+.chat-title-div{
+    margin-left:10px; 
+    display: inline-block;
+}
+.chat-owner{
+    text-align:right; 
+    width:27%; 
+    float:right;
+}
+.chat-body{
+    margin-left: 10px; 
+   margin-bottom: 10px;
+}
+.outer-comment-div{
+    max-height:150px; 
+    overflow-y:auto;
+}
+.comment-item-div{
+    display:inline-block;
+    margin-left:5%;
+    width:80%; 
+    color:gray;
+}
+
+.chat-component-main-div{
+    z-index: -1; 
+    position:absolute; 
+    left:22%; 
+    top:60px; 
+    margin:1%; 
+    display:inline-block;
+    width:55%; 
+    border: solid 2px lightgray;
+}
+
+.hr-division{
+    margin-top:10px; 
+    margin-bottom: 0px;
+}
+
+.chat-card-main-div-header{
+    margin-top:0px;
+    display:inline-block; 
+    background-color: khaki;  
+    height:35px;  
+    width:100%;
+}
+
+.comment-input{
+    margin: 1%; 
+    width: 90%;
+    font-size: 80%;
+    
+}
+
+.chat-header-tittle{
+    margin-left:20px;   
+}
+.comment-send-icon{
+    font-size: 90%;
+}
+.chat-created-date{
+    margin-left:12px; 
+    font-size: 50%;
+    width:17%;
+    
+}
+
+.chat-header-tittle{
+    margin-left:10px; 
+    display: inline-block 
+}
+
+.comment-main-div{
+    margin-left:25px; 
+    margin-bottom:1px;
+    border-top:solid lightgray 1px; 
+    width: 95%;
+}
+
+.comment-body{
+    display:inline-block; 
+    width:74%; 
+    font-size:70%
+}
+.comment-createdDate {
+    display:inline-block; 
+    font-size:50%;
+}
+.comment-avatar_name{
+    display:inline-block; 
+    margin-left:1px; 
+    font-size:70%;
+}
+
+@media screen and (max-width :590px){
+    .chat-component-main-div{
+        left: 2%;
+        width: 95%;
+        border: 0px;
+    }
+    .avatar-name{
+        font-size: 40%;        
+    }
+    .input-no-border-100{
+        font-size: 40%;
+        margin: 1px;
+        border: lightgray solid 1px;
+    }
+    .btn {
+        width: 10%;
+        text-align: center;
+        font-size: 20%;
+        padding:2px 2px 2px 2px;
+        border-radius: 0px;
+    }
+    .chat-tittle-likes-div{
+    height: 18px;    
+    }
+    .chat-likes-div {
+        width: 25%; 
+        margin: 0px;
+        margin-top:px;
+        font-size: 55%;
+        height: 15px;         
+    }
+    .chat-card-header-div{
+        height:20px;
+    }
+
+    .chat-owner{
+        font-size: 50%;
+        width:25%;
+        height: 18px;
+        padding: 2px;
+    }
+
+    .chat-body{
+        font-size: 40%;
+    }
+
+    .comment-owner {
+        font-size:15%; 
+        margin:0px; 
+        margin-left:10px; 
+        border:solid green 1px; 
+        padding:0px;
+    }
+    .outer-comment-div{
+        max-height: 75px;
+        font-size: 10%;
+        padding:0px;
+        
+    }
+    .comment-date-created{
+        margin:0px;          
+    }
+    .hr-division{
+        margin-top:5px; 
+        margin-bottom: 0px;
+    }
+    .comment-input{
+        margin: 1%; 
+        width: 90%;
+        height: 15px;
+        font-size: 30%;    
+    }
+    .comment-send-icon{
+        font-size:60%;
+    }
+
+    .chat-created-date{
+        margin-left:8px;
+        font-size: 0.5%; 
+        width:30%;
+    }
+
+    .chat-header-tittle{
+        font-size: 20%; 
+    }    
+    .chat-card-main-div-header{
+        height:15px;
+        font-size: 50%;
+    }
+    .comment-main-div{
+        margin-left:10px; 
+        margin-bottom:1px;
+        border-top:solid lightgray 1px; 
+        width: 95%;
+    }
+    .comment-avatar_name{
+        font-size: 10%;
+    }
+    .comment-body{
+        width: 78%;
+    }
+}
+
+@media screen and (max-width:240px) {
+    .comment-item-div {
+        width: 67%;
+        padding-bottom:0px;
+        margin-bottom: 0px;
+    }    
+}
+

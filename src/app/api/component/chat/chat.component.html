@@ -1,9 +1,9 @@
 <div *ngIf="isAvatarModal" id="myModal" class="modal">
     <div id="myCont" class="modal-content">
-        <header style="width:100%; background-color: lightblue"> Change Avatar Name </header>
+        <header class="avatar-modal-header"> Change Avatar Name </header>
 
-        <body style="width: 65%; margin :20px">
-            <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+        <body class="avatar-modal-outer">
+            <input class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
         <footer style="text-align: right">
             <button class="btn" (click)="createNewAvatar()"> Submit </button>
@@ -12,87 +12,116 @@
     </div>
 </div>
 
-<div *ngIf="isChatModal" id="myModal" class="modal">
-    <div id="myCont" class="modal-content">
-        <header style="width:100%; background-color: lightblue"> Post </header>
+<div *ngIf="isChatModal" id="myModal" class="chatModal">
+    <div id="myCont" class="chatModal-content">
+        <header class="chat-modal-header">
+            {{selectedChat.likes.length}}
+            <i class="chat-modal-tittle" class="fa fa-heart"></i>
+            <h2>{{selectedChat.title}}</h2>
+        </header>
 
-        <body style="width: 65%; margin :30px">
-            <input style="width:100%;border:none; border-bottom: solid 1px lightgray" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+        <body style="width:100%;">
+            <p class="chat-modal-body">
+                {{selectedChat.body}}
+            </p>
+
+            <div *ngIf="selectedChat.post.length > 0" class="chat-modal-comment-body">
+                <div *ngFor="let item of selectedChat.post">
+                    <h6 class="chat-modal-comment-avatar-name">
+                        <strong class="avatar_name">{{item.avatar.name}}</strong>
+                    </h6>
+                    <div style="display:inline-block"> _+{{item.body}}</div>
+                </div>
+            </div>
+            <input class="chat-modal-input" [ngModel]="message" (ngModelChange)="postMessageChanged($event,selectedChat._id)" placeholder="Enter your comment"
+                type="text" />
         </body>
         <footer style="text-align: right">
-            <button class="btn" (click)="saveNewAvatar()"> Submit </button>
-            <button class="btn" (click)="closeModal()"> Cancel </button>
+            <button class="btn" (click)="createNewPost(selectedChat)"> Submit </button>
+            <button class="btn" (click)="closeChatModal()"> Cancel </button>
         </footer>
     </div>
 </div>
 
-<div style="z-index: -1; position:absolute; left:22%; top:60px; margin:1%; display:inline-block; width:55%; border: solid 2px lightblue">
-    <div style="display:inline-block; width:100%;">
-        <header style="margin: 5%; width:90%;">
-            <div style="padding:10px; border: solid 1px lightgray">
-                <div *ngFor="let item of listOfAvatars">
+<div class="chat-component-main-div">
+    <div class="chat-outer-div">
+        <header class="new-chat-as-header">
+            <div class="new-chat-outer-div">
+                <div>
 
-                    <body (click)="openAvatarModal()" style="display: inline-block; font-size:70%">Posting as
-                        <strong> {{item.name}} </strong>
+                    <body (click)="openAvatarModal()" class="avatar-name">Posting as
+                        <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
                     </body>
                 </div>
-                <input type="text" style="border:0px; width: 100%" [(ngModel)]="chatTitle" placeholder="Title" />
-                <textarea style="border:0px; opacity:0.1; background-color:lightgray; width: 100%" [(ngModel)]="chatBody" placeholder="Body"></textarea>
+                <input type="text" class="input-no-border-100" [(ngModel)]="chatTitle" placeholder="Title" />
+                <textarea class="input-no-border-100" [(ngModel)]="chatBody" placeholder="Body"></textarea>
                 <button style="display: block" class="btn" (click)="createNewChat()"> post </button>
             </div>
         </header>
         <div *ngFor="let chat of listOfChats">
-            <div style="margin-left: 5%; margin-bottom: 2%; width:90%; border: solid lightgray 1px">
-                <header style="height:30px; background: lightblue; border: solid lightblue 1px">
-                    <div *ngIf="chat.likes.length > 0" style="width:70%; margin-left: 10px;float: left; text-align:left">
-                        <div style="width:17%; float:left;">
-                            <label> {{chat.likes.length}}</label>
-                            <i style="display: inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-heart"></i>
-                        </div>
-                        <div style="width:80%; float:left;">
-                            <h5 style="margin-left:20px"> {{chat.title}}</h5>
-                        </div>
+            <div class="chat-card-main-div">
+                <div *ngIf="chat.likes.length > 0 && chat.post.length > 0" class="chat-card-main-div-header">
+                    <div style="display: inline-block">
+                        <label style="margin-left:10px;"> {{chat.likes.length}} </label>
+                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
+                        <label style="margin-left:10px;"> {{chat.post.length}} </label>
+                        <i class="fa fa-comment-o"></i>
                     </div>
+                    <div class="chat-header-tittle"> {{chat.title}} </div>
+                    <div class="avatar-name">{{chat.owner.name}}</div>
+                </div>
+                <div *ngIf="chat.likes.length== 0 && chat.post.length == 0" class="chat-card-main-div-header">
+                    <div style="display: inline-block">
+                        <label style="margin-left:10px;"> </label>
+                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
+                        <label style="margin-left:10px;"> </label>
+                        <i class="fa fa-comment-o"></i>
+                    </div>
+                    <div class="chat-header-tittle"> {{chat.title}} </div>
+                    <div class="avatar-name">{{chat.owner.name}}</div>
+                </div>
 
-                    <div *ngIf="chat.likes.length == 0" style="width:70%; margin-left: 10px;float: left; text-align:left">
-                        <div style="width:17%; float:left;">
-                            <label></label>
-                            <i style="display: inline-block" (click)="createNewChatlike(chat._id)" class="fa fa-heart"></i>
-                        </div>
-                        <div style="width:80%; float:left;">
-                            <h5 style="margin-left:20px"> {{chat.title}}</h5>
-                        </div>
+                <div *ngIf="chat.likes.length > 0 && chat.post.length == 0" class="chat-card-main-div-header">
+                    <div style="display: inline-block">
+                        <label style="margin-left:10px;"> {{chat.likes.length}} </label>
+                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
+                        <label style="margin-left:10px;"> </label>
+                        <i class="fa fa-comment-o"></i>
                     </div>
-                    <div style="text-align:right; width:27%; float:right;">
-                        <label> {{chat.owner.name}} </label>
+                    <div class="chat-header-tittle"> {{chat.title}} </div>
+                    <div class="avatar-name">{{chat.owner.name}}</div>
+                </div>
+
+                <div *ngIf="chat.likes.length == 0 && chat.post.length > 0" class="chat-card-main-div-header">
+                    <div style="display: inline-block">
+                        <label style="margin-left:10px;"> </label>
+                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"> </i>
+                        <label style="margin-left:10px;">{{chat.post.length}}</label>
+                        <i class="fa fa-comment-o"></i>
                     </div>
-                </header>
-                <hr>
-                <p (click)="openChatModal()" style="margin-left: 10px; margin-bottom: 10px;">
+                    <div class="chat-header-tittle"> {{chat.title}} </div>
+                    <div class="avatar-name">{{chat.owner.name}}</div>
+                </div>
+
+                <div class="chat-created-date"> {{chat.createdDate}} </div>
+                <hr class="hr-division">
+                <p (click)="openChatModal(chat)" class="chat-body">
                     {{chat.body}}
                 </p>
-                <div style="max-height:150px; overflow-y:auto;">
-                    <div *ngFor="let item of chat.post">
-                        <div style="display:inline-block; margin-left:5%;width:80%; margin-bottom:1%;  color:gray;">
-                            <h6 style="font-size:80%; margin:0px; display:inline-block">
-                                <strong class="avatar_name">{{item.avatar.name}}</strong>
-                            </h6>
-                            _+ {{item.body}}
-                        </div>
-                        <div style="width:13%;  text-align:right; display:inline-block; font-size:60%; color:gray; ">
-                            <i>
-                                <h6 style="font-size: 80%; margin-right:0px;">{{item.createdDate}}</h6>
-                            </i>
+                <div (click)="openChatModal()" class="outer-comment-div">
+                    <div *ngIf="chat.post.length > 0">
+                        <div class="comment-main-div" *ngFor="let item of chat.post">
+                            <div class="comment-avatar_name">
+                                <strong>{{item.avatar.name}}</strong> _++</div>
+                            <div class="comment-body">{{item.body}} </div>
+                            <div class="comment-createdDate"> {{item.createdDate}} </div>
                         </div>
                     </div>
                 </div>
-                <footer style="width:100%; color:gray; border:solid lightgray 1px; text-align: left">
-                    <i style="margin:1%;" (click)="viewOneChat(chat)" class="fa fa-share"></i>
-                    <i style="margin:1%" (click)="colourPosts()" class="fa fa-arrow-up"></i>
-                    <input type="text" [ngModel]="message" (ngModelChange)="postMessageChanged($event,chat._id)" style="margin: 1%; width: 80%">
-                    <i class="fa fa-send" (click)="createNewPost(chat)"></i>
+                <footer class="chat-footer">
+                    <input type="text" [ngModel]="message" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"
+                        class="comment-input">
+                    <i class=" comment-send-icon fa fa-send" (click)="createNewPost(chat)"></i>
                 </footer>
             </div>
         </div>
-    </div>
-</div>

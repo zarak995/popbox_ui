@@ -1,14 +1,15 @@
 .firstMainSection{
-    background: yellow; width:30%; 
+    background:lightblue; 
+    width:30%; 
     top:20%; 
-    height:400px;
+    height:100px;
     width:35%;  
     position: absolute;  
     right: 60%; 
 }
 
 .secondMainSection{
-    background-color: yellow; 
+    background-color: lightblue; 
     width:35%; 
     top:20%; 
     height:400px; 
@@ -25,3 +26,8 @@
      margin-top:5px
 }
 
+@media screen and (max-width :590px){
+    .secondMainSection{
+        display: none;
+    }            
+}

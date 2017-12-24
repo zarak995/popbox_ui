@@ -15,6 +15,8 @@ import { HeaderComponent } from './api/component/header/header.component';
 import { ChatService } from './api/component/chat/chat.service';
 import { RightnavComponent } from './api/component/rightnav/rightnav.component';
 import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
+import { LoginService } from '../app/api/component/login/login.service';
+import{LeftnavService} from './api/component/leftnav/leftnav.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,7 @@ import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
     Routing,
     ReactiveFormsModule
   ],
-  providers: [ChatService],
+  providers: [ChatService,LeftnavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

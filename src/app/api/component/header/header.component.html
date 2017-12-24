@@ -1,9 +1,9 @@
-<div style="position:fixed; width: 100%; background-color:lightblue; height: 60px">
-  <div style="margin: 10px; float: left">
+<div class="header-main-header">
+  <div style="margin: 13px; float: left">
     <div style="border: solid black 2px; padding:5px">Pop|Box</div>
   </div>
   <div (click)="logout()" style="margin: 10px; float: right">
-    <h6 style="font-size: 90%; text-align: right">{{loggedInUser.name}}</h6>
-    <h6 style="font-size: 90%; text-align: right">{{loggedInUser.email}}</h6>
+    <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
+    <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
   </div>
 </div>

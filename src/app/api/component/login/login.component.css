@@ -1,13 +1,13 @@
-.firstMainSection{
-    background: yellow; width:30%; 
-    top:20%; 
-    height:400px;
-    width:35%;  
-    position: absolute;  
-    right: 60%; 
+
+.popboxHeader{
+    border:solid 1px black; 
+    margin-left:70px; 
+    margin-top:80px; 
+    width:34.7%;
+    text-align: center;
 }
 .secondMainSection{
-    background-color: yellow; 
+    background-color:lightblue; 
     width:35%; 
     top:20%; 
     height:400px; 
@@ -24,3 +24,36 @@
      margin-top:5px
 }
 
+.emptyWhiteDiv{
+    border: solid white 1px; 
+    height: 200px;
+}
+
+.firstMainSection {
+    background: khaki;
+    top:20%; 
+    height:400px;
+    width:35%;  
+    position: absolute;  
+    right: 60%; 
+}
+
+@media screen and (max-width :590px){
+        .firstMainSection {
+               top:60px;
+               width: 100%;
+               right: 0px;
+        } 
+
+        .popboxHeader {
+            text-align: center;
+            border:solid 1px black; 
+            margin-left:0px; 
+            margin-top:0px; 
+            width:100%        
+        }
+        .emptyWhiteDiv{
+        display: none;
+        }
+
+}
