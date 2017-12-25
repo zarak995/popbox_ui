@@ -15,7 +15,7 @@ export class UserService {
   });
 
   getUserCurrentUserData() {
-    return this.http.get('localhost:3000/Users', this.options.body)
+    return this.http.get('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/Users', this.options.body)
     .map(res => res.json());
   }
 }

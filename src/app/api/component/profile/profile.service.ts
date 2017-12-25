@@ -11,7 +11,7 @@ export class ProfileService {
     const userId = window.localStorage.getItem('id');
     const headers = new Headers({'authorization': token, 'content-type': 'application/json'});
     debugger;
-    return this.http.options('http://localhost:3000/users/' + userId,{
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/users/' + userId,{
       headers: headers, 
       method: 'GET'
   })

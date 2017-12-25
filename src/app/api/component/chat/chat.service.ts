@@ -5,7 +5,7 @@ import { Post } from '../../../models/Post';
 export class ChatService {
   constructor(public http: Http) { }
   saveNewChat(chat, headers) {
-    return this.http.options('http://localhost:3000/chats', {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats', {
       method: 'POST',
       body: chat,
       headers: headers
@@ -13,7 +13,7 @@ export class ChatService {
   }
 
   saveNewAvatar(avatar, headers, userId) {
-    return this.http.options('http://localhost:3000/avatars/' + userId, {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/avatars/' + userId, {
       method: 'POST',
       body: avatar,
       headers: headers
@@ -23,7 +23,7 @@ export class ChatService {
   saveNewPost(post, headers) {
     console.log("its here");
     console.log(Post)
-    return this.http.options('http://localhost:3000/posts', {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/posts', {
       method: 'POST',
       body: post,
       headers: headers
@@ -31,19 +31,19 @@ export class ChatService {
   }
 
   getOneChat(headers, chat) {
-    return this.http.options('http://localhost:3000/chats/' + chat._id, {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/' + chat._id, {
       method: 'GET',
       headers: headers
     })
   }
   getAvatars(userId, headers) {
-    return this.http.options('http://localhost:3000/avatars/' + userId, {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/avatars/' + userId, {
       method: 'GET',
       headers: headers
     })
   }
   saveNewChatlike(chat, headers) {
-    return this.http.options('http://localhost:3000/chats/' + chat._id,
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/' + chat._id,
       {
         method: 'PUT',
         body: chat,
@@ -52,7 +52,7 @@ export class ChatService {
   }
 
   getChats(headers) {
-    return this.http.options('http://localhost:3000/chats/', {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/', {
       method: 'GET',
       headers: headers
     })

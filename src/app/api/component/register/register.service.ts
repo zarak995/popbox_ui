@@ -8,7 +8,7 @@ export class RegisterService {
 
   registerNewUser(newUser: User) {
     debugger;
-    return this.http.options('http://localhost:3000/login/reg', {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/login/reg', {
       method: 'POST',
       body: newUser
     }).map(res => res.json());

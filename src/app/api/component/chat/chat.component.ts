@@ -154,7 +154,7 @@ export class ChatComponent implements OnInit {
             .map(res => res.json())
             .subscribe((data) => {
               let max = this.listOfChats.length;
-              for (var i = 0; i < this.listOfChats.length; i++) {                
+              for (var i = 0; i < this.listOfChats.length; i++) {
                 if (this.listOfChats[i]._id === data._id) {
                   this.listOfChats[i] = data;
                   this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow()
@@ -177,7 +177,15 @@ export class ChatComponent implements OnInit {
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
       .subscribe(data => {
-        this.listOfChats.push(data)
+        this.listOfChats.push(data);
+        this.listOfChats.forEach(element => {
+          if (element.post !== null) {
+            element.createdDate = moment(element.createdDate).fromNow();
+            if (element.post.length > 0) {
+              element.post = this.sortChatsAndPosts(element.post);
+            }
+          }
+        })
       })
   }
 
@@ -196,7 +204,7 @@ export class ChatComponent implements OnInit {
           .map(res => res.json())
           .subscribe(data => {
             this.listOfChats[i] = data;
-            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow();            this.listOfChats[i].post.forEach(element => {
+            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
               element.createdDate = moment(element.createdDate).fromNow();
             });
           });

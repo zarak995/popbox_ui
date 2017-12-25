@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
   getData() {
     this.loggedInUser = new User();
-    this.http.options('http://localhost:3000/users/' + this.id, {
+    this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/users/' + this.id, {
       method: 'GET',
       headers: this.headers
     }).map(res => res.json())

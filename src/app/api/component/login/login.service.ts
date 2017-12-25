@@ -15,7 +15,7 @@ export class LoginService {
       body: data,
     });
 
-    return this.http.post('http://localhost:3000/login', options.body)
+    return this.http.post('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/login', options.body)
       .map(res => res.json());
   }
 
