@@ -1,9 +1,8 @@
 <div *ngIf="isAvatarModal" id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
-
         <body class="avatar-modal-outer">
-            <input class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+            <input maxlength="15" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
         <footer style="text-align: right">
             <button class="btn" (click)="createNewAvatar()"> Submit </button>
@@ -15,9 +14,16 @@
 <div *ngIf="isChatModal" id="myModal" class="chatModal">
     <div id="myCont" class="chatModal-content">
         <header class="chat-modal-header">
-            {{selectedChat.likes.length}}
-            <i class="chat-modal-tittle" class="fa fa-heart"></i>
-            <h2>{{selectedChat.title}}</h2>
+            <div class="chat-header-likescomments-div">
+                <label> {{selectedChat.likes.length}}</label>
+                <i (click)="createNewChatlike(selectedChat._id)" class="fa fa-heart-o"></i>
+                <label style="margin-left:10px"> {{selectedChat.post.length}}</label>
+                <i class="fa fa-comment-o"></i>
+            </div>
+            <div class="chat-modal-selectedChat-title-div">
+                <h2 class="chat-modal-selectedChat-title">{{selectedChat.title}}</h2>
+            </div>
+            <div class="chat-modal-owner"> {{selectedChat.owner.name}} </div>
         </header>
 
         <body style="width:100%;">
@@ -25,12 +31,12 @@
                 {{selectedChat.body}}
             </p>
 
-            <div *ngIf="selectedChat.post.length > 0" class="chat-modal-comment-body">
-                <div *ngFor="let item of selectedChat.post">
-                    <h6 class="chat-modal-comment-avatar-name">
-                        <strong class="avatar_name">{{item.avatar.name}}</strong>
-                    </h6>
-                    <div style="display:inline-block"> _+{{item.body}}</div>
+            <div *ngIf="selectedChat.likes.length > 0 && selectedChat.post.length > 0">
+                <div *ngFor="let item of selectedChat.post" class="comment-main-div">
+                    <div class="comment-avatar_name">
+                        <strong>{{item.avatar.name}}</strong> _++</div>
+                    <div class="comment-body">{{item.body}} </div>
+                    <div class="comment-createdDate"> {{item.createdDate}} </div>
                 </div>
             </div>
             <input class="chat-modal-input" [ngModel]="message" (ngModelChange)="postMessageChanged($event,selectedChat._id)" placeholder="Enter your comment"
@@ -53,8 +59,8 @@
                         <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
                     </body>
                 </div>
-                <input type="text" class="input-no-border-100" [(ngModel)]="chatTitle" placeholder="Title" />
-                <textarea class="input-no-border-100" [(ngModel)]="chatBody" placeholder="Body"></textarea>
+                <input type="text" class="input-no-border-100" maxlength="50" [(ngModel)]="chatTitle" placeholder="Title" />
+                <textarea class="input-no-border-100" maxlength="1001" [(ngModel)]="chatBody" placeholder="Body"></textarea>
                 <button style="display: block" class="btn" (click)="createNewChat()"> post </button>
             </div>
         </header>
@@ -64,7 +70,7 @@
                     <div style="display: inline-block">
                         <label style="margin-left:10px;"> {{chat.likes.length}} </label>
                         <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
-                        <label style="margin-left:10px;"> {{chat.post.length}} </label>
+                        <label style="margin-left:10px;">{{chat.post.length}} </label>
                         <i class="fa fa-comment-o"></i>
                     </div>
                     <div class="chat-header-tittle"> {{chat.title}} </div>
@@ -91,7 +97,7 @@
                     <div class="chat-header-tittle"> {{chat.title}} </div>
                     <div class="avatar-name">{{chat.owner.name}}</div>
                 </div>
-
+                
                 <div *ngIf="chat.likes.length == 0 && chat.post.length > 0" class="chat-card-main-div-header">
                     <div style="display: inline-block">
                         <label style="margin-left:10px;"> </label>
@@ -102,7 +108,6 @@
                     <div class="chat-header-tittle"> {{chat.title}} </div>
                     <div class="avatar-name">{{chat.owner.name}}</div>
                 </div>
-
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
                 <hr class="hr-division">
                 <p (click)="openChatModal(chat)" class="chat-body">
@@ -113,13 +118,13 @@
                         <div class="comment-main-div" *ngFor="let item of chat.post">
                             <div class="comment-avatar_name">
                                 <strong>{{item.avatar.name}}</strong> _++</div>
-                            <div class="comment-body">{{item.body}} </div>
+                            <div class="comment-body"> {{item.body}} </div>
                             <div class="comment-createdDate"> {{item.createdDate}} </div>
                         </div>
                     </div>
                 </div>
                 <footer class="chat-footer">
-                    <input type="text" [ngModel]="message" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"
+                    <input type="text" [ngModel]="message" maxlength="709" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"
                         class="comment-input">
                     <i class=" comment-send-icon fa fa-send" (click)="createNewPost(chat)"></i>
                 </footer>

@@ -16,7 +16,8 @@ import { ChatService } from './api/component/chat/chat.service';
 import { RightnavComponent } from './api/component/rightnav/rightnav.component';
 import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
 import { LoginService } from '../app/api/component/login/login.service';
-import{LeftnavService} from './api/component/leftnav/leftnav.service'
+import{LeftnavService} from './api/component/leftnav/leftnav.service';
+import { FooterComponent } from './api/component/footer/footer.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import{LeftnavService} from './api/component/leftnav/leftnav.service'
     HeaderComponent,
     RightnavComponent,
     LeftnavComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
 .modal {
     display: none;
     /* Hidden by default */
@@ -149,7 +150,7 @@ body::-webkit-scrollbar-thumb {
 }
 .chat-modal-header{
     width:100%; 
-    text-align:center; 
+    text-align:left; 
     margin-bottom:10px; 
     background-color: khaki;
 }
@@ -267,6 +268,11 @@ body::-webkit-scrollbar-thumb {
 .comment-send-icon{
     font-size: 90%;
 }
+.chat-header-likescomments-div{
+    display:inline-block; 
+    text-align: center; 
+    width:13%;
+}
 .chat-created-date{
     margin-left:12px; 
     font-size: 50%;
@@ -286,19 +292,28 @@ body::-webkit-scrollbar-thumb {
     width: 95%;
 }
 
-.comment-body{
-    display:inline-block; 
-    width:74%; 
-    font-size:70%
+.comment-body {  
+    width:85%; 
+    display:inline-block;
+    font-size:80%;
 }
 .comment-createdDate {
-    display:inline-block; 
     font-size:50%;
+    display:inline-block;
 }
 .comment-avatar_name{
-    display:inline-block; 
     margin-left:1px; 
     font-size:70%;
+}
+.chat-modal-owner{
+    display:inline-block; 
+    width:20%; 
+    text-align: center;
+}
+.chat-modal-selectedChat-title-div{
+    width:65%; 
+    text-align: center; 
+    display:inline-block;
 }
 
 @media screen and (max-width :590px){
@@ -308,7 +323,7 @@ body::-webkit-scrollbar-thumb {
         border: 0px;
     }
     .avatar-name{
-        font-size: 40%;        
+        font-size: 50%;        
     }
     .input-no-border-100{
         font-size: 40%;
@@ -344,11 +359,11 @@ body::-webkit-scrollbar-thumb {
     }
 
     .chat-body{
-        font-size: 40%;
+        font-size: 60%;
     }
 
     .comment-owner {
-        font-size:15%; 
+        font-size:25%; 
         margin:0px; 
         margin-left:10px; 
         border:solid green 1px; 
@@ -360,9 +375,7 @@ body::-webkit-scrollbar-thumb {
         padding:0px;
         
     }
-    .comment-date-created{
-        margin:0px;          
-    }
+    
     .hr-division{
         margin-top:5px; 
         margin-bottom: 0px;
@@ -371,7 +384,7 @@ body::-webkit-scrollbar-thumb {
         margin: 1%; 
         width: 90%;
         height: 15px;
-        font-size: 30%;    
+        font-size: 50%;    
     }
     .comment-send-icon{
         font-size:60%;
@@ -382,33 +395,59 @@ body::-webkit-scrollbar-thumb {
         font-size: 0.5%; 
         width:30%;
     }
-
-    .chat-header-tittle{
-        font-size: 20%; 
-    }    
+    
     .chat-card-main-div-header{
         height:15px;
-        font-size: 50%;
+        font-size: 60%;
     }
+    
     .comment-main-div{
         margin-left:10px; 
         margin-bottom:1px;
         border-top:solid lightgray 1px; 
         width: 95%;
     }
+    
+    .avatar-modal-header{
+        font-size: 60%;
+    }
+    
     .comment-avatar_name{
-        font-size: 10%;
+        font-size: 190%;
+    }
+
+    .avatar-modal-input{
+        font-size:50%;
+    }
+
+    .modal-content {
+        height: 150px;     
+        width: 75%;
+    }
+
+    .chatModal-content{
+        width: 80%;
+    }    
+
+    .chat-modal-owner{
+        font-size:50%;
+        display:block;
+    }
+
+    .chat-modal-selectedChat-title{
+        font-size: 90%;
+    }
+    
+    .chat-modal-body{
+        font-size: 80%;
     }
     .comment-body{
-        width: 78%;
+        font-size:60%;
+    }
+    .comment-createdDate{
+        font-size:10%;
     }
 }
 
-@media screen and (max-width:240px) {
-    .comment-item-div {
-        width: 67%;
-        padding-bottom:0px;
-        margin-bottom: 0px;
-    }    
-}
+
 

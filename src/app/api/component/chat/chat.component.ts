@@ -130,6 +130,7 @@ export class ChatComponent implements OnInit {
 
   createNewPost(chat: any) {
     debugger;
+    this.selectedChat = {};
     this.message = "";
     if (this.postBody.chatId === chat._id) {
       let max = this.listOfChats.length;
@@ -145,10 +146,7 @@ export class ChatComponent implements OnInit {
                 this.post = new Post(this.postBody.chatId, this.listOfChats[x].post[y].avatar._id, this.postBody.body, Date.now);
                 break;
               }
-
             }
-
-
           }
           this.chatservice.saveNewPost(this.post, this.headers)
             .map(res => res.json())
@@ -245,10 +243,12 @@ export class ChatComponent implements OnInit {
   }
 
   closeChatModal() {
+    this.selectedChat = {};
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
     }
+
   }
 
   closeModal() {
