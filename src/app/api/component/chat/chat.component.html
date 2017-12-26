@@ -1,6 +1,7 @@
 <div *ngIf="isAvatarModal" id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
+
         <body class="avatar-modal-outer">
             <input maxlength="15" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
@@ -30,8 +31,7 @@
             <p class="chat-modal-body">
                 {{selectedChat.body}}
             </p>
-
-            <div *ngIf="selectedChat.likes.length > 0 && selectedChat.post.length > 0">
+            <div *ngIf="selectedChat.likes.length > 0 && selectedChat.post.length > 0" style="height:130px; overflow-y: auto">
                 <div *ngFor="let item of selectedChat.post" class="comment-main-div">
                     <div class="comment-avatar_name">
                         <strong>{{item.avatar.name}}</strong> _++</div>
@@ -97,7 +97,7 @@
                     <div class="chat-header-tittle"> {{chat.title}} </div>
                     <div class="avatar-name">{{chat.owner.name}}</div>
                 </div>
-                
+
                 <div *ngIf="chat.likes.length == 0 && chat.post.length > 0" class="chat-card-main-div-header">
                     <div style="display: inline-block">
                         <label style="margin-left:10px;"> </label>
@@ -114,7 +114,7 @@
                     {{chat.body}}
                 </p>
                 <div (click)="openChatModal()" class="outer-comment-div">
-                    <div *ngIf="chat.post.length > 0">
+                    <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">
                             <div class="comment-avatar_name">
                                 <strong>{{item.avatar.name}}</strong> _++</div>

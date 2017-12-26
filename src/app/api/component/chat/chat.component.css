@@ -290,6 +290,7 @@ body::-webkit-scrollbar-thumb {
     margin-bottom:1px;
     border-top:solid lightgray 1px; 
     width: 95%;
+
 }
 
 .comment-body {  
@@ -413,7 +414,7 @@ body::-webkit-scrollbar-thumb {
     }
     
     .comment-avatar_name{
-        font-size: 190%;
+        font-size: 70%;
     }
 
     .avatar-modal-input{
@@ -426,7 +427,8 @@ body::-webkit-scrollbar-thumb {
     }
 
     .chatModal-content{
-        width: 80%;
+        width: 85%;
+        max-height: 700px;
     }    
 
     .chat-modal-owner{
@@ -446,6 +448,10 @@ body::-webkit-scrollbar-thumb {
     }
     .comment-createdDate{
         font-size:10%;
+    }
+
+    .chat-modal-header{
+        text-align: center;
     }
 }
 
