@@ -107,7 +107,8 @@ body::-webkit-scrollbar-thumb {
     width:100%; 
     color:gray; 
     border-top:solid lightgray 1px; 
-    text-align: left
+    text-align: left;
+    padding: 1%;
 }
 
 .comment-date-created{
@@ -180,9 +181,9 @@ body::-webkit-scrollbar-thumb {
     padding:10px; 
     border: solid 1px lightgray;
 }
-.avatar-name {
-    font-size: 70%; 
-    float:right;
+.avatar-name { 
+    float: right;
+    margin-right: 5px;
 }
 .input-no-border-100{
     border: solid  lightgray 1px; 
@@ -217,8 +218,7 @@ body::-webkit-scrollbar-thumb {
     float:right;
 }
 .chat-body{
-    margin-left: 10px; 
-   margin-bottom: 10px;
+    margin: 10px;
 }
 .outer-comment-div{
     max-height:150px; 
@@ -243,8 +243,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .hr-division{
-    margin-top:10px; 
-    margin-bottom: 0px;
+    margin-top:20px; 
+    margin-bottom: 10px;
 }
 
 .chat-card-main-div-header{
@@ -256,10 +256,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .comment-input{
-    margin: 1%; 
-    width: 90%;
-    font-size: 80%;
-    
+    width: 80%;
+    font-size: 80%;    
 }
 
 .chat-header-tittle{
@@ -274,10 +272,10 @@ body::-webkit-scrollbar-thumb {
     width:13%;
 }
 .chat-created-date{
-    margin-left:12px; 
-    font-size: 50%;
+    margin-left:12px;
+    font-size: 70%;
     width:17%;
-    
+    float: left;
 }
 
 .chat-header-tittle{
@@ -323,9 +321,6 @@ body::-webkit-scrollbar-thumb {
         width: 95%;
         border: 0px;
     }
-    .avatar-name{
-        font-size: 50%;        
-    }
     .input-no-border-100{
         font-size: 40%;
         margin: 1px;
@@ -357,10 +352,8 @@ body::-webkit-scrollbar-thumb {
         width:25%;
         height: 18px;
         padding: 2px;
-    }
-
-    .chat-body{
-        font-size: 60%;
+        border: solid green 1px;
+        margin-top: 0px;        
     }
 
     .comment-owner {
@@ -377,16 +370,6 @@ body::-webkit-scrollbar-thumb {
         
     }
     
-    .hr-division{
-        margin-top:5px; 
-        margin-bottom: 0px;
-    }
-    .comment-input{
-        margin: 1%; 
-        width: 90%;
-        height: 15px;
-        font-size: 50%;    
-    }
     .comment-send-icon{
         font-size:60%;
     }
@@ -414,13 +397,16 @@ body::-webkit-scrollbar-thumb {
     }
     
     .comment-avatar_name{
-        font-size: 70%;
+        font-size: 90%;
     }
 
     .avatar-modal-input{
         font-size:50%;
     }
 
+    .avatar-name{
+        font-size: 80%;
+    }
     .modal-content {
         height: 150px;     
         width: 75%;

@@ -21,7 +21,7 @@
                 <i (click)="createNewChatlike(selectedChat._id)" class="fa fa-heart-o"></i>
                 <label *ngIf="selectedChat.post.length > 0" style="margin-left:10px"> {{selectedChat.post.length}}</label>
                 <label *ngIf="selectedChat.post.length == 0" style="margin-left:10px"></label>
-                
+
                 <i class="fa fa-comment-o"></i>
             </div>
             <div class="chat-modal-selectedChat-title-div">
@@ -37,7 +37,8 @@
             <div *ngIf="selectedChat.post.length > 0" style="height:130px; overflow-y: auto">
                 <div *ngFor="let item of selectedChat.post" class="comment-main-div">
                     <div class="comment-avatar_name">
-                        <strong>{{item.avatar.name}}</strong> _++</div>
+                        <strong>{{item.avatar.name}}</strong>
+                    </div>
                     <div class="comment-body">{{item.body}} </div>
                     <div class="comment-createdDate"> {{item.createdDate}} </div>
                 </div>
@@ -62,7 +63,7 @@
                         <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
                     </body>
                 </div>
-                <input type="text" class="input-no-border-100" maxlength="50" [(ngModel)]="chatTitle" placeholder="Title" />
+                <input type="text" class="input-no-border-100" maxlength="30" [(ngModel)]="chatTitle" placeholder="Title" />
                 <textarea class="input-no-border-100" maxlength="1001" [(ngModel)]="chatBody" placeholder="Body"></textarea>
                 <button style="display: block" class="btn" (click)="createNewChat()"> post </button>
             </div>
@@ -73,16 +74,19 @@
                     <div style="display: inline-block">
                         <label *ngIf="chat.likes.length > 0" style="margin-left:10px;"> {{chat.likes.length}} </label>
                         <label *ngIf="chat.likes.length == 0" style="margin-left:10px;"></label>
-                        
+
                         <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
                         <label *ngIf="chat.post.length > 0" style="margin-left:10px;">{{chat.post.length}} </label>
                         <label *ngIf="chat.post.length == 0" style="margin-left:10px;"> </label>
                         <i class="fa fa-comment-o"></i>
                     </div>
                     <div class="chat-header-tittle"> {{chat.title}} </div>
-                    <div class="avatar-name">{{chat.owner.name}}</div>
+                    <div class="avatar-name">
+                        <i style="color: gray" class="fa fa-ellipsis-h"></i>
+                    </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
+                <div class="avatar-name">{{chat.owner.name}}</div>
                 <hr class="hr-division">
                 <p (click)="openChatModal(chat)" class="chat-body">
                     {{chat.body}}
@@ -91,13 +95,15 @@
                     <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">
                             <div class="comment-avatar_name">
-                                <strong>{{item.avatar.name}}</strong> _++</div>
+                                <strong>{{item.avatar.name}}</strong>
+                            </div>
                             <div class="comment-body"> {{item.body}} </div>
                             <div class="comment-createdDate"> {{item.createdDate}} </div>
                         </div>
                     </div>
                 </div>
                 <footer class="chat-footer">
+                    <button class="btn btn-sm btn-danger" style="margin-left:10px"> report </button>
                     <input type="text" [ngModel]="message" maxlength="709" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"
                         class="comment-input">
                     <i class=" comment-send-icon fa fa-send" (click)="createNewPost(chat)"></i>
