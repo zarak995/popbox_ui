@@ -317,7 +317,7 @@ body::-webkit-scrollbar-thumb {
     display:inline-block;
 }
 
-@media screen and (max-width :590px){
+@media screen and (max-width :1024px){
     .chat-component-main-div{
         left: 2%;
         width: 95%;

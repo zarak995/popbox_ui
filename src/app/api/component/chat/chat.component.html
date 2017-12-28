@@ -16,9 +16,12 @@
     <div id="myCont" class="chatModal-content">
         <header class="chat-modal-header">
             <div class="chat-header-likescomments-div">
-                <label> {{selectedChat.likes.length}}</label>
+                <label *ngIf="selectedChat.likes.length > 0"> {{selectedChat.likes.length}}</label>
+                <label *ngIf="selectedChat.likes.length == 0"></label>
                 <i (click)="createNewChatlike(selectedChat._id)" class="fa fa-heart-o"></i>
-                <label style="margin-left:10px"> {{selectedChat.post.length}}</label>
+                <label *ngIf="selectedChat.post.length > 0" style="margin-left:10px"> {{selectedChat.post.length}}</label>
+                <label *ngIf="selectedChat.post.length == 0" style="margin-left:10px"></label>
+                
                 <i class="fa fa-comment-o"></i>
             </div>
             <div class="chat-modal-selectedChat-title-div">
@@ -31,7 +34,7 @@
             <p class="chat-modal-body">
                 {{selectedChat.body}}
             </p>
-            <div *ngIf="selectedChat.likes.length > 0 && selectedChat.post.length > 0" style="height:130px; overflow-y: auto">
+            <div *ngIf="selectedChat.post.length > 0" style="height:130px; overflow-y: auto">
                 <div *ngFor="let item of selectedChat.post" class="comment-main-div">
                     <div class="comment-avatar_name">
                         <strong>{{item.avatar.name}}</strong> _++</div>
@@ -66,43 +69,14 @@
         </header>
         <div *ngFor="let chat of listOfChats">
             <div class="chat-card-main-div">
-                <div *ngIf="chat.likes.length > 0 && chat.post.length > 0" class="chat-card-main-div-header">
+                <div class="chat-card-main-div-header">
                     <div style="display: inline-block">
-                        <label style="margin-left:10px;"> {{chat.likes.length}} </label>
+                        <label *ngIf="chat.likes.length > 0" style="margin-left:10px;"> {{chat.likes.length}} </label>
+                        <label *ngIf="chat.likes.length == 0" style="margin-left:10px;"></label>
+                        
                         <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
-                        <label style="margin-left:10px;">{{chat.post.length}} </label>
-                        <i class="fa fa-comment-o"></i>
-                    </div>
-                    <div class="chat-header-tittle"> {{chat.title}} </div>
-                    <div class="avatar-name">{{chat.owner.name}}</div>
-                </div>
-                <div *ngIf="chat.likes.length== 0 && chat.post.length == 0" class="chat-card-main-div-header">
-                    <div style="display: inline-block">
-                        <label style="margin-left:10px;"> </label>
-                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
-                        <label style="margin-left:10px;"> </label>
-                        <i class="fa fa-comment-o"></i>
-                    </div>
-                    <div class="chat-header-tittle"> {{chat.title}} </div>
-                    <div class="avatar-name">{{chat.owner.name}}</div>
-                </div>
-
-                <div *ngIf="chat.likes.length > 0 && chat.post.length == 0" class="chat-card-main-div-header">
-                    <div style="display: inline-block">
-                        <label style="margin-left:10px;"> {{chat.likes.length}} </label>
-                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
-                        <label style="margin-left:10px;"> </label>
-                        <i class="fa fa-comment-o"></i>
-                    </div>
-                    <div class="chat-header-tittle"> {{chat.title}} </div>
-                    <div class="avatar-name">{{chat.owner.name}}</div>
-                </div>
-
-                <div *ngIf="chat.likes.length == 0 && chat.post.length > 0" class="chat-card-main-div-header">
-                    <div style="display: inline-block">
-                        <label style="margin-left:10px;"> </label>
-                        <i (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"> </i>
-                        <label style="margin-left:10px;">{{chat.post.length}}</label>
+                        <label *ngIf="chat.post.length > 0" style="margin-left:10px;">{{chat.post.length}} </label>
+                        <label *ngIf="chat.post.length == 0" style="margin-left:10px;"> </label>
                         <i class="fa fa-comment-o"></i>
                     </div>
                     <div class="chat-header-tittle"> {{chat.title}} </div>

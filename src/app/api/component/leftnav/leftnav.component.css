@@ -106,7 +106,7 @@ body::-webkit-scrollbar-thumb {
     margin-left:15px;
 }
 
-@media screen and (max-width :590px){
+@media screen and (max-width :1024px){
     .leftNavMainDiv{
             display: none;
     }

@@ -137,7 +137,7 @@ export class ChatComponent implements OnInit {
       for (var x = 0; x < max; x++) {
         if (this.listOfChats[x]._id === chat._id) {
           let maxPost = this.listOfChats[x].post.length;
-          if (this.listOfChats[x].owner._id === this.id) {
+          if (this.listOfChats[x].owner.user === this.id) {
             this.post = new Post(this.postBody.chatId, this.listOfChats[x].owner._id, this.postBody.body, Date.now);
           } else {
             this.post = new Post(this.postBody.chatId, this.currentAvatar.id, this.postBody.body, Date.now);
@@ -159,6 +159,8 @@ export class ChatComponent implements OnInit {
                   this.listOfChats[i].post.forEach(element => {
                     element.createdDate = moment(element.createdDate).fromNow();
                   });
+                  this.selectedChat = this.listOfChats[i];
+                  break;
                 }
               }
             });
@@ -185,15 +187,19 @@ export class ChatComponent implements OnInit {
           }
         })
       })
+    this.chatBody = "";
+    this.chatTitle = "";
+    this.chat = null;
   }
 
   createNewChatlike(chatID: any) {
+    debugger;
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
         let maxLikes = this.listOfChats[i].likes.length;
         for (var j = 0; j < maxLikes; j++) {
-          if (this.listOfChats[i].likes[j].user === this.id) {
+          if (this.listOfChats[i].likes[j].user === this.id || this.listOfChats[i].likes[j] === this.id) {
             return;
           }
         }

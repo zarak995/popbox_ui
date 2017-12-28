@@ -5,7 +5,7 @@
     margin: 1%; 
     width:19%
 }
-@media screen and (max-width :590px){
+@media screen and (max-width :1024px){
     .rightNavMainDiv{
             display: none;
     }
