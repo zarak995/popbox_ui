@@ -256,7 +256,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .comment-input{
-    width: 80%;
+    width: 85%;
     font-size: 80%;    
 }
 
@@ -438,6 +438,9 @@ body::-webkit-scrollbar-thumb {
 
     .chat-modal-header{
         text-align: center;
+    }
+    .comment-input{
+        width: 75%;
     }
 }
 
