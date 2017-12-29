@@ -1,6 +1,7 @@
 <div *ngIf="isAvatarModal" id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
+
         <body class="avatar-modal-outer">
             <input maxlength="15" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
@@ -16,7 +17,7 @@
         <header class="chat-modal-header">
             <div style="margin-top:5px; float:left"> {{selectedChat.owner.name}} </div>
             <div class="chat-header-options">
-                <i  style="margin-left:5px; display:inline-block" class="fa fa-ellipsis-v"></i>
+                <i style="margin-left:5px; display:inline-block" class="fa fa-ellipsis-v"></i>
                 <i *ngIf="selectedChat.owner.user === id" style="margin-left:5px; display:inline-block" class="fa fa-edit"> Edit </i>
                 <i *ngIf="selectedChat.owner.user === id" style="margin-left:5px; display:inline-block" class="fa fa-remove"> Delete </i>
                 <i *ngIf="selectedChat.owner.user !== id" style="margin-left:5px; display:inline-block" class="fa fa-thumbs-o-down">Report</i>
@@ -62,6 +63,7 @@
         <header class="new-chat-as-header">
             <div class="new-chat-outer-div">
                 <div>
+
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
                         <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
                     </body>
@@ -76,10 +78,10 @@
                 <div class="chat-card-main-div-header">
                     <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                     <div class="avatar-name">
-                        <i style="color: gray" class="fa fa-ellipsis-v"></i>
-                        <i *ngIf="chat.owner.user === id" style="margin-left: 5px;" class="fa fa-edit"> Edit </i>
-                        <i *ngIf="chat.owner.user === id" style="margin-left: 5px;" class="fa fa-remove"> delete </i>
-                        <i *ngIf="chat.owner.user !== id" style="margin-left: 5px;" class="fa fa-thumbs-o-down"> report </i>
+                        <i style="color: gray; margin-right:5px;" class="fa fa-ellipsis-v"></i>
+                        <i *ngIf="chat.owner.user === id" class="fa fa-edit chat-header-options"> Edit </i>
+                        <i *ngIf="chat.owner.user === id" class="fa fa-trash-o chat-header-options"> Delete </i>
+                        <i *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down chat-header-options"> report </i>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
@@ -90,11 +92,16 @@
                 <div (click)="openChatModal()" class="outer-comment-div">
                     <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">
+                            <div style="float:right">
+                                <i *ngIf="chat.owner.user===id" class="fa fa-trash-o"></i>
+                                <i *ngIf="chat.owner.user!==id" class="fa fa-thumbs-o-down"></i>
+                            </div>
                             <div class="comment-avatar_name">
                                 <strong>{{item.avatar.name}}</strong>
                             </div>
-                            <div class="comment-body"> {{item.body}} </div>
-                            <div class="comment-createdDate"> {{item.createdDate}} </div>
+                            <div> {{item.body}} </div>
+                            <div class="comment-createdDate">{{item.createdDate}} </div>
+
                         </div>
                     </div>
                 </div>

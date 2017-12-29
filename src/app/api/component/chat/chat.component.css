@@ -297,7 +297,6 @@ body::-webkit-scrollbar-thumb {
 }
 .comment-createdDate {
     font-size:50%;
-    display:inline-block;
 }
 .comment-avatar_name{
     margin-left:1px; 
@@ -344,7 +343,7 @@ body::-webkit-scrollbar-thumb {
     
     .outer-comment-div{
         max-height: 75px;
-        font-size: 10%;
+        font-size: 80%;
         padding:0px;        
     }
     
@@ -392,7 +391,7 @@ body::-webkit-scrollbar-thumb {
     }        
     
     .comment-input{
-        width: 87%;
+        width: 86%;
     }
 
     .chat-footer{
@@ -418,23 +417,28 @@ body::-webkit-scrollbar-thumb {
         width: 50px;
         font-size: 90%;
     }
+    .chat-header-options{
+        font-size:60%;
+        margin-right: 15px;
+    }
+
 }
 
 @media screen and (max-width :414px){
     .comment-input{
-        width:65%;
+        width:73%;
     }
 }
 
 @media screen and (max-width :360px){
     .comment-input{
-        width:60%;
+        width:68%;
     }
 }
 
 @media screen and (max-width :320px){
     .comment-input{
-        width:50%;
+        width:63%;
     }
 }
 
@@ -443,9 +447,13 @@ body::-webkit-scrollbar-thumb {
         width:40%;
     }
 
-    .chat-header-options{
-        font-size: 30%;
+    .comment-avatar_name{
+        font-size: 100%;
     }
+
+    .comment-createdDate{
+        font-size:10%;        }
+
 }    
 
 
