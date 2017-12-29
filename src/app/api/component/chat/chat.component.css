@@ -152,8 +152,10 @@ body::-webkit-scrollbar-thumb {
 .chat-modal-header{
     width:100%; 
     text-align:left; 
-    margin-bottom:10px; 
+    margin-bottom:0px; 
     background-color: khaki;
+    display: block;
+    height: 35px;
 }
 .avatar-modal-header {
     width:100%; 
@@ -267,10 +269,13 @@ body::-webkit-scrollbar-thumb {
     width:13%;
 }
 .chat-created-date{
-    margin-left:12px;
+    margin-left:5px; 
     font-size: 70%;
-    width:17%;
     float: left;
+    width: 100%;
+}
+.chat-header-options{
+    float:right;
 }
 
 .chat-header-tittle{
@@ -348,9 +353,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .chat-created-date{
-        margin-left:8px;
-        font-size: 0.5%; 
-        width:30%;
+        font-size: 30%;
     }
     
     .chat-card-main-div-header{
@@ -406,6 +409,10 @@ body::-webkit-scrollbar-thumb {
     .chat-modal-selectedChat-title{
         font-size: 90%;
     }    
+    .chat-likes-comment-labels{
+        margin:0px; 
+        font-size:80%;
+    }
 }
 
 @media screen and (max-width :414px){
@@ -429,6 +436,10 @@ body::-webkit-scrollbar-thumb {
 @media screen and (max-width :240px){
     .comment-input{
         width:40%;
+    }
+
+    .chat-header-options{
+        font-size: 30%;
     }
 }    
 

@@ -199,10 +199,17 @@ export class ChatComponent implements OnInit {
       if (this.listOfChats[i]._id === chatID) {
         let maxLikes = this.listOfChats[i].likes.length;
         for (var j = 0; j < maxLikes; j++) {
-          if (this.listOfChats[i].likes[j].user === this.id || this.listOfChats[i].likes[j] === this.id) {
+          if (this.listOfChats[i].likes[j].user === this.id) {
             return;
           }
         }
+
+        for (var k = 0; k < maxLikes; k++) {
+          if (this.listOfChats[i].likes[k].id === this.currentAvatar.id) {
+            return;
+          }
+        }
+
         this.listOfChats[i].likes.push(this.currentAvatar.id);
         this.chatservice.saveNewChatlike(this.listOfChats[i], this.headers)
           .map(res => res.json())
