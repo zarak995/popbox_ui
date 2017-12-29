@@ -62,14 +62,13 @@
         <header class="new-chat-as-header">
             <div class="new-chat-outer-div">
                 <div>
-
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
                         <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
                     </body>
                 </div>
                 <input type="text" class="input-no-border-100" maxlength="30" [(ngModel)]="chatTitle" placeholder="Title" />
                 <textarea class="input-no-border-100" maxlength="1001" [(ngModel)]="chatBody" placeholder="Body"></textarea>
-                <button style="display: block" class="btn btn-primary" (click)="createNewChat()"> post </button>
+                <button style="display: block" class="btn btn-primary btn-md" (click)="createNewChat()"> post </button>
             </div>
         </header>
         <div *ngFor="let chat of listOfChats">
