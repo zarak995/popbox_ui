@@ -1,9 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
 import { Post } from '../../../models/Post';
+
 @Injectable()
 export class ChatService {
   constructor(public http: Http) { }
+  leftNavSelectedChat: any = {};
+
+  removeChat(headers, chatId) {
+    return this.http.options("http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/" + chatId, {
+      method: "DELETE",
+      headers: headers
+    })
+  }
+  removePost(headers, chatId, postId) {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/posts/' + chatId + '/' + postId, {
+      method: 'DELETE',
+      headers: headers
+    })
+  }
   saveNewChat(chat, headers) {
     return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats', {
       method: 'POST',
@@ -42,7 +57,7 @@ export class ChatService {
       headers: headers
     })
   }
-  saveNewChatlike(chat, headers) {
+  updateChat(chat, headers) {
     return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/' + chat._id,
       {
         method: 'PUT',
