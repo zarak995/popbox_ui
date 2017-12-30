@@ -65,7 +65,7 @@
                 <div>
 
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
-                        <strong> {{listOfAvatars[listOfAvatars.length-1].name}} </strong>
+                        <strong></strong>
                     </body>
                 </div>
                 <input type="text" class="input-no-border-100" maxlength="30" [(ngModel)]="chatTitle" placeholder="Title" />
@@ -79,9 +79,9 @@
                     <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                     <div class="avatar-name">
                         <i style="color: gray; margin-right:5px;" class="fa fa-ellipsis-v"></i>
-                        <i *ngIf="chat.owner.user === id" class="fa fa-edit chat-header-options"> Edit </i>
-                        <i *ngIf="chat.owner.user === id" class="fa fa-trash-o chat-header-options"> Delete </i>
-                        <i *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down chat-header-options"> report </i>
+                        <i *ngIf="chat.owner.user === id" class="fa fa-edit"> Edit </i>
+                        <i (click)="deleteChat(chat)" *ngIf="chat.owner.user === id" class="fa fa-trash-o"> Delete </i>
+                        <i *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down"> report </i>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
@@ -89,11 +89,11 @@
                 <p (click)="openChatModal(chat)" class="chat-body">
                     {{chat.body}}
                 </p>
-                <div (click)="openChatModal()" class="outer-comment-div">
+                <div class="outer-comment-div">
                     <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">
                             <div style="float:right">
-                                <i *ngIf="chat.owner.user===id" class="fa fa-trash-o"></i>
+                                <i *ngIf="chat.owner.user=== id" (click)="deletePost(chat._id,item._id)" class="fa fa-trash-o"></i>
                                 <i *ngIf="chat.owner.user!==id" class="fa fa-thumbs-o-down"></i>
                             </div>
                             <div class="comment-avatar_name">
@@ -101,15 +101,14 @@
                             </div>
                             <div> {{item.body}} </div>
                             <div class="comment-createdDate">{{item.createdDate}} </div>
-
                         </div>
                     </div>
                 </div>
                 <footer class="chat-footer">
-                    <label class="chat-likes-comment-labels" *ngIf="chat.likes.length > 0">{{chat.likes.length}} </label>
+                    <label class="chat-likes-comment-labels" style="font-size: 80%" *ngIf="chat.likes.length > 0">{{chat.likes.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.likes.length == 0"></label>
                     <i (click)="createNewChatlike(chat._id)" style="font-size: 80%" class="fa fa-heart-o"></i>
-                    <label class="chat-likes-comment-labels" *ngIf="chat.post.length > 0">{{chat.post.length}} </label>
+                    <label class="chat-likes-comment-labels"  style="font-size: 80%" *ngIf="chat.post.length > 0">{{chat.post.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.post.length == 0"> </label>
                     <i style="font-size: 80%;" class="fa fa-comment-o fa-1x"></i>
                     <input type="text" [ngModel]="message" maxlength="709" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"

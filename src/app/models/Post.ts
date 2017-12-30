@@ -6,6 +6,7 @@ export interface IPost {
     createdDate: any;
 }
 export class Post implements IPost {
+    _id:any;
     likes: Number;
     tags: any;
     constructor(public chat: String, public avatar: any

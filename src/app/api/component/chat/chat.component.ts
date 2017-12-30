@@ -192,6 +192,42 @@ export class ChatComponent implements OnInit {
     this.chat = null;
   }
 
+  deleteChat(chat:any) {
+    this.chatservice.removeChat(this.headers,chat)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.listOfChats = data;
+        this.listOfChats.forEach(element => {
+          element.createdDate = moment(element.createdDate).fromNow();
+          element.post.forEach(item => {
+            item.createdDate = moment(item.createdDate).fromNow();
+          });
+        })
+      })
+    }
+  deletePost(chatId: any, postId: any) {
+    debugger;
+    let max = this.listOfChats.length;
+    for (var i = 0; i < max; i++) {
+      if (this.listOfChats[i]._id === chatId) {
+        let maxPosts = this.listOfChats[i].post.length;
+        for (var j = 0; j < maxPosts; j++) {
+          if (this.listOfChats[i].post[j]._id === postId) {
+            this.listOfChats[i].post.splice(j, 1);
+            this.chatservice.removePost(this.headers, this.listOfChats[i]._id, this.listOfChats[i].post[j]._id)
+              .map(res => res.json())
+              .subscribe(data => {
+                this.listOfChats[i] = data;
+                this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
+                  element.createdDate = moment(element.createdDate).fromNow();
+                });
+              });
+            break;
+          }
+        }
+      }
+    }
+  }
   createNewChatlike(chatID: any) {
     debugger;
     let max = this.listOfChats.length;
@@ -211,7 +247,7 @@ export class ChatComponent implements OnInit {
         }
 
         this.listOfChats[i].likes.push(this.currentAvatar.id);
-        this.chatservice.saveNewChatlike(this.listOfChats[i], this.headers)
+        this.chatservice.updateChat(this.listOfChats[i], this.headers)
           .map(res => res.json())
           .subscribe(data => {
             this.listOfChats[i] = data;
