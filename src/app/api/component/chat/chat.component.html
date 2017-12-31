@@ -3,7 +3,7 @@
         <header class="avatar-modal-header"> Change Avatar Name </header>
 
         <body class="avatar-modal-outer">
-            <input maxlength="15" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
+            <input maxlength="25" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
         <footer style="text-align: right">
             <button class="btn btn-primary" (click)="createNewAvatar()"> Submit </button>
@@ -65,7 +65,7 @@
                 <div>
 
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
-                        <strong>npm </strong>
+                        <strong>{{currentAvatar.name}} </strong>
                     </body>
                 </div>
                 <input type="text" class="input-no-border-100" maxlength="30" [(ngModel)]="chatTitle" placeholder="Title" />
