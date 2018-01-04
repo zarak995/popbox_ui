@@ -200,7 +200,8 @@ export class ChatComponent implements OnInit {
         let chatl = this.listOfChats.length;
         for (var x = 0; x < chatl; x++) {
           if (this.listOfChats[x]._id === data._id) {
-            this.listOfChats = this.listOfChats.splice(x, 1);
+            this.listOfChats.splice(x, 1);
+            return;
           }
         }
       });
