@@ -15,6 +15,7 @@ import { element } from 'protractor';
 import * as moment from 'moment';
 import { DatePipe } from '@angular/common/src/pipes';
 import { ChatService } from '../chat/chat.service';
+import { isType } from '@angular/core/src/type';
 
 @Component({
   selector: 'app-chat',
@@ -113,11 +114,11 @@ export class ChatComponent implements OnInit {
             if (element.post.length > 0) {
               element.post = this.sortChatsAndPosts(element.post);
             }
-
           }
         });
       })
   }
+
   createNewAvatar() {
     this.avatar = new Avatar(null, this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
@@ -177,34 +178,34 @@ export class ChatComponent implements OnInit {
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
       .subscribe(data => {
-        this.listOfChats.push(data);
-        this.listOfChats.forEach(element => {
-          if (element.post !== null) {
-            element.createdDate = moment(element.createdDate).fromNow();
-            if (element.post.length > 0) {
-              element.post = this.sortChatsAndPosts(element.post);
-            }
+        if (data.post !== null) {
+          data.createdDate = moment(data.createdDate).fromNow();
+          if (data.post.length > 0) {
+            data.post = this.sortChatsAndPosts(data.post);
           }
-        })
+        }
+        this.listOfChats.push(data);
+        this.listOfChats.reverse();
       })
     this.chatBody = "";
     this.chatTitle = "";
     this.chat = null;
   }
 
-  deleteChat(chat:any) {
-    this.chatservice.removeChat(this.headers,chat)
+  deleteChat(chat: any) {
+    console.log(chat);
+    this.chatservice.removeChat(this.headers, chat._id)
       .map(res => res.json())
       .subscribe(data => {
-        this.listOfChats = data;
-        this.listOfChats.forEach(element => {
-          element.createdDate = moment(element.createdDate).fromNow();
-          element.post.forEach(item => {
-            item.createdDate = moment(item.createdDate).fromNow();
-          });
-        })
-      })
-    }
+        let chatl = this.listOfChats.length;
+        for (var x = 0; x < chatl; x++) {
+          if (this.listOfChats[x]._id === data._id) {
+            this.listOfChats = this.listOfChats.splice(x, 1);
+          }
+        }
+      });
+  }
+
   deletePost(chatId: any, postId: any) {
     debugger;
     let max = this.listOfChats.length;
@@ -228,6 +229,40 @@ export class ChatComponent implements OnInit {
       }
     }
   }
+
+  reportNewChat(chat: any) {
+    debugger;
+    console.log(chat);
+    let max = this.listOfChats.length;
+    for (var i = 0; i < max; i++) {
+      if (this.listOfChats[i]._id === chat._id) {
+        let maxLikes = this.listOfChats[i].reports.length;
+        for (var j = 0; j < maxLikes; j++) {
+          if (this.listOfChats[i].reports[j].user === this.id) {
+            return;
+          }
+        }
+
+        for (var k = 0; k < maxLikes; k++) {
+          if (this.listOfChats[i].reports[k].id === this.currentAvatar.id) {
+            return;
+          }
+        }
+
+        this.listOfChats[i].reports.push(this.currentAvatar.id);
+        this.chatservice.updateChat(this.listOfChats[i], this.headers)
+          .map(res => res.json())
+          .subscribe(data => {
+            this.listOfChats[i] = data;
+            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
+              element.createdDate = moment(element.createdDate).fromNow();
+            });
+          });
+        break;
+      }
+    }
+  }
+
   createNewChatlike(chatID: any) {
     debugger;
     let max = this.listOfChats.length;

@@ -18,6 +18,8 @@ import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
 import { LoginService } from '../app/api/component/login/login.service';
 import{LeftnavService} from './api/component/leftnav/leftnav.service';
 import { FooterComponent } from './api/component/footer/footer.component'
+import {LandingService} from '../app/api/component/landing/landing.service'
+    import { from } from 'rxjs/observable/from';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,7 @@ import { FooterComponent } from './api/component/footer/footer.component'
     Routing,
     ReactiveFormsModule
   ],
-  providers: [ChatService,LeftnavService],
+  providers: [ChatService,LandingService,LeftnavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

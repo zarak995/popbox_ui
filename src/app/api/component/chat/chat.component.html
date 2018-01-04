@@ -81,7 +81,7 @@
                         <i style="color: gray; margin-right:5px;" class="fa fa-ellipsis-v"></i>
                         <i *ngIf="chat.owner.user === id" class="fa fa-edit"> Edit </i>
                         <i (click)="deleteChat(chat)" *ngIf="chat.owner.user === id" class="fa fa-trash-o"> Delete </i>
-                        <i *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down"> report </i>
+                        <i (click)="reportNewChat(chat)" *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down"> report </i>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
