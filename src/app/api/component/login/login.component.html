@@ -1,8 +1,7 @@
 <div>
   <header class="popboxHeader">
-    <h1> Pop|Box </h1>
+    <h1> oOzet </h1>
   </header>
-  
   <section class="firstMainSection">
     <div class="emptyWhiteDiv"> </div>
     <div>
@@ -20,8 +19,9 @@
           <input formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
             type="text">
         </div>
-        <div style="margin: 10px;">
-          <input type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-action" value="Sign in">
+        <div style="margin-right: 10px; text-align: right;">
+          <input style="display: inline-block" type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-action" value="Sign in">
+          <input type="button" (click)="DisplayRegisterPage()" class="btn btn-primary hideRegister" value="Register">
         </div>
       </form>
     </div>

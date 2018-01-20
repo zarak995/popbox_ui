@@ -1,20 +1,11 @@
-.firstMainSection{
-    background:lightblue; 
-    width:30%; 
-    top:20%; 
-    height:100px;
-    width:35%;  
-    position: absolute;  
-    right: 60%; 
-}
-
 .secondMainSection{
     background-color: lightblue; 
     width:35%; 
     top:20%; 
-    height:400px; 
+    height: 60vh; 
     position: absolute;  
-    left: 50%;}
+    left: 50%;
+}
 
 .registerRow {
     margin-left: 10px;
@@ -26,8 +17,37 @@
      margin-top:5px
 }
 
+.cancelBtn{
+    margin-right:12px; 
+    margin-left: 5px;
+    float:right;
+}
+
+
+@media screen and (max-height:640px){
+    .secondMainSection{
+        height: 90vh;
+    }
+}
+
+/*
+@media screen and (max-height:320px){
+    .secondMainSection{
+        height: 90vh;
+    }
+}
+*/
 @media screen and (max-width :590px){
     .secondMainSection{
-        display: none;
+        display:none;
+        background-color:khaki; 
+        width:100%; 
+        top:10%; 
+        font-size: 60%;
+        height: 60vh;
+        position: absolute;  
+        left: 0px;
+        padding-right: 10px;
+        align-self: center;
     }            
 }

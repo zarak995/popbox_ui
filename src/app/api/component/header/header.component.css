@@ -9,6 +9,12 @@
     background-color:khaki; 
     font-size: 90%;
 }
+.popboxHeader{
+    margin-left:70px; 
+    margin-top:80px; 
+    width:34.7%;
+    text-align: center;
+}
 
 @media screen and (max-width: 480px)
   {

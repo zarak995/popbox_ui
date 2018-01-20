@@ -79,9 +79,9 @@
                     <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                     <div class="avatar-name">
                         <i style="color: gray; margin-right:5px;" class="fa fa-ellipsis-v"></i>
-                        <i *ngIf="chat.owner.user === id" class="fa fa-edit"> Edit </i>
-                        <i (click)="deleteChat(chat)" *ngIf="chat.owner.user === id" class="fa fa-trash-o"> Delete </i>
-                        <i (click)="reportNewChat(chat)" *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down"> report </i>
+                        <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
+                        <i (click)="deleteChat(chat)" *ngIf="chat.owner.user === id" class="fa fa-trash-o"> </i>
+                        <i (click)="reportNewChat(chat)" *ngIf="chat.owner.user !== id" class="fa fa-thumbs-o-down"> </i>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>

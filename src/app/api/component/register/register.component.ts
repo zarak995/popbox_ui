@@ -109,4 +109,9 @@ export class RegisterComponent implements OnInit {
   private showErrorMessage(message: string) {
     //this.toastManager.error(message, 'Something went wrong!', { toastLife: 5000, showCloseButton: true });
   }
+
+  gotToLogin() {
+    console.log("Here");
+    this.router.navigate(['']);
+  }
 }

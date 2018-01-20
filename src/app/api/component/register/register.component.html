@@ -51,7 +51,7 @@
         <div style="width:33%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
               'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
           <select formControlName="gender" class="form-control" name="reg_gender">
-                      <option selected>--Select Gender--</option>
+                      <option>G</option>
                       <option value="M"> Male </option>
                       <option value="F">Female</option>
                       <option value="O"> Other</option>
@@ -71,7 +71,7 @@
       </div>
 
       <div cass="row registerRow">
-        <button style=" margin-right:12px; margin-left: 5px;float:right;" class="btn btn-primary"> Cancel </button>
+        <button class="cancelBtn btn btn-primary" (click)=gotToLogin()> Cancel </button>
         <input type="submit" style="float:right;" (click)="addNewUser()" [disabled]="!registerForm.valid" class="btn btn-primary btn-action" value="Submit"> 
       </div>
     </form>

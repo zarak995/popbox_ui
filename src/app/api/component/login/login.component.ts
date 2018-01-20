@@ -43,6 +43,17 @@ export class LoginComponent implements OnInit {
     };
   }
 
+  DisplayRegisterPage() {
+    let modal = document.getElementsByClassName('secondMainSection') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
+
+    let login = document.getElementsByClassName('firstMainSection') as HTMLCollectionOf<HTMLElement>;
+    if (login.length != 0) {
+      login[0].style.display = "none";
+    }
+  }
   authenticate() {
     this.body.username = this.loginForm.get('username').value;
     this.body.password = this.loginForm.get('password').value;
