@@ -107,7 +107,7 @@
                     <label class="chat-likes-comment-labels" style="font-size: 80%" *ngIf="chat.likes.length > 0">{{chat.likes.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.likes.length == 0"></label>
                     <i (click)="createNewChatlike(chat._id)" style="font-size: 80%" class="fa fa-heart-o"></i>
-                    <label class="chat-likes-comment-labels"  style="font-size: 80%" *ngIf="chat.post.length > 0">{{chat.post.length}} </label>
+                    <label class="chat-likes-comment-labels" style="font-size: 80%" *ngIf="chat.post.length > 0">{{chat.post.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.post.length == 0"> </label>
                     <i style="font-size: 80%;" class="fa fa-comment-o fa-1x"></i>
                     <input type="text" [ngModel]="message" maxlength="709" (ngModelChange)="postMessageChanged($event,chat._id)" placeholder="Enter your comment"

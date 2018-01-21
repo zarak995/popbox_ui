@@ -169,6 +169,7 @@ body::-webkit-scrollbar-thumb {
     width:100%;
     border:none; 
     border-bottom: solid 1px lightgray;
+    font-size: 150%;
 }
 
 .chat-outer-div {
@@ -373,7 +374,7 @@ body::-webkit-scrollbar-thumb {
     
     
     .avatar-modal-input{
-        font-size:50%;
+        font-size:90%;
     }
 
     .avatar-name{

@@ -107,7 +107,6 @@ export class ChatComponent implements OnInit {
         data.forEach(element => {
           this.listOfChats.push(element);
         });
-        this.listOfChats = this.listOfChats.reverse();
         this.listOfChats.forEach(element => {
           if (element.post !== null) {
             element.createdDate = moment(element.createdDate).fromNow();
@@ -185,7 +184,6 @@ export class ChatComponent implements OnInit {
           }
         }
         this.listOfChats.push(data);
-        this.listOfChats.reverse();
       })
     this.chatBody = "";
     this.chatTitle = "";
