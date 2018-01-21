@@ -16,6 +16,14 @@
     text-align: center;
 }
 
+.userMenu{
+    display: none;
+    padding-left: 5px; 
+    position:absolute; 
+    top:45px; 
+    right:0px; 
+    width:80px;
+}
 @media screen and (max-width: 480px)
   {
       .header-main-header{

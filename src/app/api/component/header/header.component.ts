@@ -32,10 +32,24 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  headerMenu() {
+    let chatDivs = document.getElementsByClassName('userMenu') as HTMLCollectionOf<HTMLElement>;
+    let maxChatsDivs = chatDivs.length;
+    if (maxChatsDivs != 0) {
+      for (var x = 0; x < maxChatsDivs; x++) {
+        console.log(chatDivs[0].style.display.toString())
+        if (chatDivs[0].style.display === "block") {
+          chatDivs[0].style.display = "none";
+          return;
+        }
+        chatDivs[0].style.display = "block";
+      }
+    }
+  }
+
   logout() {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('id');
     this.router.navigate(['']);
   }
-
 }

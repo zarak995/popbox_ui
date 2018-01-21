@@ -2,8 +2,23 @@
   <div style="margin: 13px; float: left">
     <div style="border: solid black 2px; padding:5px">oOzet</div>
   </div>
-  <div (click)="logout()" style="margin: 10px; float: right">
-    <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
-    <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
+  <div style="margin: 10px; float: right;">
+    <div style="display: inline-block">
+      <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
+      <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
+    </div>
+    <i (click)="headerMenu()" style="margin-left:10px; font-size:200%;" class="fa fa-ellipsis-v"></i>
   </div>
-</div>
+  <div class="userMenu">
+    <ul style="padding: 0px;">
+      <li class="btn-primary" style="list-style: none">
+        <i class="fa fa-user"> Profile </i>
+      </li>
+      <li class="btn-primary" style="list-style: none">
+        <i class="fa fa-cog"> Settings </i>
+      </li>
+      <li class="btn-primary" (click)="logout()" style="list-style: none">
+        <i class="fa fa-sign-out"> Sign out </i>
+      </li>
+    </ul>
+  </div>
