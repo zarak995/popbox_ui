@@ -172,8 +172,7 @@ export class ChatComponent implements OnInit {
 
   createNewChat() {
     debugger;
-    this.chat = new Chat(this.chatTitle, this.chatBody, this.currentAvatar.id);
-    console.log(this.chat);
+    this.chat = new Chat(this.chatBody, this.currentAvatar.id);
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
       .subscribe(data => {
@@ -183,7 +182,7 @@ export class ChatComponent implements OnInit {
             data.post = this.sortChatsAndPosts(data.post);
           }
         }
-        this.listOfChats.push(data);
+        this.listOfChats.unshift(data);
       })
     this.chatBody = "";
     this.chatTitle = "";
@@ -191,7 +190,6 @@ export class ChatComponent implements OnInit {
   }
 
   deleteChat(chat: any) {
-    console.log(chat);
     this.chatservice.removeChat(this.headers, chat._id)
       .map(res => res.json())
       .subscribe(data => {

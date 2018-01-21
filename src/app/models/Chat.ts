@@ -2,10 +2,8 @@ import { Avatar } from "./Avatar";
 import { Post } from "./Post";
 
 interface IChat {
-    title: String;
     body: String;
     owner: any;
-
 }
 
 export class Chat implements IChat {
@@ -14,7 +12,7 @@ export class Chat implements IChat {
     likes: [any];
     reports: [any];
     createdDate: string;
-    constructor(public title: String, public body: String
+    constructor(public body: String
         , public owner: any) {
     }
 }
