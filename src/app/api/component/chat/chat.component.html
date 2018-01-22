@@ -1,6 +1,7 @@
 <div id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
+
         <body class="avatar-modal-outer">
             <input maxlength="25" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
@@ -61,6 +62,7 @@
         <header class="new-chat-as-header">
             <div class="new-chat-outer-div">
                 <div>
+
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
                         <strong>{{currentAvatar.name}} </strong>
                     </body>
@@ -74,10 +76,13 @@
                 <div class="chat-card-main-div-header">
                     <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                     <div class="avatar-name">
-                        <i style="color: gray; margin-right:5px;" class="fa fa-ellipsis-v"></i>
+                        <i class="chatEllipses fa fa-ellipsis-v"></i>
+                        <div class="chatMenu">
                         <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
                         <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)"  class="fa fa-trash-o"> </i>
                         <i *ngIf="chat.owner.user !== id" (click)="reportNewChat(chat)"  class="fa fa-thumbs-o-down"> </i>
+                        
+                        </div>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>

@@ -245,10 +245,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .chat-card-main-div-header{
-    margin-top:0px;
     display:inline-block; 
     background-color: khaki;  
-    height:35px;  
+    height:30px;  
     width:100%;
 }
 
@@ -313,8 +312,24 @@ body::-webkit-scrollbar-thumb {
     text-align: center; 
     display:inline-block;
 }
+.chatMenu{
+    display: inline-block;
+}
+.chatEllipses{
+    color: gray; 
+    margin-top:10px; 
+    margin-right:2px;
+}
+
 
 @media screen and (max-width :1024px){
+    .chatEllipses{
+        float: right;
+        margin-top: 10px;
+    }
+    .chatMenu{
+        display: none;
+    }
     .chat-component-main-div{
         left: 2%;
         width: 95%;
@@ -357,8 +372,7 @@ body::-webkit-scrollbar-thumb {
     }
     
     .chat-card-main-div-header{
-        height:15px;
-        font-size: 60%;
+        height:30px;
     }
     
     .comment-main-div{
@@ -387,12 +401,12 @@ body::-webkit-scrollbar-thumb {
     }
 
     .chatModal-content{
-        width: 85%;
+        width: 80%;
         max-height: 700px;
     }        
     
     .comment-input{
-        width: 86%;
+        width: 80%;
     }
 
     .chat-footer{
@@ -411,7 +425,6 @@ body::-webkit-scrollbar-thumb {
     }    
     .chat-likes-comment-labels{
         margin:0px; 
-        font-size:80%;
     }
     .btn-md{
         height: 30px;
@@ -427,25 +440,25 @@ body::-webkit-scrollbar-thumb {
 
 @media screen and (max-width :414px){
     .comment-input{
-        width:73%;
+        width:67%;
     }
 }
 
 @media screen and (max-width :360px){
     .comment-input{
-        width:68%;
+        width:60%;
     }
 }
 
 @media screen and (max-width :320px){
     .comment-input{
-        width:63%;
+        width:55%;
     }
 }
 
 @media screen and (max-width :240px){
     .comment-input{
-        width:40%;
+        width:33%;
     }
 
     .comment-avatar_name{
