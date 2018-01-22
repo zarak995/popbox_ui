@@ -278,6 +278,7 @@ export class ChatComponent implements OnInit {
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
+        this.listOfChats[i].isLiked = true;
         let maxLikes = this.listOfChats[i].likes.length;
         this.listOfChats[i].likes.push(this.currentAvatar.id);
         this.chatservice.updateChat(this.listOfChats[i], this.headers)
