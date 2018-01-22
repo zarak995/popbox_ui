@@ -114,6 +114,13 @@ export class ChatComponent implements OnInit {
               element.post = this.sortChatsAndPosts(element.post);
             }
           }
+
+          let maxLikes = element.likes.length;
+          for (var xl = 0; xl < maxLikes; xl++) {
+            if (element.likes[xl].user === this.id) {
+              element.isLiked = true;
+            }
+          }
         });
       })
   }
@@ -152,14 +159,20 @@ export class ChatComponent implements OnInit {
             .map(res => res.json())
             .subscribe((data) => {
               let max = this.listOfChats.length;
-              for (var i = 0; i < this.listOfChats.length; i++) {
+              for (var i = 0; i < max; i++) {
                 if (this.listOfChats[i]._id === data._id) {
                   this.listOfChats[i] = data;
-                  this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow()
+                  this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow();
+                  let maxLikes = this.listOfChats[i].likes.length;
+                  for (var xl = 0; xl < maxLikes; xl++) {
+                    if (this.listOfChats[i].likes[xl].user === this.id) {
+                      this.listOfChats[i].isLiked = true;
+                    }
+                  }
                   this.listOfChats[i].post.forEach(element => {
                     element.createdDate = moment(element.createdDate).fromNow();
                   });
-                  this.selectedChat = this.listOfChats[i];
+                  //this.selectedChat = this.listOfChats[i];
                   break;
                 }
               }
@@ -266,23 +279,12 @@ export class ChatComponent implements OnInit {
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
         let maxLikes = this.listOfChats[i].likes.length;
-        for (var j = 0; j < maxLikes; j++) {
-          if (this.listOfChats[i].likes[j].user === this.id) {
-            return;
-          }
-        }
-
-        for (var k = 0; k < maxLikes; k++) {
-          if (this.listOfChats[i].likes[k].id === this.currentAvatar.id) {
-            return;
-          }
-        }
-
         this.listOfChats[i].likes.push(this.currentAvatar.id);
         this.chatservice.updateChat(this.listOfChats[i], this.headers)
           .map(res => res.json())
           .subscribe(data => {
             this.listOfChats[i] = data;
+            this.listOfChats[i].isLiked = true;
             this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
               element.createdDate = moment(element.createdDate).fromNow();
             });
@@ -297,14 +299,7 @@ export class ChatComponent implements OnInit {
     this.postBody.body = $event;
   }
 
-  openAvatarModal() {
-    this.isAvatarModal = true;
-    let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
-    if (modal.length != 0) {
-      modal[0].style.display = "block";
-    }
-  }
-
+  
   colourPosts() {
     let post = document.getElementsByClassName('post') as HTMLCollectionOf<HTMLElement>;
     debugger;
@@ -314,7 +309,17 @@ export class ChatComponent implements OnInit {
       }
     }
   }
+  
+  openAvatarModal() {
+    this.isAvatarModal = true;
+    let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
+  }
+
   openChatModal(chat) {
+    console.log("open");
     this.selectedChat = chat;
     this.isChatModal = true;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;

@@ -10,6 +10,7 @@ export class Chat implements IChat {
     _id: String;
     post: [Post];
     likes: [any];
+    isLiked: Boolean;
     reports: [any];
     createdDate: string;
     constructor(public body: String
