@@ -12,6 +12,12 @@
     </div>
 </div>
 
+<div class="navMenuForMobile">
+    <i class="navMenuForMobileItem fa fa-newspaper-o"></i>
+    <i class="navMenuForMobileItem fa fa-star-o"></i>
+    <i style="display:block" class="fa fa-user-o"></i>
+</div>
+
 <div *ngIf="isChatModal" id="myModal" class="chatModal">
     <div id="myCont" style="border: solid lightgray 1px;" class="chatModal-content">
         <header class="chat-modal-header">
@@ -78,10 +84,9 @@
                     <div class="avatar-name">
                         <i class="chatEllipses fa fa-ellipsis-v"></i>
                         <div class="chatMenu">
-                        <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
-                        <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)"  class="fa fa-trash-o"> </i>
-                        <i *ngIf="chat.owner.user !== id" (click)="reportNewChat(chat)"  class="fa fa-thumbs-o-down"> </i>
-                        
+                            <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
+                            <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)" class="fa fa-trash-o"> </i>
+                            <i *ngIf="chat.owner.user !== id" (click)="reportNewChat(chat)" class="fa fa-thumbs-o-down"> </i>
                         </div>
                     </div>
                 </div>
