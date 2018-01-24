@@ -73,7 +73,7 @@
                         <strong>{{currentAvatar.name}} </strong>
                     </body>
                 </div>
-                <textarea class="input-no-border-100" maxlength="1001" [(ngModel)]="chatBody" placeholder="Body"></textarea>
+                <textarea class="input-no-border-100" maxlength="1001" [(ngModel)]="chatBody" placeholder="Say something......"></textarea>
                 <button style="display: block" class="btn btn-primary btn-md" (click)="createNewChat()"> post </button>
             </div>
         </header>
@@ -99,8 +99,8 @@
                     <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">
                             <div style="float:right">
-                                <i *ngIf="chat.owner.user=== id" (click)="deletePost(chat._id,item._id)" class="fa fa-trash-o"></i>
-                                <i *ngIf="chat.owner.user!==id" class="fa fa-thumbs-o-down"></i>
+                                <i *ngIf="item.avatar.user=== id" (click)="deletePost(chat._id,item._id)" class="fa fa-trash-o"></i>
+                                <i *ngIf="item.avatar.user!==id" class="fa fa-thumbs-o-down"></i>
                             </div>
                             <div class="comment-avatar_name">
                                 <strong>{{item.avatar.name}}</strong>
@@ -111,8 +111,8 @@
                     </div>
                 </div>
                 <footer class="chat-footer">
-                    <label *ngIf="chat.likes.length > 0 && chat.isLiked">{{chat.likes.length}} </label>
-                    <label *ngIf="chat.likes.length > 0 && !chat.isLiked">{{chat.likes.length}} </label>
+                    <label *ngIf="chat.likes.length > 0 && chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
+                    <label *ngIf="chat.likes.length > 0 && !chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.likes.length == 0"></label>
                     <i *ngIf="chat.isLiked" style="color: red;" class="fa fa-heart"></i>
                     <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
