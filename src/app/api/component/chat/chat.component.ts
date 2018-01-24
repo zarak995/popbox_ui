@@ -126,6 +126,7 @@ export class ChatComponent implements OnInit {
   }
 
   createNewAvatar() {
+    debugger;
     this.avatar = new Avatar(null, this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
       .map(res => res.json())

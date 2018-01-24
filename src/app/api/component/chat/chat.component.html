@@ -111,8 +111,8 @@
                     </div>
                 </div>
                 <footer class="chat-footer">
-                    <label *ngIf="chat.likes.length > 0 && chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
-                    <label *ngIf="chat.likes.length > 0 && !chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
+                    <label *ngIf="chat.likes.length > 0 && chat.isLiked">{{chat.likes.length}} </label>
+                    <label *ngIf="chat.likes.length > 0 && !chat.isLiked">{{chat.likes.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.likes.length == 0"></label>
                     <i *ngIf="chat.isLiked" style="color: red;" class="fa fa-heart"></i>
                     <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
