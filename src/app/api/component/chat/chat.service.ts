@@ -72,4 +72,11 @@ export class ChatService {
       headers: headers
     })
   }
+
+  getTopChats(headers) {
+    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/top/chats', {
+      method: 'GET',
+      headers: headers
+    })
+  }
 }

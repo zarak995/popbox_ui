@@ -49,7 +49,6 @@ export class ChatComponent implements OnInit {
   selectedChat: any = {};
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
-
   }
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
@@ -99,6 +98,38 @@ export class ChatComponent implements OnInit {
     return Posts;
   }
 
+
+  
+  getTopChats() {
+    let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "none";
+    }
+
+    this.listOfChats = [];
+    this.chatservice.getTopChats(this.headers)
+      .map(res => res.json())
+      .subscribe(data => {
+        data.forEach(element => {
+          this.listOfChats.push(element);
+        });
+        this.listOfChats.forEach(element => {
+          if (element.post !== null) {
+            element.createdDate = moment(element.createdDate).fromNow();
+            if (element.post.length > 0) {
+              element.post = this.sortChatsAndPosts(element.post);
+            }
+          }
+
+          let maxLikes = element.likes.length;
+          for (var xl = 0; xl < maxLikes; xl++) {
+            if (element.likes[xl].user === this.id) {
+              element.isLiked = true;
+            }
+          }
+        });
+      })
+  }
   getChats() {
     this.listOfChats = [];
     this.chatservice.getChats(this.headers)
@@ -301,7 +332,7 @@ export class ChatComponent implements OnInit {
     this.postBody.body = $event;
   }
 
-  
+
   colourPosts() {
     let post = document.getElementsByClassName('post') as HTMLCollectionOf<HTMLElement>;
     debugger;
@@ -311,7 +342,7 @@ export class ChatComponent implements OnInit {
       }
     }
   }
-  
+
   openAvatarModal() {
     this.isAvatarModal = true;
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
@@ -336,7 +367,6 @@ export class ChatComponent implements OnInit {
     if (modal.length != 0) {
       modal[0].style.display = "none";
     }
-
   }
 
   closeModal() {

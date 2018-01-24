@@ -2,12 +2,12 @@
   <div style="margin: 13px; float: left">
     <div class="mainHeaderLogo"> <strong>o</strong>O<strong>xet</strong></div>
   </div>
-  <div style="margin: 10px; float: right;">
+  <div (click)="headerMenu()" style="margin: 10px; float: right;">
     <div style="display: inline-block">
       <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
       <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
     </div>
-    <i (click)="headerMenu()" class="userMenu-ellipses fa fa-ellipsis-v"></i>
+    <i  class="userMenu-ellipses fa fa-ellipsis-v"></i>
   </div>
   <div class="userMenu">
     <ul style="padding: 0px;">

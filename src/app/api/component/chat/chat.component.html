@@ -1,7 +1,6 @@
 <div id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
-
         <body class="avatar-modal-outer">
             <input maxlength="25" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
@@ -13,9 +12,9 @@
 </div>
 
 <div class="navMenuForMobile">
-    <i class="navMenuForMobileItem fa fa-newspaper-o"></i>
-    <i class="navMenuForMobileItem fa fa-star-o"></i>
-    <i style="display:block" class="fa fa-user-o"></i>
+    <i [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
+    <i (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
+    <i  [routerLink]="['/profile']" style="display:block" class="fa fa-user-o"></i>
 </div>
 
 <div *ngIf="isChatModal" id="myModal" class="chatModal">
@@ -63,12 +62,12 @@
         </footer>
     </div>
 </div>
+
 <div class="chat-component-main-div">
     <div class="chat-outer-div">
         <header class="new-chat-as-header">
             <div class="new-chat-outer-div">
                 <div>
-
                     <body (click)="openAvatarModal()" class="avatar-name">Posting as
                         <strong>{{currentAvatar.name}} </strong>
                     </body>
@@ -125,3 +124,5 @@
                 </footer>
             </div>
         </div>
+    </div>
+</div>
