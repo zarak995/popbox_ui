@@ -298,10 +298,6 @@ body::-webkit-scrollbar-thumb {
 .comment-createdDate {
     font-size:50%;
 }
-.comment-avatar_name{
-    margin-left:1px; 
-    font-size:70%;
-}
 
 .chat-likes-comment-labels{
     margin-left:5px; 
@@ -485,11 +481,7 @@ body::-webkit-scrollbar-thumb {
     .comment-input{
         width:25%;
     }
-
-    .comment-avatar_name{
-        font-size: 100%;
-    }
-
+    
     .comment-createdDate{
         font-size:10%;        }
 

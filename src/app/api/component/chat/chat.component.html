@@ -101,7 +101,7 @@
                                 <i *ngIf="item.avatar.user=== id" (click)="deletePost(chat._id,item._id)" class="fa fa-trash-o"></i>
                                 <i *ngIf="item.avatar.user!==id" class="fa fa-thumbs-o-down"></i>
                             </div>
-                            <div class="comment-avatar_name">
+                            <div>
                                 <strong>{{item.avatar.name}}</strong>
                             </div>
                             <div> {{item.body}} </div>
