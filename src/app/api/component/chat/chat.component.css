@@ -253,7 +253,7 @@ body::-webkit-scrollbar-thumb {
 
 .comment-input{
     margin-left: 5px;
-    width: 85%;
+    width: 75%;
     font-size: 80%;    
 }
 
@@ -302,6 +302,10 @@ body::-webkit-scrollbar-thumb {
     margin-left:1px; 
     font-size:70%;
 }
+
+.chat-likes-comment-labels{
+    margin-left:5px; 
+}
 .chat-modal-owner{
     display:inline-block; 
     width:20%; 
@@ -321,7 +325,9 @@ body::-webkit-scrollbar-thumb {
     margin-right:2px;
 }
 
-
+.navMenuForMobile{
+ display: none;
+}
 @media screen and (max-width :1024px){
     
     .navMenuForMobile{
@@ -330,6 +336,7 @@ body::-webkit-scrollbar-thumb {
         top:100px; 
         font-size: 150%;
         right:0px;
+        display: block;
     }
 
     .navMenuForMobileItem{
@@ -455,27 +462,28 @@ body::-webkit-scrollbar-thumb {
     .navMenuForMobile{
         top:75px;
         font-size: 100%;
+        display: block;
     }
     .comment-input{
-        width:67%;
+        width:53%;
     }
 }
 
 @media screen and (max-width :360px){
     .comment-input{
-        width:60%;
+        width:52%;
     }
 }
 
 @media screen and (max-width :320px){
     .comment-input{
-        width:55%;
+        width:45%;
     }
 }
 
 @media screen and (max-width :240px){
     .comment-input{
-        width:33%;
+        width:25%;
     }
 
     .comment-avatar_name{
