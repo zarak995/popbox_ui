@@ -99,7 +99,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  
+
   getTopChats() {
     let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
@@ -158,13 +158,14 @@ export class ChatComponent implements OnInit {
 
   createNewAvatar() {
     debugger;
+    alert(this.newAvatarName);
     this.avatar = new Avatar(null, this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
       .map(res => res.json())
-      .subscribe(data => { })
+      .subscribe(data => { this.currentAvatar = data });
     //Need to change this code below
-    this.getAvatars();
     this.closeModal();
+    this.newAvatarName = "";
   }
 
   createNewPost(chat: any) {
