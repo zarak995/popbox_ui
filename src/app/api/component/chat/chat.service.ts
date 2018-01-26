@@ -28,7 +28,7 @@ export class ChatService {
   }
 
   saveNewAvatar(avatar, headers, userId) {
-    return this.http.options(environment.host +environment.chatsRoute+environment.avatarRoute + userId, {
+    return this.http.options(environment.host +environment.avatarRoute + userId, {
       method: 'POST',
       body: avatar,
       headers: headers
@@ -51,7 +51,7 @@ export class ChatService {
       headers: headers
     })
   }
-  getAvatars(userId, headers) {
+  getCurrentAvatar(userId, headers) {
     return this.http.options(environment.host+environment.avatarRoute + userId, {
       method: 'GET',
       headers: headers
