@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
 import { Post } from '../../../models/Post';
-
+import {environment} from '../../../../environments/environment.prod';
 @Injectable()
 export class ChatService {
   constructor(public http: Http) { }
   leftNavSelectedChat: any = {};
 
   removeChat(headers, chatId) {
-    return this.http.options("http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/" + chatId, {
+    return this.http.options(environment.host +environment.chatsRoute + chatId, {
       method: "DELETE",
       headers: headers
     })
   }
   removePost(headers, chatId, postId) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/posts/' + chatId + '/' + postId, {
+    return this.http.options(environment.host +environment.chatsRoute + chatId + '/' + postId, {
       method: 'DELETE',
       headers: headers
     })
   }
   saveNewChat(chat, headers) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats', {
+    return this.http.options(environment.host +environment.chatsRoute, {
       method: 'POST',
       body: chat,
       headers: headers
@@ -28,7 +28,7 @@ export class ChatService {
   }
 
   saveNewAvatar(avatar, headers, userId) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/avatars/' + userId, {
+    return this.http.options(environment.host +environment.chatsRoute+environment.avatarRoute + userId, {
       method: 'POST',
       body: avatar,
       headers: headers
@@ -38,7 +38,7 @@ export class ChatService {
   saveNewPost(post, headers) {
     console.log("its here");
     console.log(Post)
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/posts', {
+    return this.http.options(environment.host+environment.postRoute, {
       method: 'POST',
       body: post,
       headers: headers
@@ -46,19 +46,19 @@ export class ChatService {
   }
 
   getOneChat(headers, chat) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/' + chat._id, {
+    return this.http.options(environment.host +environment.chatsRoute+ chat._id, {
       method: 'GET',
       headers: headers
     })
   }
   getAvatars(userId, headers) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/avatars/' + userId, {
+    return this.http.options(environment.host+environment.avatarRoute + userId, {
       method: 'GET',
       headers: headers
     })
   }
   updateChat(chat, headers) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/' + chat._id,
+    return this.http.options(environment.host +environment.chatsRoute + chat._id,
       {
         method: 'PUT',
         body: chat,
@@ -67,14 +67,14 @@ export class ChatService {
   }
 
   getChats(headers) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/', {
+    return this.http.options(environment.host +environment.chatsRoute, {
       method: 'GET',
       headers: headers
     })
   }
 
   getTopChats(headers) {
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/chats/top/chats', {
+    return this.http.options(environment.host +environment.chatsRoute+environment.topChatsRoute, {
       method: 'GET',
       headers: headers
     })

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestMethod, Request, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import {environment} from '../../../../environments/environment.prod';
 @Injectable()
 export class UserService {
 
@@ -15,7 +15,7 @@ export class UserService {
   });
 
   getUserCurrentUserData() {
-    return this.http.get('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/Users', this.options.body)
+    return this.http.get(environment.host + environment.usersRoute, this.options.body)
     .map(res => res.json());
   }
 }

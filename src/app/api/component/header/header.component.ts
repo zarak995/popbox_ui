@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment.prod';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
   getData() {
     this.loggedInUser = new User();
-    this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/users/' + this.id, {
+    this.http.options(environment.host + 'users/' + this.id, {
       method: 'GET',
       headers: this.headers
     }).map(res => res.json())

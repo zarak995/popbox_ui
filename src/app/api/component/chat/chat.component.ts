@@ -162,10 +162,11 @@ export class ChatComponent implements OnInit {
     this.avatar = new Avatar(null, this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
       .map(res => res.json())
-      .subscribe(data => { this.currentAvatar = data });
+      .subscribe(data => { });
     //Need to change this code below
+    this.getAvatars();
     this.closeModal();
-    this.newAvatarName = "";
+  //  this.newAvatarName = "";
   }
 
   createNewPost(chat: any) {

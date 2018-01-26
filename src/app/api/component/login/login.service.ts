@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestMethod, Request, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable()
 export class LoginService {
@@ -15,7 +16,7 @@ export class LoginService {
       body: data,
     });
 
-    return this.http.post('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/login', options.body)
+    return this.http.post(environment.host + environment.loginRoute, options.body)
       .map(res => res.json());
   }
 
