@@ -1,19 +1,23 @@
 <div class="leftNavMainDiv">
+
   <body>
     <header style="margin:2px">Hottest Today </header>
-    <div *ngFor="let item of listOfTopChats" (click)="openChatModal(item)" style="max-height:300px;">
-      <div class="hottest_posts_card">
-        <div class="hottest_posts_header">
-          {{item.body}} </div>
-        <div style="font-size: 65%;">
-          {{item.post[item.post.length-1].body}}
-        </div>
-        <div style="border-top: lightgray solid 1px">
-          <div style="display:inline-block">{{item.likes.length}}
-            <i class="fa fa-heart-o"></i>
+    <div *ngIf="listOfTopChats.length > 0">
+      <div *ngFor="let item of listOfTopChats" (click)="openChatModal(item)" style="max-height:300px;">
+        <div class="hottest_posts_card">
+          <div class="hottest_posts_header">
+            <label> {{item.body}}</label>
           </div>
-          <div class="number_0f_comments">{{item.post.length}}
-            <i class="fa fa-comment-o"></i>
+          <div style="font-size: 65%;">
+            {{item.post[item.post.length-1].body}}
+          </div>
+          <div style="border-top: lightgray solid 1px">
+            <div style="display:inline-block">{{item.likes.length}}
+              <i class="fa fa-heart-o"></i>
+            </div>
+            <div class="number_0f_comments">{{item.post.length}}
+              <i class="fa fa-comment-o"></i>
+            </div>
           </div>
         </div>
       </div>
