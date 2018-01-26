@@ -65,8 +65,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
+      this.getCurrentAvatar();
       this.getChats();
-      this.getAvatars();
       this.elementScroll()
     } else {
       this.router.navigate(['']);
@@ -77,20 +77,6 @@ export class ChatComponent implements OnInit {
 
   }
 
-
-  getAvatars() {
-    this.currentAvatar = null;
-    this.listOfAvatars = [];
-    this.chatservice.getAvatars(this.id, this.headers)
-      .map(res => res.json())
-      .subscribe(data => {
-        data.forEach(element => {
-          this.listOfAvatars.push(element);
-          this.currentAvatar = new Avatar(element._id, element.name, element.user);
-        });
-      });
-  }
-
   sortChatsAndPosts(Posts: any) {
     for (var i = 0; i < Posts.length; i++) {
       Posts[i].createdDate = moment(Posts[i].createdDate).fromNow();
@@ -98,8 +84,17 @@ export class ChatComponent implements OnInit {
     return Posts;
   }
 
-
-
+  getCurrentAvatar() {
+    this.chatservice.getCurrentAvatar(this.id, this.headers)
+      .map(data => data.json())
+      .subscribe(data => {
+        data.forEach(element => {
+          this.currentAvatar = {
+            id: element._id, name: element.name, user: element.user
+          }
+        });
+      })
+  }
   getTopChats() {
     let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
@@ -157,16 +152,14 @@ export class ChatComponent implements OnInit {
   }
 
   createNewAvatar() {
-    debugger;
-    alert(this.newAvatarName);
-    this.avatar = new Avatar(null, this.newAvatarName, this.id);
+    this.avatar = new Avatar(this.newAvatarName, this.id);
     this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
       .map(res => res.json())
-      .subscribe(data => { });
-    //Need to change this code below
-    this.getAvatars();
+      .subscribe(data => {
+        this.currentAvatar = data;
+      });
+    this.newAvatarName = "";
     this.closeModal();
-  //  this.newAvatarName = "";
   }
 
   createNewPost(chat: any) {
