@@ -153,17 +153,18 @@ export class ChatComponent implements OnInit {
 
   createNewAvatar() {
     this.avatar = new Avatar(this.newAvatarName, this.id);
-    this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
-      .map(res => res.json())
-      .subscribe(data => {
-        this.currentAvatar = data;
-      });
-    this.newAvatarName = "";
-    this.closeModal();
+    if (this.avatar !== null) {
+      this.chatservice.saveNewAvatar(this.avatar, this.headers, this.id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.currentAvatar = { id: data._id, name: data.name, user: data.user }
+        });
+      this.newAvatarName = "";
+      this.closeModal();
+    }
   }
 
   createNewPost(chat: any) {
-    debugger;
     this.selectedChat = {};
     this.message = "";
     if (this.postBody.chatId === chat._id) {
@@ -211,7 +212,7 @@ export class ChatComponent implements OnInit {
   }
 
   createNewChat() {
-    debugger;
+    
     this.chat = new Chat(this.chatBody, this.currentAvatar.id);
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
@@ -244,7 +245,6 @@ export class ChatComponent implements OnInit {
   }
 
   deletePost(chatId: any, postId: any) {
-    debugger;
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatId) {
@@ -268,8 +268,6 @@ export class ChatComponent implements OnInit {
   }
 
   reportNewChat(chat: any) {
-    debugger;
-    console.log(chat);
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chat._id) {
@@ -301,7 +299,6 @@ export class ChatComponent implements OnInit {
   }
 
   createNewChatlike(chatID: any) {
-    debugger;
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
@@ -330,7 +327,6 @@ export class ChatComponent implements OnInit {
 
   colourPosts() {
     let post = document.getElementsByClassName('post') as HTMLCollectionOf<HTMLElement>;
-    debugger;
     if (post.length != 0) {
       for (var i = 0; i < post.length; i++) {
         post[i].style.color = "yellow";
@@ -347,7 +343,6 @@ export class ChatComponent implements OnInit {
   }
 
   openChatModal(chat) {
-    console.log("open");
     this.selectedChat = chat;
     this.isChatModal = true;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
