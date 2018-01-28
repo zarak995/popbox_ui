@@ -19,11 +19,10 @@ export class LeftnavComponent implements OnInit {
   listOfTopChats: Chat[] = [];
 
   ngOnInit() {
-    this.listOfTopChats = []
     this.getTopChats();
     setInterval(() => {
       this.getTopChats();
-    }, 60000);
+    }, 6000);
   }
 
   getTopChats() {
@@ -31,8 +30,8 @@ export class LeftnavComponent implements OnInit {
     this.leftnavService.getTopChats(this.headers)
       .map(res => res.json())
       .subscribe(data => {
-        for (var x = 0; x < data.length; x++) {
-          this.listOfTopChats.push(data[x]);
+        for (var x = 0; x < data.length-1; x++) {
+          this.listOfTopChats.push(data[x]);          
         }
       })
   }
