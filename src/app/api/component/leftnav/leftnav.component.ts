@@ -31,7 +31,7 @@ export class LeftnavComponent implements OnInit {
     this.leftnavService.getTopChats(this.headers)
       .map(res => res.json())
       .subscribe(data => {
-        for (var x = 0; x < 3; x++) {
+        for (var x = 0; x < data.length; x++) {
           this.listOfTopChats.push(data[x]);
         }
       })
