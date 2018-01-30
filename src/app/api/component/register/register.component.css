@@ -2,7 +2,7 @@
     background-color: lightblue; 
     width:35%; 
     top:20%; 
-    height: 60vh; 
+    height: 65vh; 
     position: absolute;  
     left: 50%;
 }
@@ -22,11 +22,18 @@
     margin-left: 5px;
     float:right;
 }
+.emailOrPhoneSlash{
+    margin:2px; 
+    font-size: 150%;
+}
 
 
 @media screen and (max-height:640px){
     .secondMainSection{
         height: 90vh;
+    }
+    .emailOrPhoneSlash{
+        font-size: 220%;
     }
 }
 

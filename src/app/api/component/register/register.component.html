@@ -5,16 +5,20 @@
     </header>
     <form [formGroup]="registerForm">
       <div class="row registerRow">
-        <div style="width:48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.name.invalid && registerForm.controls.name.dirty,
+        <div style="width:96%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.name.invalid && registerForm.controls.name.dirty,
         'has-success': registerForm.controls.name.valid && registerForm.controls.name.dirty}">
-          <input class="form-control" formControlName="name" placeholder="Enter Name">
+          <input class="form-control" formControlName="name" placeholder="Enter Full Name">
         </div>
-        <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.email.invalid && registerForm.controls.email.dirty,
-      'has-success': registerForm.controls.email.valid && registerForm.controls.email.dirty}">
-          <input class="form-control" formControlName="email" placeholder="Enter email">
+
+        <div style="width: 45%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.email.invalid && registerForm.controls.email.dirty,
+        'has-success': registerForm.controls.email.valid && registerForm.controls.email.dirty}">
+            <input class="form-control" formControlName="email" placeholder="james@example.com">
+          </div> <label class="emailOrPhoneSlash"> / </label> 
+        <div style="width: 45%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.phone.invalid && registerForm.controls.phone.dirty,
+      'has-success': registerForm.controls.phone.valid && registerForm.controls.phone.dirty}">
+          <input class="form-control" formControlName="phone" placeholder="+27910372585">
         </div>
       </div>
-
       <div style="margin-left:10px; margin-bottom:10px; width:96%; border:solid white 1px">
         <h6 class="dobH6Style"> Date of Birth</h6>
         <div class="row registerRow">
@@ -51,7 +55,7 @@
         <div style="width:33%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
               'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
           <select formControlName="gender" class="form-control" name="reg_gender">
-                      <option>G</option>
+                      <option selected>Select Gender</option>
                       <option value="M"> Male </option>
                       <option value="F">Female</option>
                       <option value="O"> Other</option>

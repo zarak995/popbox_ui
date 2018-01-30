@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
 
   validateForm() {
     this.registerForm = new FormGroup({
-      'email': new FormControl('', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]),
+      'email': new FormControl('', [Validators.pattern('[^ @]*@[^ @]*')]),
       'name': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
       'pass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
       'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
@@ -67,7 +67,8 @@ export class RegisterComponent implements OnInit {
       'gender': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Select Gender--/i)]),
       'year': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Year--/i)]),
       'month': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Month--/i)]),
-      'day': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Day--/i)])
+      'day': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Day--/i)]),
+      'phone': new FormControl('', [Validators.required, Validators.pattern(/^[+][0-9]+$/i)])
     });
   }
 
@@ -85,14 +86,16 @@ export class RegisterComponent implements OnInit {
   addNewUser() {
     this.newuser = new User();
     this.newuser.email = this.registerForm.get('email').value;
+
     this.newuser.name = this.registerForm.get('name').value;
     this.newuser.password = this.registerForm.get('pass').value;
     this.newuser.occupation = this.registerForm.get('occupation').value;
     this.newuser.gender = this.registerForm.get('gender').value;
+    this.newuser.phone = this.registerForm.get('phone').value;
+
     this.newuser.date_of_birth = new Date();
     this.newuser.date_of_birth.setFullYear(this.registerForm.get('year').value,
       this.registerForm.get('month').value, this.registerForm.get('day').value);
-    console.log(this.newuser);
     this.registerService.registerNewUser(this.newuser)
       .subscribe(
       data => {
