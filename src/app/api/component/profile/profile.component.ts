@@ -21,13 +21,13 @@ export class ProfileComponent implements OnInit {
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
-      this.getData();
+     //this.getData();
     } else {
       this.router.navigate(['']);
     }
   }
 
-  getData() {
+  /*getData() {
     this.loggedInUser = new User();
     this.http.options('http://localhost:3000/users/' + this.id, {
       method: 'GET',
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
           occupation: data.occupation, gender: data.gender
         }; console.log(this.loggedInUser);
       });
-  }
+  }*/
 
   updateProfile() {
 
