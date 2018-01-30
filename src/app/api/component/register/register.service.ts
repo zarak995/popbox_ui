@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../../models/user';
 import { Http } from '@angular/http';
+import { environment } from '../../../../environments/environment.prod';
 @Injectable()
 export class RegisterService {
 
   constructor(private http: Http) { }
 
   registerNewUser(newUser: User) {
-    debugger;
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/login/reg', {
+    return this.http.options(environment.host + environment.loginRoute + environment.registerRoute, {
       method: 'POST',
       body: newUser
     }).map(res => res.json());
