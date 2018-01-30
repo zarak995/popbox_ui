@@ -6,5 +6,6 @@ export class User {
     date_of_birth: Date;
     occupation: string;
     gender: string;
+    phone: String;
     constructor() {}
 }
