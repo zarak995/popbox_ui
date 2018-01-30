@@ -238,6 +238,9 @@ export class ChatComponent implements OnInit {
         for (var x = 0; x < chatl; x++) {
           if (this.listOfChats[x]._id === data._id) {
             this.listOfChats.splice(x, 1);
+            if(this.isChatModal === true){
+              this.isChatModal = false;
+            }
             return;
           }
         }
@@ -344,6 +347,7 @@ export class ChatComponent implements OnInit {
 
   openChatModal(chat) {
     this.selectedChat = chat;
+    alert(this.selectedChat);
     this.isChatModal = true;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
