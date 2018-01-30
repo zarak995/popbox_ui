@@ -4,7 +4,7 @@ export const environment = {
   chatsRoute:'chats/',
   avatarRoute:'avatars/',
   postRoute:'posts/',
-  loginRoute:'login',
+  loginRoute:'login/',
   topChatsRoute:'top/chats',
   profileRoute:'profile/',
   usersRoute:'Users/',
