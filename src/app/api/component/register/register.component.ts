@@ -4,6 +4,7 @@ import { User } from '../../../models/user';
 import { RegisterService } from '../../component/register/register.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { ToastsManager } from "ng2-toastr";
 
 @Component({
   selector: 'app-register',
@@ -86,7 +87,6 @@ export class RegisterComponent implements OnInit {
   addNewUser() {
     this.newuser = new User();
     this.newuser.email = this.registerForm.get('email').value;
-
     this.newuser.name = this.registerForm.get('name').value;
     this.newuser.password = this.registerForm.get('pass').value;
     this.newuser.occupation = this.registerForm.get('occupation').value;
@@ -99,18 +99,15 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerNewUser(this.newuser)
       .subscribe(
       data => {
-        if (data == null) {
-          alert('Could not create the new manual task');
+        if (data.code === '11000') {
+          alert(JSON.stringify(data.message));
         } else {
+          alert("your account has been created. Please login");
           this.router.navigate(['/profile']);
         }
       },
       err => console.log(err),
       () => console.log('Request Add New user Complete'));
-  }
-
-  private showErrorMessage(message: string) {
-    //this.toastManager.error(message, 'Something went wrong!', { toastLife: 5000, showCloseButton: true });
   }
 
   gotToLogin() {
