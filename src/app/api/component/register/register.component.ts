@@ -110,6 +110,14 @@ export class RegisterComponent implements OnInit {
       () => console.log('Request Add New user Complete'));
   }
 
+  verificationCodeModal() {
+
+  }
+
+  validateUser() {
+    alert("Something");
+  }
+
   gotToLogin() {
     console.log("Here");
     this.router.navigate(['']);
