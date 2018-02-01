@@ -11,16 +11,5 @@ export class LeftnavService {
       headers: headers
     })
   }
-  
-  saveNewPost(post, headers) {
-    console.log("its here");
-    console.log(Post)
-    return this.http.options('http://ec2-52-202-182-40.compute-1.amazonaws.com:3000/posts', {
-      method: 'POST',
-      body: post,
-      headers: headers
-    })
-  }
-
 }
 
