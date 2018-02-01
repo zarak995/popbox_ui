@@ -12,7 +12,7 @@ export const environment = {
   loginRoute:'login/',
   topChatsRoute:'top/chats',
   profileRoute:'profile/',
-  usersRoute:'Users/',
+  usersRoute:'users/',
   registerRoute: 'reg/',
   userVerification: 'ver/'
 };
