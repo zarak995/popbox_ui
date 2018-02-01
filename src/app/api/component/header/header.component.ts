@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
   getData() {
     this.loggedInUser = new User();
-    this.http.options(environment.host + 'users/' + this.id, {
+    this.http.options(environment.host + environment.usersRoute + this.id, {
       method: 'GET',
       headers: this.headers
     }).map(res => res.json())
