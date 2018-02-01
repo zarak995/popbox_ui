@@ -3,7 +3,7 @@ import { Http, RequestMethod, Request, Headers, RequestOptions, } from '@angular
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable()
 export class ProfileService {
