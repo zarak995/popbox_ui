@@ -4,5 +4,15 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  host: 'http://localhost:3000/',
+  chatsRoute:'chats/',
+  avatarRoute:'avatars/',
+  postRoute:'posts/',
+  loginRoute:'login/',
+  topChatsRoute:'top/chats',
+  profileRoute:'profile/',
+  usersRoute:'Users/',
+  registerRoute: 'reg/',
+  userVerification: 'ver/'
 };
