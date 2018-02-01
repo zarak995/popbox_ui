@@ -13,4 +13,12 @@ export class RegisterService {
       body: newUser
     }).map(res => res.json());
   }
+
+  verifyUser(data) {
+    console.log(data);
+    return this.http.options(environment.host + environment.loginRoute + environment.userVerification, {
+      method: 'POST',
+      body: data
+    }).map(res => res.json());
+  }
 }
