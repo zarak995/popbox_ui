@@ -3,7 +3,7 @@ import { Http, RequestMethod, Request, Headers, RequestOptions, } from '@angular
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-
+import {environment} from '../../../../environments/environment.prod';
 @Injectable()
 export class LandingService {
   constructor(private http: Http, private router: Router) { }
@@ -12,7 +12,7 @@ export class LandingService {
     const userId = window.localStorage.getItem('id');
     const headers = new Headers({ 'authorization': token, 'content-type': 'application/json' });
     debugger;
-    return this.http.options('http://localhost:3000/users/' + userId, {
+    return this.http.options(environment.host + environment.usersRoute + userId, {
       headers: headers,
       method: 'GET'
     })
