@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.verifyUser(verification_data)
       .subscribe(data => { console.log(data) });
     this.closeModal();
-    this.router.navigate(['']);
+    this.router.navigate(['/landing']);
   }
 
   closeModal() {
