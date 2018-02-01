@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   days: number[] = [];
   years: number[] = [];
-
+  verify_id: String = "";
+  verificatioCode: string = "";
   ngOnInit() {
     this.populateDays();
     this.populateYears();
@@ -103,7 +104,8 @@ export class RegisterComponent implements OnInit {
           alert(JSON.stringify(data.message));
         } else {
           alert("your account has been created. Please login");
-          this.router.navigate(['/profile']);
+          this.verify_id = data.user;
+          this.verificationCodeModal();
         }
       },
       err => console.log(err),
@@ -111,11 +113,26 @@ export class RegisterComponent implements OnInit {
   }
 
   verificationCodeModal() {
-
+    let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
   }
 
   validateUser() {
-    alert("Something");
+    console.log(this.verify_id + " " + this.verificatioCode);
+    let verification_data = { userId: this.verify_id, code: this.verificatioCode }
+    this.registerService.verifyUser(verification_data)
+      .subscribe(data => { console.log(data) });
+    this.closeModal();
+    this.router.navigate(['']);
+  }
+
+  closeModal() {
+    let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "none";
+    }
   }
 
   gotToLogin() {
