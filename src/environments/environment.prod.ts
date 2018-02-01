@@ -8,5 +8,6 @@ export const environment = {
   topChatsRoute:'top/chats',
   profileRoute:'profile/',
   usersRoute:'Users/',
-  registerRoute: 'reg/'
+  registerRoute: 'reg/',
+  userVerification: 'ver/'
 };
