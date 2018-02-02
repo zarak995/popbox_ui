@@ -12,6 +12,7 @@ export class Chat implements IChat {
     likes: [any];
     isLiked: Boolean;
     reports: [any];
+    isReported:Boolean
     createdDate: string;
     constructor(public body: String
         , public owner: any) {
