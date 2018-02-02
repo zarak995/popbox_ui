@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { User } from '../../../models/user';
-
+import { RegisterComponent } from '../register/register.component'
+import { from } from 'rxjs/observable/from';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,7 @@ import { User } from '../../../models/user';
 })
 
 export class LoginComponent implements OnInit {
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private reg: RegisterComponent) { }
   loginForm: FormGroup;
   username: String;
   password: String;
@@ -60,7 +61,12 @@ export class LoginComponent implements OnInit {
     this.loginService.isUserValid(this.body)
       .subscribe(
       data => {
-        if (data.token) {
+        if (data.code === "401") {
+          alert("Your account has not been verified yet");
+          this.reg.verify_id = data.uid;
+          this.reg.verificationCodeModal();
+        }
+        else if (data.token) {
           window.localStorage.setItem('token', data.token);
           window.localStorage.setItem('id', data.user);
           this.router.navigate(['/landing']);
