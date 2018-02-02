@@ -85,7 +85,8 @@
                         <div class="chatMenu">
                             <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
                             <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)" class="fa fa-trash-o"> </i>
-                            <i *ngIf="chat.owner.user !== id" (click)="reportNewChat(chat)" class="fa fa-thumbs-o-down"> </i>
+                            <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
+                            <i *ngIf="chat.owner.user !== id && chat.isReported" style="color: red" class="fa fa-thumbs-o-down"> </i>    
                         </div>
                     </div>
                 </div>
