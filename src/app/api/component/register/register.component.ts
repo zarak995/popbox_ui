@@ -104,8 +104,12 @@ export class RegisterComponent implements OnInit {
           alert(JSON.stringify(data.message));
         } else {
           alert("your account has been created. Please login");
+          this.router.navigate(['/landing']);
+          /*** For future implementation
           this.verify_id = data.user;
           this.verificationCodeModal();
+           */
+
         }
       },
       err => console.log(err),
