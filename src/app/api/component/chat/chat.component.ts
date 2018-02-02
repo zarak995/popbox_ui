@@ -67,6 +67,7 @@ export class ChatComponent implements OnInit {
     if (this.loginService.isUserLoggedin()) {
       this.getCurrentAvatar();
       this.getChats();
+      console.log(this.listOfChats);
       this.elementScroll()
     } else {
       this.router.navigate(['']);
@@ -133,6 +134,7 @@ export class ChatComponent implements OnInit {
         data.forEach(element => {
           this.listOfChats.push(element);
         });
+
         this.listOfChats.forEach(element => {
           if (element.post !== null) {
             element.createdDate = moment(element.createdDate).fromNow();
@@ -145,6 +147,15 @@ export class ChatComponent implements OnInit {
           for (var xl = 0; xl < maxLikes; xl++) {
             if (element.likes[xl].user === this.id) {
               element.isLiked = true;
+              break;
+            }
+          }
+
+          let maxReports = element.reports.length;
+          for (var xl = 0; xl < maxReports; xl++) {
+            if (element.reports[xl].user === this.id) {
+              element.isReported = true;
+              break;
             }
           }
         });
@@ -212,7 +223,7 @@ export class ChatComponent implements OnInit {
   }
 
   createNewChat() {
-    
+
     this.chat = new Chat(this.chatBody, this.currentAvatar.id);
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
@@ -238,7 +249,7 @@ export class ChatComponent implements OnInit {
         for (var x = 0; x < chatl; x++) {
           if (this.listOfChats[x]._id === data._id) {
             this.listOfChats.splice(x, 1);
-            if(this.isChatModal === true){
+            if (this.isChatModal === true) {
               this.isChatModal = false;
             }
             return;
@@ -270,50 +281,34 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  reportNewChat(chat: any) {
-    let max = this.listOfChats.length;
-    for (var i = 0; i < max; i++) {
-      if (this.listOfChats[i]._id === chat._id) {
-        let maxLikes = this.listOfChats[i].reports.length;
-        for (var j = 0; j < maxLikes; j++) {
-          if (this.listOfChats[i].reports[j].user === this.id) {
-            return;
-          }
-        }
-
-        for (var k = 0; k < maxLikes; k++) {
-          if (this.listOfChats[i].reports[k].id === this.currentAvatar.id) {
-            return;
-          }
-        }
-
-        this.listOfChats[i].reports.push(this.currentAvatar.id);
-        this.chatservice.updateChat(this.listOfChats[i], this.headers)
-          .map(res => res.json())
-          .subscribe(data => {
-            this.listOfChats[i] = data;
-            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
-              element.createdDate = moment(element.createdDate).fromNow();
-            });
-          });
-        break;
-      }
-    }
+  reportChat(chat: any) {
+    chat.isReported = true;
+    chat.reports.push(this.currentAvatar.id);
+    this.chatservice.updateChat(chat, this.headers)
+      .map(res => res.json())
+      .subscribe(data => {
+        chat = data;
+        chat.isReported = true;
+        chat.createdDate = moment(chat.createdDate).fromNow();
+        chat.post.forEach(element => {
+          element.createdDate = moment(element.createdDate).fromNow();
+        });
+      })
   }
-
   createNewChatlike(chatID: any) {
     let max = this.listOfChats.length;
     for (var i = 0; i < max; i++) {
       if (this.listOfChats[i]._id === chatID) {
         this.listOfChats[i].isLiked = true;
-        let maxLikes = this.listOfChats[i].likes.length;
         this.listOfChats[i].likes.push(this.currentAvatar.id);
         this.chatservice.updateChat(this.listOfChats[i], this.headers)
           .map(res => res.json())
           .subscribe(data => {
             this.listOfChats[i] = data;
             this.listOfChats[i].isLiked = true;
-            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow(); this.listOfChats[i].post.forEach(element => {
+            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow();
+
+            this.listOfChats[i].post.forEach(element => {
               element.createdDate = moment(element.createdDate).fromNow();
             });
           });
