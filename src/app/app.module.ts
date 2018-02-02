@@ -20,6 +20,7 @@ import{LeftnavService} from './api/component/leftnav/leftnav.service';
 import { FooterComponent } from './api/component/footer/footer.component'
 import {LandingService} from '../app/api/component/landing/landing.service'
     import { from } from 'rxjs/observable/from';
+import { RegisterService } from './api/component/register/register.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,7 @@ import {LandingService} from '../app/api/component/landing/landing.service'
     Routing,
     ReactiveFormsModule
   ],
-  providers: [ChatService,LandingService,LeftnavService],
+  providers: [ChatService,LandingService,LeftnavService,RegisterService, RegisterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
