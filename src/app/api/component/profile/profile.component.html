@@ -1,11 +1,49 @@
-<div class="jumbotron">
-  <div style="padding: 10px; border:solid black 1px; float:left">Pop|Box</div>
-  <div style="float:right;">
-    <div (click)=logout(); style="display: inline-block; width:300px;">
-      <h3 style="text-align: right">{{loggedInUser.name}}</h3>
-      <h5 style="text-align: right">{{loggedInUser.email}}</h5>
+<div class="header-main-header">
+  <div style="margin: 13px; float: left">
+    <div class="mainHeaderLogo">
+      <strong>o</strong>O
+      <strong>xet</strong>
     </div>
   </div>
-</div>
-
-<div> </div>
+  <div (click)="headerMenu()" style="margin: 10px; float: right;">
+    <div style="display: inline-block">
+      <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
+      <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
+    </div>
+    <i class="userMenu-ellipses fa fa-ellipsis-v"></i>
+  </div>
+  <div class="userMenu">
+    <ul style="padding: 0px;">
+      <li class="btn-primary" style="padding-left: 15px; list-style: none">
+        <i class="fa fa-user"> Profile </i>
+      </li>
+      <li class="btn-primary" style="padding-left: 15px; list-style: none">
+        <i class="fa fa-cog"> Settings </i>
+      </li>
+      <li class="btn-primary" (click)="logout()" style="padding-left: 15px; list-style: none">
+        <i class="fa fa-sign-out"> Sign out </i>
+      </li>
+    </ul>
+  </div>
+  <div style="height:500px; border:solid red 1px; margin-top: 80px;">
+    <div style="float:left; border:solid black 1px; width:500px">Hello</div>
+    <div style="float:right; height:500px; border: solid yellow 1px; width: 300px">
+      <div style="margin-left:5px; margin-top: 20px;">
+        <label> Email </label>
+        <input type="text" [(ngModel)]="loggedInUser.email">
+        <button (click)='updateProfile()' class="btn btn-primary btn-sm">save</button>
+      </div>
+      <div style="margin-left:5px; margin-top: 20px;">
+        <label> Phone </label>
+        <input type="text" [(ngModel)]="loggedInUser.phone">
+        <button (click)='updateProfile()' class="btn btn-primary btn-sm">save</button>
+      </div>
+      <div style="margin-left:5px; margin-top: 20px;">
+        <label>Show reported posts</label>
+        <input type="checkbox">
+      </div>
+      <div style="margin-left:5px; margin-top: 20px;">
+        <button class="btn btn-primary btn-sm "> Change password </button>
+      </div>
+    </div>
+  </div>

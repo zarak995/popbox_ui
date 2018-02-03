@@ -3,8 +3,10 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { LoginService } from '../login/login.service';
+import { ProfileService } from '../profile/profile.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment.prod';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,22 +16,21 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
-  constructor(private http: Http, private loginService: LoginService, private router: Router) {
-
-  }
+  constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
-     //this.getData();
+      this.getData();
+      this.getOwnChats();
     } else {
       this.router.navigate(['']);
     }
   }
 
-  /*getData() {
+  getData() {
     this.loggedInUser = new User();
-    this.http.options('http://localhost:3000/users/' + this.id, {
+    this.http.options(environment.host + environment.usersRoute + this.id, {
       method: 'GET',
       headers: this.headers
     }).map(res => res.json())
@@ -37,13 +38,21 @@ export class ProfileComponent implements OnInit {
         this.loggedInUser = {
           id: data._id, name: data.name,
           password: data.password, email: data.email, date_of_birth: data.date_of_birth,
-          occupation: data.occupation, gender: data.gender
+          occupation: data.occupation, gender: data.gender, phone: data.phone
         }; console.log(this.loggedInUser);
       });
-  }*/
+  }
 
-  updateProfile() {
+  getOwnChats() {
+    this.profileService.getOwnChats()
+      .map(res => res.json())
+      .subscribe(data => console.log(data))
+  }
 
+  saveUpdateProfile() {
+    this.profileService.updateProfile(this.loggedInUser)
+      .map(res => res.json())
+      .subscribe(data => this.loggedInUser = data)
   }
 
   logout() {

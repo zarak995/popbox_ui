@@ -16,11 +16,12 @@ import { ChatService } from './api/component/chat/chat.service';
 import { RightnavComponent } from './api/component/rightnav/rightnav.component';
 import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
 import { LoginService } from '../app/api/component/login/login.service';
-import{LeftnavService} from './api/component/leftnav/leftnav.service';
+import { LeftnavService } from './api/component/leftnav/leftnav.service';
 import { FooterComponent } from './api/component/footer/footer.component'
-import {LandingService} from '../app/api/component/landing/landing.service'
-    import { from } from 'rxjs/observable/from';
+import { LandingService } from '../app/api/component/landing/landing.service'
+import { from } from 'rxjs/observable/from';
 import { RegisterService } from './api/component/register/register.service';
+import { ProfileService } from '../app/api/component/profile/profile.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { RegisterService } from './api/component/register/register.service';
     Routing,
     ReactiveFormsModule
   ],
-  providers: [ChatService,LandingService,LeftnavService,RegisterService, RegisterComponent],
+  providers: [ChatService,ProfileService, LandingService, LeftnavService, RegisterService, RegisterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

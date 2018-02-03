@@ -5,14 +5,14 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:3000/',
-  chatsRoute:'chats/',
-  avatarRoute:'avatars/',
-  postRoute:'posts/',
-  loginRoute:'login/',
-  topChatsRoute:'top/chats',
-  profileRoute:'profile/',
-  usersRoute:'users/',
+  host: 'http://52.55.249.148:3000/',
+  chatsRoute: 'chats/',
+  userChatsRoute: '/chats/users/',
+  topChatsRoute: 'top/chats',
+  usersRoute: 'users/',
+  avatarRoute: 'avatars/',
+  postRoute: 'posts/',
+  loginRoute: 'login/',
   registerRoute: 'reg/',
   userVerification: 'ver/'
 };

@@ -7,16 +7,29 @@ import { environment } from '../../../../environments/environment.prod';
 
 @Injectable()
 export class ProfileService {
+  token = window.localStorage.getItem('token');
+  id = window.localStorage.getItem('id');
+  headers = new Headers({ 'authorization': this.token, 'content-type': 'application/json' });
   constructor(private http: Http, private router: Router) { }
+
   getUserCurrentUserData() {
-    const token = window.localStorage.getItem('token');
-    const userId = window.localStorage.getItem('id');
-    const headers = new Headers({ 'authorization': token, 'content-type': 'application/json' });
-    debugger;
-    return this.http.options(environment.host + environment.usersRoute + userId, {
-      headers: headers,
+    return this.http.options(environment.host + environment.usersRoute + this.id, {
+      headers: this.headers,
       method: 'GET'
     })
-      .map(res => res.json());
+  }
+
+  getOwnChats() {
+    return this.http.options('http://localhost:3000' + environment.userChatsRoute + this.id, {
+      headers: this.headers,
+      method: 'GET'
+    })
+  }
+  updateProfile(data) {
+    return this.http.options('http://localhost:3000/' + environment.usersRoute + this.id, {
+      headers: this.headers,
+      body: data,
+      method: 'PUT'
+    })
   }
 }
