@@ -20,7 +20,7 @@ export class ProfileService {
   }
 
   getOwnChats() {
-    return this.http.options('http://localhost:3000' + environment.userChatsRoute + this.id, {
+    return this.http.options(environment.host + environment.userChatsRoute + this.id, {
       headers: this.headers,
       method: 'GET'
     })
@@ -31,5 +31,9 @@ export class ProfileService {
       body: data,
       method: 'PUT'
     })
+  }
+
+  changePassword() {
+    return this.http.options('http://localhost:3000/' + environment.userChangePasswordRoute)
   }
 }

@@ -7,6 +7,8 @@ import { ProfileService } from '../profile/profile.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.prod';
+import { FormGroup, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -16,6 +18,8 @@ import { environment } from '../../../../environments/environment.prod';
 export class ProfileComponent implements OnInit {
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
+  isShowChangepassword = false;
+  changeFormPass: FormGroup;
   constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
@@ -23,11 +27,19 @@ export class ProfileComponent implements OnInit {
     if (this.loginService.isUserLoggedin()) {
       this.getData();
       this.getOwnChats();
+      this.validateFields();
     } else {
       this.router.navigate(['']);
     }
   }
 
+  validateFields() {
+
+  }
+
+  saveNewPassword() {
+      
+  }
   getData() {
     this.loggedInUser = new User();
     this.http.options(environment.host + environment.usersRoute + this.id, {
@@ -47,6 +59,10 @@ export class ProfileComponent implements OnInit {
     this.profileService.getOwnChats()
       .map(res => res.json())
       .subscribe(data => console.log(data))
+  }
+
+  showClosePassword() {
+    this.isShowChangepassword = !this.isShowChangepassword;
   }
 
   saveUpdateProfile() {
