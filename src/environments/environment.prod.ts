@@ -9,5 +9,6 @@ export const environment = {
   postRoute:'posts/',
   loginRoute:'login/',  
   registerRoute: 'reg/',
-  userVerification: 'ver/'
+  userVerification: 'ver/',
+  userChangePasswordRoute:'users/change_pass/'
 };
