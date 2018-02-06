@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   validateForm() {
     this.loginForm = new FormGroup({
       'username': new FormControl('', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]),
-      'password': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/i)])
+      'password': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^& *?]+$/i)])
     });
   }
 
@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
       login[0].style.display = "none";
     }
   }
+
   authenticate() {
     this.body.username = this.loginForm.get('username').value;
     this.body.password = this.loginForm.get('password').value;
@@ -77,5 +78,14 @@ export class LoginComponent implements OnInit {
       },
       err => console.log(err),
       () => console.log('request complete'));
+  }
+
+  showPassword(){
+    let modal = document.getElementById('login_txtpassword');
+    if (modal.attributes.getNamedItem('type').value === 'password') {
+      modal.attributes.getNamedItem('type').value = 'text';
+      return;
+    }
+    modal.attributes.getNamedItem('type').value="password";
   }
 }

@@ -20,12 +20,21 @@
 
         <div class="form-group" style="margin: 10px; width: 93%" [ngClass]="{'has-danger': loginForm.controls.password.invalid && loginForm.controls.password.dirty,
         'has-success': loginForm.controls.password.valid && loginForm.controls.password.dirty}">
-          <input formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
-            type="text">
+          <input  formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
+            type="password">
         </div>
-        <div style="margin-right: 10px; text-align: right;">
-          <input style="display: inline-block" type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-action" value="Sign in">
-          <input type="button" (click)="DisplayRegisterPage()" class="btn btn-primary hideRegister" value="Register">
+        <div style="margin-left:10px">
+        </div>
+        <div style="margin-left:10px; margin-right: 10px; text-align: right;">
+          <div style="float:left">
+            <input type="checkbox" (click)="showPassword()" />
+            <label style="font-size: 80%"> Show password </label>
+          </div>
+          <div style="float:right">
+            <input style="display: inline-block" type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-action" value="Sign in">
+            <input type="button" (click)="DisplayRegisterPage()" class="btn btn-primary hideRegister" value="Register">
+          </div>
+
         </div>
       </form>
     </div>
