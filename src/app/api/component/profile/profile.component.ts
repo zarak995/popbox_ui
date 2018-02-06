@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -7,7 +7,8 @@ import { ProfileService } from '../profile/profile.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.prod';
-import { FormGroup, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
+import { invalid } from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
   isShowChangepassword = false;
-  changeFormPass: FormGroup;
+  changeFormPass: FormBuilder;
+  newPassword: String = "";
   constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
@@ -27,19 +29,31 @@ export class ProfileComponent implements OnInit {
     if (this.loginService.isUserLoggedin()) {
       this.getData();
       this.getOwnChats();
-      this.validateFields();
+      //this.validateFields();
     } else {
       this.router.navigate(['']);
     }
   }
 
-  validateFields() {
-
+  validateFields( @Inject(FormBuilder) fb: FormBuilder) {
+    let changeFormPass = fb.group({
+      oPass: ['', Validators.required, Validators.pattern(''), Validators.min(6)],
+      newPassword: fb.group({
+        nPass: ['', Validators.required, Validators.min(6)],
+        cPass: ['', Validators.required, Validators.min(6)]
+      }, { Validator: this.confirmingPassword }),
+    })
   }
 
+  confirmingPassword(c: AbstractControl): { invalid: boolean } {
+    if (c.get('nPass').value !== c.get('cPass').value) {
+      return { invalid: true }
+    }
+  }
   saveNewPassword() {
-      
+    alert(this.newPassword);
   }
+
   getData() {
     this.loggedInUser = new User();
     this.http.options(environment.host + environment.usersRoute + this.id, {

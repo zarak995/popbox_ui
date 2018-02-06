@@ -45,22 +45,21 @@
       <div style="margin-left:5px; margin-top: 20px;">
         <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>
         <div *ngIf=isShowChangepassword>
-
-          <form [formGroup]="changeFormPass">
+          <form>
             <fieldset>
               <legend> Change password </legend>
-              <input formControlName="" type="text" placeholder="Enter old password">
+              <input type="text" placeholder="Enter old password">
               <br>
-              <input type="text" placeholder="Enter new password">
+              <input [(ngModel)]="newPassword" type="text" placeholder="Enter new password">
               <input type="text" placeholder="Confirm new password">
               <div>
-                <button class="btn btn-primary btn-sm" (click)="savePassword()"> Save </button>
+                <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
                 <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
               </div>
             </fieldset>
           </form>
-
         </div>
       </div>
     </div>
   </div>
+</div>
