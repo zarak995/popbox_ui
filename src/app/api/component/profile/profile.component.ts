@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.loggedInUser = {
           id: data._id, name: data.name,
-          password: data.password, email: data.email, date_of_birth: data.date_of_birth,
+          password: data.password, email: data.email, dateOfBirth: data.dateOfBirth,
           occupation: data.occupation, gender: data.gender, phone: data.phone, isShowReported: data.isShowReported
         }; console.log(this.loggedInUser);
       });
