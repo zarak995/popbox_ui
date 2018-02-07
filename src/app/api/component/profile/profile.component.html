@@ -26,38 +26,42 @@
     </ul>
   </div>
   <div style="height:500px; border:solid red 1px; margin-top: 80px;">
-    <div style="float:left; border:solid black 1px; width:500px">Hello</div>
     <div style="float:right; height:500px; border: solid yellow 1px; width: 300px">
       <div style="margin-left:5px; margin-top: 20px;">
-        <label> Email </label>
-        <input type="text" [(ngModel)]="loggedInUser.email">
-        <button (click)='updateProfile()' class="btn btn-primary btn-sm">save</button>
+        <label style="width:80px"> Email </label>
+        <input type="text" name="current_user" [(ngModel)]="loggedInUser.email">
+        <button (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
       </div>
-      <div style="margin-left:5px; margin-top: 20px;">
-        <label> Phone </label>
+      <div style="margin-left:5px; margin-top: 10px;">
+        <label style="width:80px"> Phone </label>
         <input type="text" [(ngModel)]="loggedInUser.phone">
-        <button (click)='updateProfile()' class="btn btn-primary btn-sm">save</button>
+        <button (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
       </div>
-      <div style="margin-left:5px; margin-top: 20px;">
+      <div style="margin-left:5px; margin-top: 10px;">
+        <label style="width:80px"> Occupation </label>
+        <input type="text" [(ngModel)]="loggedInUser.occupation">
+        <button (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
+      </div>
+      <div style="margin-left:5px; margin-top: 10px;">
         <label>Show reported posts</label>
         <input type="checkbox">
       </div>
-      <div style="margin-left:5px; margin-top: 20px;">
+      <div style="margin-left:5px; margin-top: 10px;">
         <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>
         <div *ngIf=isShowChangepassword>
-          <form>
-            <fieldset>
-              <legend> Change password </legend>
-              <input type="text" placeholder="Enter old password">
-              <br>
-              <input [(ngModel)]="newPassword" type="text" placeholder="Enter new password">
-              <input type="text" placeholder="Confirm new password">
-              <div>
-                <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
-                <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
-              </div>
-            </fieldset>
-          </form>
+          <fieldset>
+            <legend> Change password </legend>
+            <div>
+              <input [(ngModel)]="oldPassword" type="text" placeholder="Enter old password">
+            </div>
+            <br>
+            <input placeholder="Enter new password" [(ngModel)]="newPassword" type="text">
+            <input type="text" placeholder="Confirm new password">
+            <div>
+              <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
+              <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
+            </div>
+          </fieldset>
         </div>
       </div>
     </div>
