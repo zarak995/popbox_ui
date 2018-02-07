@@ -93,13 +93,14 @@ export class RegisterComponent implements OnInit {
     this.newuser.occupation = this.registerForm.get('occupation').value;
     this.newuser.gender = this.registerForm.get('gender').value;
     this.newuser.phone = this.registerForm.get('phone').value;
-
-    this.newuser.date_of_birth = new Date();
-    this.newuser.date_of_birth.setFullYear(this.registerForm.get('year').value,
+    this.newuser.dateOfBirth = new Date();
+    this.newuser.dateOfBirth.setFullYear(this.registerForm.get('year').value,
       this.registerForm.get('month').value, this.registerForm.get('day').value);
     this.registerService.registerNewUser(this.newuser)
       .subscribe(
       data => {
+
+        alert(JSON.stringify(data));
         if (data.code === '11000') {
           alert(JSON.stringify(data.message));
         } else {

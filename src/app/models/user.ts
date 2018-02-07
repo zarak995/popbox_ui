@@ -3,7 +3,7 @@ export class User {
     name: String;
     password: String;
     email: String;
-    date_of_birth: Date;
+    dateOfBirth: Date;
     occupation: string;
     gender: string;
     phone: String;
