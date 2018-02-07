@@ -7,5 +7,6 @@ export class User {
     occupation: string;
     gender: string;
     phone: String;
+    isShowReported: Boolean;
     constructor() {}
 }

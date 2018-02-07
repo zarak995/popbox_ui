@@ -26,6 +26,7 @@
     </ul>
   </div>
   <div style="height:500px; border:solid red 1px; margin-top: 80px;">
+    <h3 style="margin-left:20px"> Update Profile </h3>
     <div style="float:right; height:500px; border: solid yellow 1px; width: 300px">
       <div style="margin-left:5px; margin-top: 20px;">
         <label style="width:80px"> Email </label>
@@ -44,7 +45,7 @@
       </div>
       <div style="margin-left:5px; margin-top: 10px;">
         <label>Show reported posts</label>
-        <input type="checkbox">
+        <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
       </div>
       <div style="margin-left:5px; margin-top: 10px;">
         <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>

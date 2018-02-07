@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   id = window.localStorage.getItem('id');
   isShowChangepassword = false;
   changeFormPass: FormGroup;
-  newPassword: String = "Sochi";
+  newPassword: String = "";
   oldPassword: String = "";
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
@@ -48,16 +48,20 @@ export class ProfileComponent implements OnInit {
       return { invalid: true }
     }
   }
+
   saveNewPassword() {
-    alert("something");
-    alert(this.newPassword);
     let data = {
       password: this.oldPassword,
       newPassword: this.newPassword
-      //newPassword: this.changeFormPass.control('newPassword.nPass').value
     }
-    alert(JSON.stringify(data));
-    //this.profileService.changePassword(data)
+    this.profileService.changePassword(data)
+      .map(res => res.json())
+      .subscribe(data => {
+        alert(data);
+      })
+    this.oldPassword = "";
+    this.newPassword = "";
+    this.showClosePassword();
   }
 
   getData() {
@@ -70,7 +74,7 @@ export class ProfileComponent implements OnInit {
         this.loggedInUser = {
           id: data._id, name: data.name,
           password: data.password, email: data.email, date_of_birth: data.date_of_birth,
-          occupation: data.occupation, gender: data.gender, phone: data.phone
+          occupation: data.occupation, gender: data.gender, phone: data.phone, isShowReported: data.isShowReported
         }; console.log(this.loggedInUser);
       });
   }
@@ -79,6 +83,12 @@ export class ProfileComponent implements OnInit {
     this.profileService.getOwnChats()
       .map(res => res.json())
       .subscribe(data => console.log(data))
+  }
+
+  onShowReportChanged() {
+    alert(this.loggedInUser.isShowReported);
+    this.loggedInUser.isShowReported = !this.loggedInUser.isShowReported;
+    this.saveUpdateProfile();
   }
 
   showClosePassword() {
@@ -98,6 +108,7 @@ export class ProfileComponent implements OnInit {
         if (data.code == "11000") {
           alert("Please use a different email or phone");
         }
+        alert(data);
       })
     this.getData();
   }
