@@ -99,8 +99,6 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerNewUser(this.newuser)
       .subscribe(
       data => {
-
-        alert(JSON.stringify(data));
         if (data.code === '11000') {
           alert(JSON.stringify(data.message));
         } else {
@@ -141,7 +139,6 @@ export class RegisterComponent implements OnInit {
   }
 
   gotToLogin() {
-    console.log("Here");
     this.router.navigate(['']);
   }
 }
