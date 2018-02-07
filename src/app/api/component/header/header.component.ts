@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
         this.loggedInUser = {
           id: data._id, name: data.name,
           password: data.password, email: data.email, date_of_birth: data.date_of_birth,
-          occupation: data.occupation, gender: data.gender, phone: data.phone
+          occupation: data.occupation, gender: data.gender, phone: data.phone, isShowReported:data.isShowReported
         };
       });
   }
