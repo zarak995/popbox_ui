@@ -27,7 +27,7 @@ export class ProfileService {
   }
 
   updateProfile(data) {
-    return this.http.options('http://localhost:3000/' + environment.usersRoute + this.id, {
+    return this.http.options(environment.host + environment.usersRoute + this.id, {
       headers: this.headers,
       body: data,
       method: 'PUT'
@@ -35,7 +35,7 @@ export class ProfileService {
   }
 
   changePassword(data) {
-    return this.http.options('http://localhost:3000/' + environment.userChangePasswordRoute + this.id, {
+    return this.http.options(environment.host + environment.userChangePasswordRoute + this.id, {
       headers: this.headers,
       body: data,
       method: 'PUT'
