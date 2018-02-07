@@ -8,7 +8,6 @@ import { User } from '../../../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.prod';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
-import { invalid } from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -17,12 +16,13 @@ import { invalid } from 'moment';
 })
 
 export class ProfileComponent implements OnInit {
+  constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
   isShowChangepassword = false;
-  changeFormPass: FormBuilder;
-  newPassword: String = "";
-  constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
+  changeFormPass: FormGroup;
+  newPassword: String = "Sochi";
+  oldPassword: String = "";
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
   ngOnInit() {
@@ -36,12 +36,10 @@ export class ProfileComponent implements OnInit {
   }
 
   validateFields( @Inject(FormBuilder) fb: FormBuilder) {
-    let changeFormPass = fb.group({
+    this.changeFormPass = fb.group({
       oPass: ['', Validators.required, Validators.pattern(''), Validators.min(6)],
-      newPassword: fb.group({
-        nPass: ['', Validators.required, Validators.min(6)],
-        cPass: ['', Validators.required, Validators.min(6)]
-      }, { Validator: this.confirmingPassword }),
+      /*nPass: ['', Validators.required, Validators.min(6)],
+      cPass: ['', Validators.required, Validators.min(6)]*/
     })
   }
 
@@ -51,7 +49,15 @@ export class ProfileComponent implements OnInit {
     }
   }
   saveNewPassword() {
+    alert("something");
     alert(this.newPassword);
+    let data = {
+      password: this.oldPassword,
+      newPassword: this.newPassword
+      //newPassword: this.changeFormPass.control('newPassword.nPass').value
+    }
+    alert(JSON.stringify(data));
+    //this.profileService.changePassword(data)
   }
 
   getData() {
@@ -80,9 +86,20 @@ export class ProfileComponent implements OnInit {
   }
 
   saveUpdateProfile() {
+    alert(JSON.stringify(this.loggedInUser));
     this.profileService.updateProfile(this.loggedInUser)
       .map(res => res.json())
-      .subscribe(data => this.loggedInUser = data)
+      .subscribe(data => {
+        /*if (data.status !== null && data.status !== '200') {
+          alert(" There was an error please try again later")
+        }else{
+          alert("Profile has been updated");
+        }*/
+        if (data.code == "11000") {
+          alert("Please use a different email or phone");
+        }
+      })
+    this.getData();
   }
 
   logout() {
