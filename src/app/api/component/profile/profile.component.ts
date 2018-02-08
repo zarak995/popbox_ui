@@ -86,7 +86,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onShowReportChanged() {
-    alert(this.loggedInUser.isShowReported);
     this.loggedInUser.isShowReported = !this.loggedInUser.isShowReported;
     this.saveUpdateProfile();
   }
