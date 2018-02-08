@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
           id: data._id, name: data.name,
           password: data.password, email: data.email, dateOfBirth: data.dateOfBirth,
           occupation: data.occupation, gender: data.gender, phone: data.phone, isShowReported: data.isShowReported
-        }; console.log(this.loggedInUser);
+        };
       });
   }
 
@@ -96,19 +96,14 @@ export class ProfileComponent implements OnInit {
   }
 
   saveUpdateProfile() {
-    alert(JSON.stringify(this.loggedInUser));
     this.profileService.updateProfile(this.loggedInUser)
       .map(res => res.json())
       .subscribe(data => {
-        /*if (data.status !== null && data.status !== '200') {
-          alert(" There was an error please try again later")
-        }else{
-          alert("Profile has been updated");
-        }*/
         if (data.code == "11000") {
           alert("Please use a different email or phone");
+          return
         }
-        alert(data);
+        alert("Profile has been updated");
       })
     this.getData();
   }
