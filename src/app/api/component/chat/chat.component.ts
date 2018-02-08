@@ -105,10 +105,10 @@ export class ChatComponent implements OnInit {
     this.isMobileTrending = true;
     this.isMobileUserChats = false;
   
-    let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
+    /*let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
-    }
+    }*/
 
     this.listOfChats = [];
     this.chatservice.getTopChats(this.headers)
@@ -140,10 +140,10 @@ export class ChatComponent implements OnInit {
     this.isMobileTrending = false;
     this.isMobileUserChats = true;
   
-    let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
+    /*let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
-    }
+    }*/
 
     this.listOfChats = [];
     this.chatservice.getUserChats(this.headers, this.id)
