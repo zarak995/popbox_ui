@@ -22,7 +22,7 @@ export class LeftnavComponent implements OnInit {
     this.getTopChats();
     setInterval(() => {
       this.getTopChats();
-    }, 6000);
+    }, 60000);
   }
 
   getTopChats() {

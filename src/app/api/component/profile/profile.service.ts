@@ -27,7 +27,7 @@ export class ProfileService {
   }
 
   updateProfile(data) {
-    return this.http.options(environment.host + environment.usersRoute + this.id, {
+    return this.http.options(environment.host+ environment.usersRoute + this.id, {
       headers: this.headers,
       body: data,
       method: 'PUT'

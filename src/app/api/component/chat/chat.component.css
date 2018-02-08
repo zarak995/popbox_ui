@@ -327,7 +327,7 @@ body::-webkit-scrollbar-thumb {
 @media screen and (max-width :1024px){
     
     .navMenuForMobile{
-        color:#428bca; 
+        color:skyblue;
         position: fixed; 
         top:100px; 
         font-size: 150%;
@@ -338,6 +338,11 @@ body::-webkit-scrollbar-thumb {
     .navMenuForMobileItem{
         display:block; 
         margin-bottom:40px;
+    }
+    .navMenuForMobileItem_col{
+        display:block; 
+        margin-bottom:40px;
+        color:#428bca;
     }
     .chatEllipses{
         float: right;

@@ -1,7 +1,7 @@
 <div class="leftNavMainDiv">
 
   <body>
-    <header style="margin:2px">Hottest Today </header>
+    <header style="margin:2px">Trending Today </header>
     <div *ngIf="listOfTopChats.length > 0">
       <div *ngFor="let item of listOfTopChats" (click)="openChatModal(item)" style="max-height:300px;">
         <div class="hottest_posts_card">

@@ -1,68 +1,41 @@
-<div class="header-main-header">
-  <div style="margin: 13px; float: left">
-    <div class="mainHeaderLogo">
-      <strong>o</strong>O
-      <strong>xet</strong>
+<app-header></app-header>
+<h1> Profile </h1>
+<div style="height:500px;">  
+  <div style="height:500px; order: solid yellow 1px; width: 300px">
+    <div style="margin-left:5px; margin-top: 20px;">
+      <label style="width:80px"> Email </label>
+      <input type="text" name="current_user" [(ngModel)]="loggedInUser.email">
     </div>
-  </div>
-  <div (click)="headerMenu()" style="margin: 10px; float: right;">
-    <div style="display: inline-block">
-      <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
-      <h6 class="logged-on-user">{{loggedInUser.email}}</h6>
+    <div style="margin-left:5px; margin-top: 10px;">
+      <label style="width:80px"> Phone </label>
+      <input type="text" [(ngModel)]="loggedInUser.phone">
     </div>
-    <i class="userMenu-ellipses fa fa-ellipsis-v"></i>
-  </div>
-  <div class="userMenu">
-    <ul style="padding: 0px;">
-      <li class="btn-primary" style="padding-left: 15px; list-style: none">
-        <i class="fa fa-user"> Profile </i>
-      </li>
-      <li class="btn-primary" style="padding-left: 15px; list-style: none">
-        <i class="fa fa-cog"> Settings </i>
-      </li>
-      <li class="btn-primary" (click)="logout()" style="padding-left: 15px; list-style: none">
-        <i class="fa fa-sign-out"> Sign out </i>
-      </li>
-    </ul>
-  </div>
-  <div style="height:500px; margin-top: 80px;">
-    <h3 style="margin-left:20px"> Update Profile </h3>
-    <div style="float:right; height:500px; order: solid yellow 1px; width: 300px">
-      <div style="margin-left:5px; margin-top: 20px;">
-        <label style="width:80px"> Email </label>
-        <input type="text" name="current_user" [(ngModel)]="loggedInUser.email">
-      </div>
-      <div style="margin-left:5px; margin-top: 10px;">
-        <label style="width:80px"> Phone </label>
-        <input type="text" [(ngModel)]="loggedInUser.phone">
-      </div>
-      <div style="margin-left:5px; margin-top: 10px;">
-        <label style="width:80px"> Occupation </label>
-        <input type="text" [(ngModel)]="loggedInUser.occupation">
-   
-        <button style="display: block" (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
-      </div>
-      <div style="margin-left:5px; margin-top: 10px;">
-        <label>Show reported posts</label>
-        <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
-      </div>
-      <div style="margin-left:5px; margin-top: 10px;">
-        <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>
-        <div *ngIf=isShowChangepassword>
-          <fieldset>
-            <legend> Change password </legend>
-            <div>
-              <input [(ngModel)]="oldPassword" type="text" placeholder="Enter old password">
-            </div>
-            <br>
-            <input placeholder="Enter new password" [(ngModel)]="newPassword" type="text">
-            <input type="text" placeholder="Confirm new password">
-            <div style="margin-top:10px">
-              <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
-              <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
-            </div>
-          </fieldset>
-        </div>
+    <div style="margin-left:5px; margin-top: 10px;">
+      <label style="width:80px"> Occupation </label>
+      <input type="text" [(ngModel)]="loggedInUser.occupation">
+
+      <button style="display: block" (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
+    </div>
+    <div style="margin-left:5px; margin-top: 10px;">
+      <label>Show reported posts</label>
+      <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
+    </div>
+    <div style="margin-left:5px; margin-top: 10px;">
+      <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>
+      <div *ngIf=isShowChangepassword>
+        <fieldset>
+          <legend> Change password </legend>
+          <div>
+            <input [(ngModel)]="oldPassword" type="text" placeholder="Enter old password">
+          </div>
+          <br>
+          <input placeholder="Enter new password" [(ngModel)]="newPassword" type="text">
+          <input type="text" placeholder="Confirm new password">
+          <div style="margin-top:10px">
+            <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
+            <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
+          </div>
+        </fieldset>
       </div>
     </div>
   </div>

@@ -47,6 +47,10 @@ export class ChatComponent implements OnInit {
   changedChat: String;
   message: String = "";
   selectedChat: any = {};
+  isMobileLanding: Boolean = true;
+  isMobileTrending: Boolean = false;
+  isMobileUserChats: Boolean = false;
+
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
   }
@@ -97,6 +101,10 @@ export class ChatComponent implements OnInit {
       })
   }
   getTopChats() {
+    this.isMobileLanding = false;
+    this.isMobileTrending = true;
+    this.isMobileUserChats = false;
+  
     let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
@@ -126,6 +134,52 @@ export class ChatComponent implements OnInit {
         });
       })
   }
+
+  getUserChat() {
+    this.isMobileLanding = false;
+    this.isMobileTrending = false;
+    this.isMobileUserChats = true;
+  
+    let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "none";
+    }
+
+    this.listOfChats = [];
+    this.chatservice.getUserChats(this.headers, this.id)
+      .map(res => res.json())
+      .subscribe(data => {
+        data.forEach(element => {
+          this.listOfChats.push(element);
+        });
+
+        this.listOfChats.forEach(element => {
+          if (element.post !== null) {
+            element.createdDate = moment(element.createdDate).fromNow();
+            if (element.post.length > 0) {
+              element.post = this.sortChatsAndPosts(element.post);
+            }
+          }
+
+          let maxLikes = element.likes.length;
+          for (var xl = 0; xl < maxLikes; xl++) {
+            if (element.likes[xl].user === this.id) {
+              element.isLiked = true;
+              break;
+            }
+          }
+
+          let maxReports = element.reports.length;
+          for (var xl = 0; xl < maxReports; xl++) {
+            if (element.reports[xl].user === this.id) {
+              element.isReported = true;
+              break;
+            }
+          }
+        });
+      })
+  }
+
   getChats() {
     this.listOfChats = [];
     this.chatservice.getChats(this.headers)

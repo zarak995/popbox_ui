@@ -1,3 +1,44 @@
-<div class="rightNavMainDiv">  
-  <div style="border: solid 2px lightgray; padding:10px; width:100%; float: right"> More Stuff </div>
+<div class="rightNavMainDiv">
+  <div style="border: solid 2px lightgray; padding:5px; width:100%; float: right"> Profile </div>
+  <div style="height:500px; margin-top: 45px;">
+    <div style="float:right; height:550px; border: solid 2px lightgray; width: 248px">
+      <div style="margin-left:5px; margin-top: 20px;">
+        <label style="width:80px"> Email </label>
+        <input style="width:100%" type="text" name="current_user" [(ngModel)]="loggedInUser.email">
+      </div>
+      <div style="margin-left:5px; margin-top: 10px;">
+        <label style="width:80px"> Phone </label>
+        <input type="text" [(ngModel)]="loggedInUser.phone">
+      </div>
+      <div style="margin-left:5px; margin-top: 10px;">
+        <label style="width:80px"> Occupation </label>
+        <input type="text" [(ngModel)]="loggedInUser.occupation">
+        <br>
+        <br>
+        <button style="display: block" (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
+      </div>
+      <div style="margin-left:5px; margin-top: 10px;">
+        <label>Show reported posts</label>
+        <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
+      </div>
+      <div style="margin-left:5px; margin-top: 10px;">
+        <button *ngIf='!isShowChangepassword' (click)="showClosePassword()" class="btn btn-primary btn-sm"> Change password </button>
+        <div *ngIf=isShowChangepassword>
+          <fieldset>
+            <legend> Change password </legend>
+            <div>
+              <input [(ngModel)]="oldPassword" type="text" placeholder="Enter old password">
+            </div>
+            <br>
+            <input placeholder="Enter new password" [(ngModel)]="newPassword" type="text">
+            <input type="text" placeholder="Confirm new password">
+            <div style="margin-top:10px">
+              <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
+              <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

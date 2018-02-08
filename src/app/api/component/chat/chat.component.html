@@ -12,9 +12,14 @@
 </div>
 
 <div class="navMenuForMobile">
-    <i [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
-    <i (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
-    <i  [routerLink]="['/profile']" style="display:block" class="fa fa-user-o"></i>
+    <i *ngIf ="!isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
+    <i *ngIf ="isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem_col fa fa-newspaper-o"></i>
+    
+    <i *ngIf ="!isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
+    <i *ngIf ="isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem_col fa fa-fire"></i>
+    
+    <i *ngIf ="!isMobileUserChats" (click) ="getUserChat()" style="display:block" class="fa fa-user-o"></i>
+    <i *ngIf ="isMobileUserChats" (click) ="getUserChat()" style="display:block; color:#428bca" class="fa fa-user-o"></i>
 </div>
 
 <div *ngIf="isChatModal" id="myModal" class="chatModal">
