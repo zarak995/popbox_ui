@@ -122,10 +122,26 @@
         width:100%; 
         top:10%; 
         font-size: 60%;
-        height: 60vh;
+        height: 90vh;
         position: absolute;  
         left: 0px;
         padding-right: 10px;
         align-self: center;
     }            
 }
+
+@media screen and (max-width :480px){
+    .secondMainSection{
+        display:none;
+        background-color:khaki; 
+        width:100%; 
+        top:10%; 
+        font-size: 60%;
+        height: 90vh;
+        position: absolute;  
+        left: 0px;
+        padding-right: 10px;
+        align-self: center;
+    }            
+}
+

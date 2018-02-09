@@ -9,6 +9,7 @@
     width: 100%; 
     background-color:khaki; 
     font-size: 90%;
+    z-index: 5;
 }
 .mainHeaderLogo{
     border: solid black 2px; 

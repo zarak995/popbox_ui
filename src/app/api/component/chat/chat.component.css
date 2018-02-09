@@ -100,7 +100,7 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid #888;
     width: 70%;
     font-size: 120%;
-   max-height: 500px;
+   max-height: 600px;
 }
 
 .chat-footer{
@@ -201,6 +201,14 @@ body::-webkit-scrollbar-thumb {
     border: solid lightgray 1px;
 }
 
+.chat-card-main-div_reported{
+    margin-left: 5%; 
+    margin-bottom: 2%; 
+    width:90%; 
+    border: solid red 2px;
+}
+
+
 .chat-card-header-div{
     height:30px; 
     background:khaki; 
@@ -287,13 +295,14 @@ body::-webkit-scrollbar-thumb {
     margin-left:25px; 
     margin-bottom:1px;
     border-top:solid lightgray 1px; 
-    width: 95%;
+    width: 90%;
+    text-align: left;
 }
 
 .comment-body {  
-    width:85%; 
+    width:100%; 
     display:inline-block;
-    font-size:80%;
+    font-size:100%;
 }
 .comment-createdDate {
     font-size:50%;
@@ -306,6 +315,10 @@ body::-webkit-scrollbar-thumb {
     display:inline-block; 
     width:20%; 
     text-align: center;
+}
+
+.chat-modal-footer-buttons{
+    text-align: right;
 }
 .chat-modal-selectedChat-title-div{
     width:65%; 
@@ -362,9 +375,9 @@ body::-webkit-scrollbar-thumb {
         border: lightgray solid 1px;
     }
     .btn {
-        width: 10%;
+        width: 45%;
         text-align: center;
-        font-size: 20%;
+        font-size: 80%;
         padding:2px;
         border-radius: 0px;
     }
@@ -421,6 +434,10 @@ body::-webkit-scrollbar-thumb {
         width: 75%;
     }
 
+    .chat-modal-footer-buttons{
+    text-align: center;
+    }
+
     .chatModal-content{
         width: 80%;
         max-height: 700px;
@@ -437,6 +454,7 @@ body::-webkit-scrollbar-thumb {
     /* Chat modal mobile settings */
     .chat-modal-body{
         font-size: 80%;
+    
     }
     .chat-modal-header{
         text-align: center;
@@ -457,6 +475,10 @@ body::-webkit-scrollbar-thumb {
         margin-right: 15px;
     }
 
+    .comment-body{
+        font-size: 80%;
+    }
+    
 }
 
 @media screen and (max-width :414px){
@@ -491,6 +513,3 @@ body::-webkit-scrollbar-thumb {
         font-size:10%;        }
 
 }    
-
-
-

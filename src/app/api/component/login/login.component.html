@@ -1,13 +1,14 @@
 <div>
   <header class="popboxHeader">
     <div style="margin: 13px; float: left">
-      <div class="mainHeaderLogo">
-        <strong>o</strong>O<strong>xet</strong>
+      <div>
+       <h1> <strong>o</strong>O<strong>xet</strong>.com</h1>
       </div>
     </div>
   </header>
   <section class="firstMainSection">
     <div class="emptyWhiteDiv"> </div>
+
     <div>
       <header style="margin: 10px;">
         <h5> Login</h5>
@@ -20,7 +21,7 @@
 
         <div class="form-group" style="margin: 10px; width: 93%" [ngClass]="{'has-danger': loginForm.controls.password.invalid && loginForm.controls.password.dirty,
         'has-success': loginForm.controls.password.valid && loginForm.controls.password.dirty}">
-          <input  formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
+          <input formControlName="password" id="login_txtpassword" formControlName="password" class="form-control" placeholder="Enter password"
             type="password">
         </div>
         <div style="margin-left:10px">

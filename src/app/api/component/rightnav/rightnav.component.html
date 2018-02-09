@@ -1,7 +1,7 @@
 <div class="rightNavMainDiv">
   <div style="border: solid 2px lightgray; padding:5px; width:100%; float: right"> Profile </div>
   <div style="height:500px; margin-top: 45px;">
-    <div style="float:right; height:550px; border: solid 2px lightgray; width: 248px">
+    <div style="float:right; height:550px; border: solid 2px lightgray; width: 245px">
       <div style="margin-left:5px; margin-top: 20px;">
         <label style="width:80px"> Email </label>
         <input style="width:100%" type="text" name="current_user" [(ngModel)]="loggedInUser.email">
@@ -18,7 +18,7 @@
         <button style="display: block" (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
       </div>
       <div style="margin-left:5px; margin-top: 10px;">
-        <label>Show reported posts</label>
+        <label>Hide reported posts</label>
         <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
       </div>
       <div style="margin-left:5px; margin-top: 10px;">

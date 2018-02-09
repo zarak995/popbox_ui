@@ -30,8 +30,8 @@ export class ChatComponent implements OnInit {
     chatId: "",
     body: ""
   }
-  isAvatarModal = false;
-  isChatModal = false;
+  isAvatarModal:Boolean = false;
+  isChatModal:Boolean = false;
   isChats: boolean = true;
   isModal: boolean = false;
   chatBody: String = "";
@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit {
   isMobileLanding: Boolean = true;
   isMobileTrending: Boolean = false;
   isMobileUserChats: Boolean = false;
-
+  isReported:Boolean = true;
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
   }
@@ -265,11 +265,13 @@ export class ChatComponent implements OnInit {
                   this.listOfChats[i].post.forEach(element => {
                     element.createdDate = moment(element.createdDate).fromNow();
                   });
-                  //this.selectedChat = this.listOfChats[i];
+                  this.selectedChat = this.listOfChats[i];
+                  var chat_modal_input = document.getElementById('chat-modal-input')
                   break;
                 }
               }
             });
+            this.isChatModal = true;
           break;
         }
       }
@@ -397,7 +399,7 @@ export class ChatComponent implements OnInit {
   openChatModal(chat) {
     this.selectedChat = chat;
     alert(this.selectedChat);
-    this.isChatModal = true;
+    this.isChatModal = !this.isChatModal;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
@@ -406,6 +408,7 @@ export class ChatComponent implements OnInit {
 
   closeChatModal() {
     this.selectedChat = {};
+    this.isChatModal = !this.isChatModal
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
