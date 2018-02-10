@@ -48,6 +48,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openProfileModal() {
+    alert("It works");
+    let modal = document.getElementsByClassName('profile-modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
+  }
+
   logout() {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('id');

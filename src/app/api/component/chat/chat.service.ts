@@ -86,4 +86,27 @@ export class ChatService {
       headers: headers
     })
   }
+
+  updateProfile(headers, userId, data) {
+    return this.http.options(environment.host + environment.usersRoute + userId, {
+      headers: headers,
+      body: data,
+      method: 'PUT'
+    })
+  }
+
+  changePassword(headers, userId, data) {
+    return this.http.options(environment.host + environment.userChangePasswordRoute + userId, {
+      headers: headers,
+      body: data,
+      method: 'PUT'
+    })
+  }
+
+  getUserData(headers, userId) {
+    return this.http.options(environment.host + environment.usersRoute + userId, {
+      method: 'GET',
+      headers: headers
+    })
+  }
 }

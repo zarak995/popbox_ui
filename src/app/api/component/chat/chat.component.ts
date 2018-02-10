@@ -30,8 +30,12 @@ export class ChatComponent implements OnInit {
     chatId: "",
     body: ""
   }
-  isAvatarModal:Boolean = false;
-  isChatModal:Boolean = false;
+  newPassword: String = "";
+  oldPassword: String = "";
+  loggedInUser: User;
+  isShowChangepassword = false;
+  isAvatarModal: Boolean = false;
+  isChatModal: Boolean = false;
   isChats: boolean = true;
   isModal: boolean = false;
   chatBody: String = "";
@@ -50,11 +54,10 @@ export class ChatComponent implements OnInit {
   isMobileLanding: Boolean = true;
   isMobileTrending: Boolean = false;
   isMobileUserChats: Boolean = false;
-  isReported:Boolean = true;
+  isReported: Boolean = true;
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
   }
-  loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
 
   elementScroll() {
@@ -69,6 +72,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
+      this.getData();
       this.getCurrentAvatar();
       this.getChats();
       console.log(this.listOfChats);
@@ -104,7 +108,7 @@ export class ChatComponent implements OnInit {
     this.isMobileLanding = false;
     this.isMobileTrending = true;
     this.isMobileUserChats = false;
-  
+
     /*let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
@@ -139,7 +143,7 @@ export class ChatComponent implements OnInit {
     this.isMobileLanding = false;
     this.isMobileTrending = false;
     this.isMobileUserChats = true;
-  
+
     /*let modal = document.getElementsByClassName('new-chat-as-header') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "none";
@@ -271,7 +275,7 @@ export class ChatComponent implements OnInit {
                 }
               }
             });
-            this.isChatModal = true;
+          this.isChatModal = true;
           break;
         }
       }
@@ -388,6 +392,47 @@ export class ChatComponent implements OnInit {
     }
   }
 
+
+  saveNewPassword() {
+    let data = {
+      password: this.oldPassword,
+      newPassword: this.newPassword
+    }
+    this.chatservice.changePassword(this.headers, this.id, data)
+      .map(res => res.json())
+      .subscribe(data => {
+        alert(data);
+      })
+    this.oldPassword = "";
+    this.newPassword = "";
+  }
+
+  saveUpdateProfile() {
+    this.chatservice.updateProfile(this.headers, this.id, this.loggedInUser)
+      .map(res => res.json())
+      .subscribe(data => {
+        if (data.code == "11000") {
+          alert("Please use a different email or phone");
+          return
+        }
+        alert("Profile has been updated");
+      })
+    this.getData();
+  }
+
+  getData() {
+    this.loggedInUser = new User();
+    this.chatservice.getUserData(this.headers, this.id)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.loggedInUser = {
+          id: data._id, name: data.name,
+          password: data.password, email: data.email, dateOfBirth: data.dateOfBirth,
+          occupation: data.occupation, gender: data.gender, phone: data.phone, isShowReported: data.isShowReported
+        };
+      });
+  }
+
   openAvatarModal() {
     this.isAvatarModal = true;
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
@@ -401,6 +446,14 @@ export class ChatComponent implements OnInit {
     alert(this.selectedChat);
     this.isChatModal = !this.isChatModal;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
+  }
+
+
+  openProfileModal() {
+    let modal = document.getElementsByClassName('profile-modal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
     }

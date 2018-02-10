@@ -46,6 +46,42 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
 }
 
+.profile-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.profile-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    font-size: 120%;
+    height: 430px;
+    text-align: center;
+}
+
+
 /* The Close Button */
 .close {
     color: #aaaaaa;
@@ -326,7 +362,7 @@ body::-webkit-scrollbar-thumb {
     display:inline-block;
 }
 .chatMenu{
-    display: inline-block;
+   float: right;
 }
 .chatEllipses{
     color: gray; 
@@ -352,6 +388,7 @@ body::-webkit-scrollbar-thumb {
         display:block; 
         margin-bottom:40px;
     }
+    
     .navMenuForMobileItem_col{
         display:block; 
         margin-bottom:40px;
@@ -362,7 +399,9 @@ body::-webkit-scrollbar-thumb {
         margin-top: 10px;
     }
     .chatMenu{
-        display: none;
+        margin-top: 0px;
+        font-size: 80%;
+        float: right;
     }
     .chat-component-main-div{
         left: 2%;
@@ -403,6 +442,7 @@ body::-webkit-scrollbar-thumb {
 
     .chat-created-date{
         font-size: 30%;
+        width:50%;
     }
     
     .chat-card-main-div-header{
@@ -457,6 +497,7 @@ body::-webkit-scrollbar-thumb {
     
     }
     .chat-modal-header{
+    
         text-align: center;
     }
     .chat-modal-selectedChat-title{

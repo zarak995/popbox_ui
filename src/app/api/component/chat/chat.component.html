@@ -1,7 +1,6 @@
 <div id="myModal" class="modal">
     <div id="myCont" class="modal-content">
         <header class="avatar-modal-header"> Change Avatar Name </header>
-
         <body class="avatar-modal-outer">
             <input maxlength="25" class="avatar-modal-input" type="text" [(ngModel)]="newAvatarName" placeholder="Enter name">
         </body>
@@ -21,13 +20,47 @@
     <i *ngIf="isMobileUserChats" (click)="getUserChat()" style="display:block; color:#428bca" class="fa fa-user-o"></i>
 </div>
 
+<div id="profModal" class="profile-modal">
+    <div id="myCont" style="border: solid lightgray 1px;" class="profile-modal-content">
+        <header style="margin-bottom: 10px;" class="avatar-modal-header"> Profile Information </header>
+        <div>
+            <input style="display:inline-block" type="text" name="current_user" [(ngModel)]="loggedInUser.email">
+        </div>
+        <div>
+            <input type="text" [(ngModel)]="loggedInUser.phone">
+        </div>
+        <div>
+            <input type="text" [(ngModel)]="loggedInUser.occupation">
+            <div>
+                <button (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
+            </div>
+        </div>
+        <div>
+            <label>Show reported posts</label>
+            <input type="checkbox" (change)="onShowReportChanged()" [(checked)]="loggedInUser.isShowReported">
+        </div>
+        <div>
+            <div>
+                <fieldset>
+                    <legend> Change password </legend>
+                    <input [(ngModel)]="oldPassword" type="text" placeholder="Enter old password">
+                    <input placeholder="Enter new password" [(ngModel)]="newPassword" type="text">
+                    <div>
+                        <button class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="myModal" class="chatModal">
     <div id="myCont" style="border: solid lightgray 1px;" class="chatModal-content">
         <header class="chat-modal-header">
-            <div *ngIf="selectedChat.owner!=null" style="float:left">{{selectedChat.owner.name}}</div>
+            <div *ngIf="selectedChat.owner!=null" style=" font-size:65%;float:left">{{selectedChat.owner.name}}</div>
             <div style="float:right">
                 <div style="font-size: 60%" *ngIf="isChatModal">
-                    <i *ngIf="selectedChat.owner.user == id" class="fa fa-edit"></i>
+                    <!--<i *ngIf="selectedChat.owner.user == id" class="fa fa-edit"></i>-->
                     <i *ngIf="selectedChat.owner.user == id" class="fa fa-remove"></i>
                     <i *ngIf="selectedChat.owner.user != id && selectedChat.isReported" style="color: red" class="fa fa-thumbs-o-down"></i>
                     <i *ngIf="selectedChat.owner.user != id && !selectedChat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"></i>
@@ -96,16 +129,16 @@
                 <div class="chat-card-main-div-header">
                     <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                     <div class="avatar-name">
-                        <i class="chatEllipses fa fa-ellipsis-v"></i>
-                        <div class="chatMenu">
-                            <i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>
-                            <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)" class="fa fa-remove"> </i>
-                            <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
-                            <i *ngIf="chat.owner.user !== id && chat.isReported" style="color: red" class="fa fa-thumbs-o-down"> </i>
-                        </div>
                     </div>
                 </div>
                 <div class="chat-created-date"> {{chat.createdDate}} </div>
+                <div class="chatMenu">
+                    <!--<i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>-->
+                    <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)" class="fa fa-remove"> </i>
+                    <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
+                    <i *ngIf="chat.owner.user !== id && chat.isReported" style="color: red" class="fa fa-thumbs-o-down"> </i>
+                </div>
+
                 <hr class="hr-division">
                 <p (click)="openChatModal(chat)" class="chat-body">
                     {{chat.body}}
