@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
       'year': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Year--/i)]),
       'month': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Month--/i)]),
       'day': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Day--/i)]),
-      'phone': new FormControl('', [Validators.required,Validators.minLength(12),Validators.maxLength(12),Validators.pattern(/^[+][0-9]+$/i)])
+      'phone': new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern(/^[+][0-9]+$/i)])
     });
   }
 
@@ -84,45 +84,58 @@ export class RegisterComponent implements OnInit {
   }
 
   confirmPasswordChange() {
-    this.registerForm.get('cpass').valueChanges.subscribe(change =>{
-      if(this.registerForm.get('pass').value !== change ){
-      this.registerForm.controls['cpass'].setErrors({'incorrect': true});
+    this.registerForm.get('cpass').valueChanges.subscribe(change => {
+      if (this.registerForm.get('pass').value !== change) {
+        this.registerForm.controls['cpass'].setErrors({ 'incorrect': true });
       }
     })
   }
-  passwordsAreTheSame(value: string): ValidatorFn {
-    return null;
-  }
 
+  showPassword() {
+    let regPass = document.getElementById('pass');
+    let regCPass = document.getElementById('cpass');
+    if (regPass.attributes.getNamedItem('type').value === 'password') {
+      regPass.attributes.getNamedItem('type').value = 'text';
+      regCPass.attributes.getNamedItem('type').value = 'text';
+      return;
+    }
+    regPass.attributes.getNamedItem('type').value = "password";
+    regCPass.attributes.getNamedItem('type').value = 'password';
+  }
   addNewUser() {
-    this.newuser = new User();
-    this.newuser.email = this.registerForm.get('email').value;
-    this.newuser.name = this.registerForm.get('name').value;
-    this.newuser.password = this.registerForm.get('pass').value;
-    this.newuser.occupation = this.registerForm.get('occupation').value;
-    this.newuser.gender = this.registerForm.get('gender').value;
-    this.newuser.phone = this.registerForm.get('phone').value;
-    this.newuser.dateOfBirth = new Date();
-    this.newuser.dateOfBirth.setFullYear(this.registerForm.get('year').value,
-      this.registerForm.get('month').value, this.registerForm.get('day').value);
-    this.registerService.registerNewUser(this.newuser)
-      .subscribe(
-      data => {
-        if (data.code === '11000') {
-          alert(JSON.stringify(data.message));
-        } else {
-          alert("your account has been created. Please login");
-          this.router.navigate(['/landing']);
-          /*** For future implementation
-          this.verify_id = data.user;
-          this.verificationCodeModal();
-           */
-
-        }
-      },
-      err => console.log(err),
-      () => console.log('Request Add New user Complete'));
+    this.confirmPasswordChange();
+    if (this.registerForm.valid && this.registerForm.get('pass').value === this.registerForm.get('cpass').value) {
+      this.newuser = new User();
+      this.newuser.email = this.registerForm.get('email').value;
+      this.newuser.name = this.registerForm.get('name').value;
+      this.newuser.password = this.registerForm.get('pass').value;
+      this.newuser.occupation = this.registerForm.get('occupation').value;
+      this.newuser.gender = this.registerForm.get('gender').value;
+      this.newuser.phone = this.registerForm.get('phone').value;
+      this.newuser.dateOfBirth = new Date();
+      this.newuser.dateOfBirth.setFullYear(this.registerForm.get('year').value,
+        this.registerForm.get('month').value, this.registerForm.get('day').value);
+      this.registerService.registerNewUser(this.newuser)
+        .subscribe(
+        data => {
+          if (data.code === '11000') {
+            alert(JSON.stringify(data.message));
+          } else {
+            alert("your account has been created. Please login");
+            this.router.navigate(['/landing']);
+            /*** For future implementation
+            this.verify_id = data.user;
+            this.verificationCodeModal();
+             */
+          }
+        },
+        err => console.log(err),
+        () => console.log('Request Add New user Complete'));
+    }else{
+      alert("ensure that all fields are valid");
+    }
   }
+
 
   verificationCodeModal() {
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
@@ -139,6 +152,8 @@ export class RegisterComponent implements OnInit {
     this.closeModal();
     this.router.navigate(['/landing']);
   }
+
+
 
   closeModal() {
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;

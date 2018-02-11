@@ -393,29 +393,39 @@ export class ChatComponent implements OnInit {
 
   saveNewPassword() {
     let data = {
-      password: this.oldPassword,
-      newPassword: this.newPassword
+      password: this.changePasswordForm.get('opass').value,
+      newPassword: this.changePasswordForm.get('pass').value
     }
     this.chatservice.changePassword(this.headers, this.id, data)
       .map(res => res.json())
       .subscribe(data => {
         alert(data);
       })
-    this.oldPassword = "";
-    this.newPassword = "";
   }
 
   saveUpdateProfile() {
-    this.chatservice.updateProfile(this.headers, this.id, this.loggedInUser)
-      .map(res => res.json())
-      .subscribe(data => {
-        if (data.code == "11000") {
-          alert("Please use a different email or phone");
-          return
-        }
-        alert("Profile has been updated");
-      })
-    this.getData();
+    if (this.updateProfileForm.get('email').value == this.loggedInUser.email
+      && this.updateProfileForm.get('occupation').value == this.loggedInUser.phone
+      && this.updateProfileForm.get('phone').value == this.loggedInUser.phone) {
+      alert("No updates were saved");
+    }
+    else if (this.updateProfileForm.get('email').value !== this.loggedInUser.email
+      || this.updateProfileForm.get('occupation').value !== this.loggedInUser.phone
+      || this.updateProfileForm.get('phone').value !== this.loggedInUser.phone) {
+      this.loggedInUser.email = this.updateProfileForm.get('email').value;
+      this.loggedInUser.phone = this.updateProfileForm.get('phone').value;
+      this.loggedInUser.occupation = this.updateProfileForm.get('occupation').value;
+      this.chatservice.updateProfile(this.headers, this.id, this.loggedInUser)
+        .map(res => res.json())
+        .subscribe(data => {
+          if (data.code == "11000") {
+            alert("Please use a different email or phone");
+            return
+          }
+          alert("Profile has been updated");
+        })
+      this.getData();
+    }
   }
 
   getData() {
@@ -441,7 +451,6 @@ export class ChatComponent implements OnInit {
 
   openChatModal(chat) {
     this.selectedChat = chat;
-    alert(this.selectedChat);
     this.isChatModal = !this.isChatModal;
     let modal = document.getElementsByClassName('chatModal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {

@@ -3,14 +3,13 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { LoginService } from '../login/login.service';
-import { ProfileService } from '../profile/profile.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.prod';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
 import { interval } from 'rxjs/observable/interval';
 import { setInterval, setTimeout } from 'timers';
-
+import { ChatService } from '../chat/chat.service';
 @Component({
   selector: 'app-rightnav',
   templateUrl: './rightnav.component.html',
@@ -18,7 +17,7 @@ import { setInterval, setTimeout } from 'timers';
 })
 export class RightnavComponent implements OnInit {
 
-  constructor(private http: Http, private loginService: LoginService, private profileService: ProfileService, private router: Router) { }
+  constructor(private http: Http, private loginService: LoginService, private chatService: ChatService, private router: Router) { }
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
   isShowChangepassword = false;
@@ -36,7 +35,7 @@ export class RightnavComponent implements OnInit {
       }, 3000)
 
       this.getData();
-      this.getOwnChats();
+      //this.getOwnChats();
       this.validateChangePasswordForm();
       this.confirmPasswordChange();
     } else {
@@ -55,7 +54,7 @@ export class RightnavComponent implements OnInit {
       password: this.oldPassword,
       newPassword: this.newPassword
     }
-    this.profileService.changePassword(data)
+    this.chatService.changePassword(this.headers, this.id, data)
       .map(res => res.json())
       .subscribe(data => {
         alert(data);
@@ -80,11 +79,11 @@ export class RightnavComponent implements OnInit {
       });
   }
 
-  getOwnChats() {
-    this.profileService.getOwnChats()
+  /*getOwnChats() {
+    this.chatService.getOwnChats()
       .map(res => res.json())
       .subscribe(data => console.log(data))
-  }
+  }*/
 
   onShowReportChanged() {
     this.loggedInUser.isShowReported = !this.loggedInUser.isShowReported;
@@ -96,16 +95,28 @@ export class RightnavComponent implements OnInit {
   }
 
   saveUpdateProfile() {
-    this.profileService.updateProfile(this.loggedInUser)
-      .map(res => res.json())
-      .subscribe(data => {
-        if (data.code == "11000") {
-          alert("Please use a different email or phone");
-          return
-        }
-        alert("Profile has been updated");
-      })
-    this.getData();
+    if (this.updateProfileForm.get('email').value == this.loggedInUser.email
+      && this.updateProfileForm.get('occupation').value == this.loggedInUser.phone
+      && this.updateProfileForm.get('phone').value == this.loggedInUser.phone) {
+      alert("No updates were saved");
+    }
+    else if (this.updateProfileForm.get('email').value !== this.loggedInUser.email
+      || this.updateProfileForm.get('occupation').value !== this.loggedInUser.phone
+      || this.updateProfileForm.get('phone').value !== this.loggedInUser.phone) {
+      this.loggedInUser.email = this.updateProfileForm.get('email').value;
+      this.loggedInUser.phone = this.updateProfileForm.get('phone').value;
+      this.loggedInUser.occupation = this.updateProfileForm.get('occupation').value;
+      this.chatService.updateProfile(this.headers, this.id, this.loggedInUser)
+        .map(res => res.json())
+        .subscribe(data => {
+          if (data.code == "11000") {
+            alert("Please use a different email or phone");
+            return
+          }
+          alert("Profile has been updated");
+        })
+      this.getData();
+    }
   }
 
 
