@@ -16,6 +16,7 @@ import * as moment from 'moment';
 import { DatePipe } from '@angular/common/src/pipes';
 import { ChatService } from '../chat/chat.service';
 import { isType } from '@angular/core/src/type';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -55,6 +56,10 @@ export class ChatComponent implements OnInit {
   isMobileTrending: Boolean = false;
   isMobileUserChats: Boolean = false;
   isReported: Boolean = true;
+  isProfileSet: Boolean = false;
+  updateProfileForm: FormGroup;
+  changePasswordForm: FormGroup;
+
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
   }
@@ -75,8 +80,12 @@ export class ChatComponent implements OnInit {
       this.getData();
       this.getCurrentAvatar();
       this.getChats();
-      console.log(this.listOfChats);
       this.elementScroll()
+      this.validateChangePasswordForm();
+      this.confirmPasswordChange();
+      setTimeout(() => {
+        this.validateUpdateForm();
+      }, 3000)
     } else {
       this.router.navigate(['']);
     }
@@ -382,17 +391,6 @@ export class ChatComponent implements OnInit {
     this.postBody.body = $event;
   }
 
-
-  colourPosts() {
-    let post = document.getElementsByClassName('post') as HTMLCollectionOf<HTMLElement>;
-    if (post.length != 0) {
-      for (var i = 0; i < post.length; i++) {
-        post[i].style.color = "yellow";
-      }
-    }
-  }
-
-
   saveNewPassword() {
     let data = {
       password: this.oldPassword,
@@ -450,9 +448,8 @@ export class ChatComponent implements OnInit {
       modal[0].style.display = "block";
     }
   }
-
-
   openProfileModal() {
+    this.validateUpdateForm();
     let modal = document.getElementsByClassName('profile-modal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
@@ -475,7 +472,27 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  getProfile() {
-    this.router.navigate(['/profile']);
+  validateUpdateForm() {
+    this.updateProfileForm = new FormGroup({
+      'email': new FormControl(this.loggedInUser.email, [Validators.pattern('[^ @]*@[^ @]*')]),
+      'phone': new FormControl(this.loggedInUser.phone, [Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern(/^[+][0-9]+$/i)]),
+      'occupation': new FormControl(this.loggedInUser.occupation, [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
+    })
+  }
+
+  validateChangePasswordForm() {
+    this.changePasswordForm = new FormGroup({
+      'opass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
+      'pass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
+      'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)])
+    })
+  }
+
+  confirmPasswordChange() {
+    this.changePasswordForm.get('cpass').valueChanges.subscribe(change => {
+      if (this.changePasswordForm.get('pass').value !== change) {
+        this.changePasswordForm.controls['cpass'].setErrors({ 'incorrect': true });
+      }
+    })
   }
 }

@@ -15,14 +15,31 @@ export class LeftnavComponent implements OnInit {
   isChatModal = false;
   constructor(private leftnavService: LeftnavService, private chatService: ChatService) { }
   token: String = window.localStorage.getItem('token');
+  id: String = window.localStorage.getItem('id');
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
   listOfTopChats: Chat[] = [];
+  listOfUserChats: Chat[] = [];
 
   ngOnInit() {
     this.getTopChats();
+    this.getUserChats();
     setInterval(() => {
+      this.getUserChats();
       this.getTopChats();
     }, 60000);
+  }
+
+  getUserChats() {
+    this.listOfUserChats = [];
+    this.leftnavService.getUserChats(this.headers, this.id)
+      .map(res => res.json())
+      .subscribe(data => {
+        if (data.length > 0) {
+          for (var x = 0; x < data.length  && x < 3; x++) {
+            this.listOfUserChats.push(data[x]);          
+          }
+        }
+      })
   }
 
   getTopChats() {
@@ -30,8 +47,8 @@ export class LeftnavComponent implements OnInit {
     this.leftnavService.getTopChats(this.headers)
       .map(res => res.json())
       .subscribe(data => {
-        for (var x = 0; x < data.length-1; x++) {
-          this.listOfTopChats.push(data[x]);          
+        for (var x = 0; x < 3; x++) {
+          this.listOfTopChats.push(data[x]);
         }
       })
   }

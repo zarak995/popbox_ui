@@ -2,6 +2,7 @@
   <div style="margin: 13px; float: left">
     <div class="mainHeaderLogo"> <strong>o</strong>O<strong>xet</strong>.com</div>
   </div>
+  
   <div (click)="headerMenu()" style="margin: 10px; float: right;">
     <div style="display: inline-block">
       <h6 class="logged-on-user">{{loggedInUser.name}}</h6>
@@ -11,10 +12,10 @@
   </div>
   <div class="userMenu">
     <ul style="padding: 0px;">
-      <li class="btn-primary" style="padding-left: 15px; list-style: none">
+      <li class="userMenuMobileOnly btn-primary" style="padding-left: 15px; list-style: none">
         <i [routerLink]="['/']" class="fa fa-newspaper-o"> Home </i>
       </li>
-      <li class="btn-primary" style="padding-left: 15px; list-style: none">
+      <li class="userMenuMobileOnly btn-primary" style="padding-left: 15px; list-style: none">
         <i (click)="openProfileModal()" class="fa fa-user"> Profile </i>
       </li>
       <li class="btn-primary" (click)="logout()" style="padding-left: 15px; list-style: none">

@@ -11,5 +11,12 @@ export class LeftnavService {
       headers: headers
     })
   }
+
+  getUserChats(headers, userId) {
+    return this.http.options(environment.host + environment.userChatsRoute + userId, {
+      method: 'GET',
+      headers: headers
+    })
+  }
 }
 

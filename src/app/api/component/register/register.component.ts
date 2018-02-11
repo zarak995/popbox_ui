@@ -39,10 +39,12 @@ export class RegisterComponent implements OnInit {
   years: number[] = [];
   verify_id: String = "";
   verificatioCode: string = "";
+  confirmPassword: String = "";
   ngOnInit() {
     this.populateDays();
     this.populateYears();
     this.validateForm();
+    this.confirmPasswordChange();
   }
 
   populateDays() {
@@ -65,12 +67,12 @@ export class RegisterComponent implements OnInit {
       'name': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
       'pass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
       'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
-      'occupation': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
+      'occupation': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
       'gender': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Select Gender--/i)]),
       'year': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Year--/i)]),
       'month': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Month--/i)]),
       'day': new FormControl('', [Validators.required, this.forbiddenValueValidator(/--Day--/i)]),
-      'phone': new FormControl('', [Validators.required, Validators.pattern(/^[+][0-9]+$/i)])
+      'phone': new FormControl('', [Validators.required,Validators.minLength(12),Validators.maxLength(12),Validators.pattern(/^[+][0-9]+$/i)])
     });
   }
 
@@ -81,6 +83,13 @@ export class RegisterComponent implements OnInit {
     };
   }
 
+  confirmPasswordChange() {
+    this.registerForm.get('cpass').valueChanges.subscribe(change =>{
+      if(this.registerForm.get('pass').value !== change ){
+      this.registerForm.controls['cpass'].setErrors({'incorrect': true});
+      }
+    })
+  }
   passwordsAreTheSame(value: string): ValidatorFn {
     return null;
   }

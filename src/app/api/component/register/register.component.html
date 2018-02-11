@@ -77,11 +77,11 @@
       <div class="row registerRow">
         <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.pass.invalid && registerForm.controls.pass.dirty,
         'has-success': registerForm.controls.pass.valid && registerForm.controls.pass.dirty}">
-          <input class="form-control" formControlName="pass" placeholder="Enter Password">
+          <input class="form-control" type="password" formControlName="pass" placeholder="Enter Password">
         </div>
         <div style="width: 48%" class="form-group" [ngClass]="{'has-danger': registerForm.controls.cpass.invalid && registerForm.controls.cpass.dirty,
           'has-success': registerForm.controls.cpass.valid && registerForm.controls.cpass.dirty}">
-          <input class="form-control" formControlName="cpass" type="cpass" name="reg_cpass" placeholder="Confirm Password">
+          <input class="form-control" formControlName="cpass" type="password" name="reg_cpass" placeholder="Confirm Password">
         </div>
       </div>
 

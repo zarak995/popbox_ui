@@ -30,10 +30,15 @@
     width:180px;
     font-size: 150%;
 }
+.userMenuMobileOnly{
+    display: none;
+}
 
-
-@media screen and (max-width: 480px)
+@media screen and (max-width: 1024px)
   {
+    .userMenuMobileOnly{
+        display: block;
+    }
     .userMenu-ellipses{
         font-size: 300%; 
         margin-top: 5px; 

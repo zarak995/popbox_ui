@@ -8,6 +8,8 @@ import { User } from '../../../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.prod';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
+import { interval } from 'rxjs/observable/interval';
+import { setInterval, setTimeout } from 'timers';
 
 @Component({
   selector: 'app-rightnav',
@@ -20,27 +22,26 @@ export class RightnavComponent implements OnInit {
   token = window.localStorage.getItem('token');
   id = window.localStorage.getItem('id');
   isShowChangepassword = false;
-  changeFormPass: FormGroup;
   newPassword: String = "";
   oldPassword: String = "";
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
+  isProfileSet: Boolean = false;
+  updateProfileForm: FormGroup;
+  changePasswordForm: FormGroup;
   ngOnInit() {
     if (this.loginService.isUserLoggedin()) {
+      setTimeout(() => {
+        this.validateUpdateForm();
+      }, 3000)
+
       this.getData();
       this.getOwnChats();
-      //this.validateFields();
+      this.validateChangePasswordForm();
+      this.confirmPasswordChange();
     } else {
       this.router.navigate(['']);
     }
-  }
-
-  validateFields( @Inject(FormBuilder) fb: FormBuilder) {
-    this.changeFormPass = fb.group({
-      oPass: ['', Validators.required, Validators.pattern(''), Validators.min(6)],
-      /*nPass: ['', Validators.required, Validators.min(6)],
-      cPass: ['', Validators.required, Validators.min(6)]*/
-    })
   }
 
   confirmingPassword(c: AbstractControl): { invalid: boolean } {
@@ -64,7 +65,7 @@ export class RightnavComponent implements OnInit {
     this.showClosePassword();
   }
 
-  getData() {
+  async getData() {
     this.loggedInUser = new User();
     this.http.options(environment.host + environment.usersRoute + this.id, {
       method: 'GET',
@@ -105,6 +106,34 @@ export class RightnavComponent implements OnInit {
         alert("Profile has been updated");
       })
     this.getData();
+  }
+
+
+  validateUpdateForm() {
+    this.updateProfileForm = new FormGroup({
+      'email': new FormControl(this.loggedInUser.email, [Validators.pattern('[^ @]*@[^ @]*')]),
+      'phone': new FormControl(this.loggedInUser.phone, [Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern(/^[+][0-9]+$/i)]),
+      'occupation': new FormControl(this.loggedInUser.occupation, [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z a-zA-Z]+$/i)]),
+    })
+  }
+
+  validateChangePasswordForm() {
+    if (this.loggedInUser.email !== null) {
+      this.isProfileSet = true;
+    }
+    this.changePasswordForm = new FormGroup({
+      'opass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
+      'pass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]),
+      'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)])
+    })
+  }
+
+  confirmPasswordChange() {
+    this.changePasswordForm.get('cpass').valueChanges.subscribe(change => {
+      if (this.changePasswordForm.get('pass').value !== change) {
+        this.changePasswordForm.controls['cpass'].setErrors({ 'incorrect': true });
+      }
+    })
   }
 
   logout() {

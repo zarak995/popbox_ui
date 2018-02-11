@@ -75,9 +75,9 @@ body::-webkit-scrollbar-thumb {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 90%;
+    width: 60%;
     font-size: 120%;
-    height: 430px;
+    height: 500px;
     text-align: center;
 }
 
@@ -530,6 +530,9 @@ body::-webkit-scrollbar-thumb {
     }
     .comment-input{
         width:53%;
+    }
+    .profile-modal-content{
+        width: 90%;
     }
 }
 
