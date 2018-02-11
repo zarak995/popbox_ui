@@ -44,7 +44,6 @@
                 <button class="btn btn-primary" (click)='saveUpdateProfile()' [disabled]="!updateProfileForm.valid"> Update Profile </button>
             </div>
             <br>
-            <br>
         </form>
         <div>
             <div>
@@ -52,15 +51,19 @@
                     <form [formGroup]="changePasswordForm">
                         <div class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.opass.invalid && changePasswordForm.controls.opass.dirty,
                             'has-success': changePasswordForm.controls.opass.valid && changePasswordForm.controls.opass.dirty}">
-                            <input class="form-control" type="text" formControlName="opass" placeholder="Enter old password">
+                            <input class="form-control" id="opass" type="password" formControlName="opass" placeholder="Enter old password">
                         </div>
                         <div class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.pass.invalid && changePasswordForm.controls.pass.dirty,
                         'has-success': changePasswordForm.controls.pass.valid && changePasswordForm.controls.pass.dirty}">
-                            <input class="form-control" type="text" formControlName="pass" placeholder="Enter new password">
+                            <input class="form-control" id="pass" type="password" formControlName="pass" placeholder="Enter new password">
                         </div>
                         <div class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.cpass.invalid && changePasswordForm.controls.cpass.dirty,
                         'has-success': changePasswordForm.controls.cpass.valid && changePasswordForm.controls.cpass.dirty}">
-                            <input class="form-control" type="text" formControlName="cpass" placeholder="Confirm new password">
+                            <input class="form-control" id="cpass" type="password" formControlName="cpass" placeholder="Confirm new password">
+                        </div>
+                        <div (click)="showPassword()" style="float:left; margin-left: 5px">
+                            <input type="checkbox"  />
+                            <label> Show password </label>
                         </div>
                         <div style="text-align: right">
                             <button [disabled]="!changePasswordForm.valid" class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save Password </button>

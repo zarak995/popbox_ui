@@ -496,7 +496,21 @@ export class ChatComponent implements OnInit {
       'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)])
     })
   }
-
+  
+  showPassword() {
+    let updateFrmPass = document.getElementById('pass');
+    let updateFrmCPass = document.getElementById('cpass');
+    let updateFrmOPass = document.getElementById('opass');
+    if (updateFrmPass.attributes.getNamedItem('type').value === 'password') {
+      updateFrmPass.attributes.getNamedItem('type').value = 'text';
+      updateFrmCPass.attributes.getNamedItem('type').value = 'text';
+      updateFrmOPass.attributes.getNamedItem('type').value = 'text';
+      return;
+    }
+    updateFrmOPass.attributes.getNamedItem('type').value = 'password';
+    updateFrmPass.attributes.getNamedItem('type').value = "password";
+    updateFrmCPass.attributes.getNamedItem('type').value = 'password';
+  }
   confirmPasswordChange() {
     this.changePasswordForm.get('cpass').valueChanges.subscribe(change => {
       if (this.changePasswordForm.get('pass').value !== change) {
