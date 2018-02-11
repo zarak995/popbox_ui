@@ -5,20 +5,20 @@
       <div style="margin:5px; margin-top: 10px;">
         <div class="form-group" [ngClass]="{'has-danger': updateProfileForm.controls.email.invalid && updateProfileForm.controls.email.dirty,
         'has-success': updateProfileForm.controls.email.valid && updateProfileForm.controls.email.dirty}">
-            <input class="form-control" type="text" formControlName="email">
-          </div>
+          <input class="form-control" type="text" formControlName="email">
+        </div>
       </div>
       <div style="margin:5px; margin-top: 10px;">
         <div class="form-group" [ngClass]="{'has-danger': updateProfileForm.controls.phone.invalid && updateProfileForm.controls.phone.dirty,
         'has-success': updateProfileForm.controls.phone.valid && updateProfileForm.controls.phone.dirty}">
-            <input class="form-control" type="text" formControlName="phone">
-          </div>
+          <input class="form-control" type="text" formControlName="phone">
+        </div>
       </div>
       <div style="margin:5px; margin-top: 10px;">
         <div class="form-group" [ngClass]="{'has-danger': updateProfileForm.controls.occupation.invalid && updateProfileForm.controls.occupation.dirty,
         'has-success': updateProfileForm.controls.occupation.valid && updateProfileForm.controls.occupation.dirty}">
-            <input class="form-control" type="text" formControlName="occupation">
-          </div> 
+          <input class="form-control" type="text" formControlName="occupation">
+        </div>
         <button [disabled]="!updateProfileForm.valid" style="display: block" (click)='saveUpdateProfile()' class="btn btn-primary btn-sm">save</button>
       </div>
     </form>
@@ -28,20 +28,24 @@
         <fieldset>
           <legend> Change password </legend>
           <form [formGroup]="changePasswordForm">
-            <div style="margin:5px;"  class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.opass.invalid && changePasswordForm.controls.opass.dirty,
+            <div style="margin:5px;" class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.opass.invalid && changePasswordForm.controls.opass.dirty,
           'has-success': changePasswordForm.controls.opass.valid && changePasswordForm.controls.opass.dirty}">
-              <input class="form-control" type="password" formControlName="opass" placeholder="Enter Password">
+              <input class="form-control" id="opass" type="password" formControlName="opass" placeholder="Enter Password">
             </div>
 
             <div style="margin:5px;" class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.pass.invalid && changePasswordForm.controls.pass.dirty,
             'has-success': changePasswordForm.controls.pass.valid && changePasswordForm.controls.pass.dirty}">
-              <input class="form-control" type="password" formControlName="pass" placeholder="Enter Password">
+              <input class="form-control" id="pass" type="password" formControlName="pass" placeholder="Enter Password">
             </div>
             <div style="margin:5px;" class="form-group" [ngClass]="{'has-danger': changePasswordForm.controls.cpass.invalid && changePasswordForm.controls.cpass.dirty,
               'has-success': changePasswordForm.controls.cpass.valid && changePasswordForm.controls.cpass.dirty}">
-              <input class="form-control" formControlName="cpass" type="password" name="reg_cpass" placeholder="Confirm Password">
+              <input class="form-control" id="cpass" formControlName="cpass" type="password" name="reg_cpass" placeholder="Confirm Password">
             </div>
           </form>
+          <div style="margin-left: 5px">
+            <input type="checkbox" (click)="showPassword()" />
+            <label style="font-size: 80%"> Show password </label>
+          </div>
           <div style="margin:5px;">
             <button [disabled]="!changePasswordForm.valid" class="btn btn-primary btn-sm" (click)="saveNewPassword()"> Save </button>
             <button class="btn btn-primary btn-sm" (click)="showClosePassword()"> Cancel </button>

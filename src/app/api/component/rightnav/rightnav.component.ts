@@ -51,8 +51,8 @@ export class RightnavComponent implements OnInit {
 
   saveNewPassword() {
     let data = {
-      password: this.oldPassword,
-      newPassword: this.newPassword
+      password: this.changePasswordForm.get('opass').value,
+      newPassword: this.changePasswordForm.get('pass').value
     }
     this.chatService.changePassword(this.headers, this.id, data)
       .map(res => res.json())
@@ -88,6 +88,21 @@ export class RightnavComponent implements OnInit {
   onShowReportChanged() {
     this.loggedInUser.isShowReported = !this.loggedInUser.isShowReported;
     this.saveUpdateProfile();
+  }
+
+  showPassword() {
+    let updateFrmPass = document.getElementById('pass');
+    let updateFrmCPass = document.getElementById('cpass');
+    let updateFrmOPass = document.getElementById('opass');
+    if (updateFrmPass.attributes.getNamedItem('type').value === 'password') {
+      updateFrmPass.attributes.getNamedItem('type').value = 'text';
+      updateFrmCPass.attributes.getNamedItem('type').value = 'text';
+      updateFrmOPass.attributes.getNamedItem('type').value = 'text';
+      return;
+    }
+    updateFrmOPass.attributes.getNamedItem('type').value = 'password';
+    updateFrmPass.attributes.getNamedItem('type').value = "password";
+    updateFrmCPass.attributes.getNamedItem('type').value = 'password';
   }
 
   showClosePassword() {
