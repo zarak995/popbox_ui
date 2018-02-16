@@ -1,13 +1,25 @@
 <div id="verificationModal" class="modal">
   <div id="myCont" class="modal-content">
-    <header class="modal-header"> Verification code </header>
+    <header class="modal-header">
+      <label style="float:left"> Verification code </label>
+      <div style="width:30%; text-align:center; border-left: lightgray 1px solid; float:right">
+        <div style="display: block">
+            <label  style="font-size:40%;"> Didnt receive verification code to </label>        </div>
+        <div style="display: block">
+          <button (click)="resendToUserEmail()" class="btn btn-sm"> Email </button>     
+          <button (click)="resendToUserPhone()" class="btn btn-sm">  Phone </button>
+        </div>
+      </div>
+    </header>
 
     <body class="modal-outer">
-      <input maxlength="25" class="modal-input" type="text" [(ngModel)]="verificatioCode" placeholder="Enter Code">
+      <div style="display:inline-block; margin:20px;">
+        <input maxlength="10" class="modal-input" type="text" [(ngModel)]="verificatioCode" placeholder="Enter Code">
+      </div>
+      <div style="display:inline-block">
+        <button class="btn btn-sm btn-primary" (click)="validateUser(verify_id)"> Submit </button>
+      </div>
     </body>
-    <footer style="text-align: right">
-      <button class="btn btn-sm btn-primary" (click)="validateUser()"> Submit </button>
-    </footer>
   </div>
 </div>
 

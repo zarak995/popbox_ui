@@ -103,6 +103,7 @@ export class RegisterComponent implements OnInit {
     regCPass.attributes.getNamedItem('type').value = 'password';
   }
   addNewUser() {
+    alert("something");
     this.confirmPasswordChange();
     if (this.registerForm.valid && this.registerForm.get('pass').value === this.registerForm.get('cpass').value) {
       this.newuser = new User();
@@ -122,22 +123,32 @@ export class RegisterComponent implements OnInit {
             alert(JSON.stringify(data.message));
           } else {
             alert("your account has been created. Please login");
-            this.router.navigate(['/landing']);
-            /*** For future implementation
-            this.verify_id = data.user;
+            alert(JSON.stringify(data));
+            this.verify_id += data;
             this.verificationCodeModal();
-             */
           }
         },
         err => console.log(err),
         () => console.log('Request Add New user Complete'));
-    }else{
+    } else {
       alert("ensure that all fields are valid");
     }
   }
+  resendToUserEmail() {
+    this.registerService.resendToEmail(this.verify_id)
+      .subscribe((data) => { console.log(data) })
+  }
 
+  resendToUserPhone() {
+    alert("sent to phone");
+  }
 
   verificationCodeModal() {
+    if(this.registerService.verify_id!=" "){
+      alert("This is verify idea from reg comp "+ this.registerService.verify_id);
+      this.verify_id = this.registerService.verify_id;
+      alert("VerficationModal "+ this.verify_id) 
+    }
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
@@ -145,15 +156,14 @@ export class RegisterComponent implements OnInit {
   }
 
   validateUser() {
-    console.log(this.verify_id + " " + this.verificatioCode);
+    alert("Verify_Id on validate User " +this.registerService.verify_id)
+    alert(this.verify_id + " " + this.verificatioCode);
     let verification_data = { userId: this.verify_id, code: this.verificatioCode }
     this.registerService.verifyUser(verification_data)
-      .subscribe(data => { console.log(data) });
+      .subscribe(data => { alert(JSON.stringify(data)) });
     this.closeModal();
     this.router.navigate(['/landing']);
   }
-
-
 
   closeModal() {
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;

@@ -1,5 +1,5 @@
 .modal {
-    display: none;
+    display:none;
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
@@ -78,6 +78,19 @@
     font-size: 150%;
 }
 
+.modal-header {
+    width:100%; 
+    background-color: khaki;
+    text-align: right;
+    font-size: 120%;
+}
+.modal-input{
+outline: none;
+    width:100%;
+    border:none; 
+    border-bottom: solid 1px lightgray;
+    font-size: 100%;
+}
 
 @media screen and (max-height:640px){
     .secondMainSection{
@@ -100,7 +113,7 @@
         margin :20px;
     }
     .modal-input{
-        width:100%;
+        width:80%;
         border:none; 
         border-bottom: solid 1px lightgray;
         font-size: 100%;

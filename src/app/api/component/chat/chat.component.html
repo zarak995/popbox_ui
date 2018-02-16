@@ -12,15 +12,16 @@
     </div>
 </div>
 
-<div class="navMenuForMobile">
-    <i *ngIf="!isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
-    <i *ngIf="isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem_col fa fa-newspaper-o"></i>
-    <i *ngIf="!isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
-    <i *ngIf="isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem_col fa fa-fire"></i>
-    <i *ngIf="!isMobileUserChats" (click)="getUserChat()" style="display:block" class="fa fa-user-o"></i>
-    <i *ngIf="isMobileUserChats" (click)="getUserChat()" style="display:block; color:#428bca" class="fa fa-user-o"></i>
+<div style="border:solid green 1px; text-align: center; width: 100%">
+    <div class="navMenuForMobile">
+        <i *ngIf="!isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
+        <i *ngIf="isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem_col fa fa-newspaper-o"></i>
+        <i *ngIf="!isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
+        <i *ngIf="isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem_col fa fa-fire"></i>
+        <i *ngIf="!isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem fa fa-user-o"></i>
+        <i *ngIf="isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem_col fa fa-user-o"></i>
+    </div>
 </div>
-
 <div id="profModal" class="profile-modal">
     <div id="myCont" style="border: solid lightgray 1px;" class="profile-modal-content">
         <header style="margin-bottom: 10px;" class="avatar-modal-header"> Profile Information </header>
@@ -62,7 +63,7 @@
                             <input class="form-control" id="cpass" type="password" formControlName="cpass" placeholder="Confirm new password">
                         </div>
                         <div (click)="showPassword()" style="float:left; margin-left: 5px">
-                            <input type="checkbox"  />
+                            <input type="checkbox" />
                             <label> Show password </label>
                         </div>
                         <div style="text-align: right">
@@ -148,7 +149,11 @@
         <div *ngFor="let chat of listOfChats">
             <div class="chat-card-main-div">
                 <div class="chat-card-main-div-header">
-                    <div class="chat-header-tittle"> {{chat.owner.name}} </div>
+                    <div class="chat-header-tittle" style="margin-left:0px; width:100%; background-color: crimson; opacity:0.3; height:120px; border: solid red 1px;background-color:darkred">
+                        <button > Cancel </button>
+                        <button class="btn btn-danger btn-sm"> Delete </button>
+                    </div>
+           <!--         <div class="chat-header-tittle"> {{chat.owner.name}} </div>-->
                     <div class="avatar-name">
                     </div>
                 </div>
@@ -159,11 +164,13 @@
                     <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
                     <i *ngIf="chat.owner.user !== id && chat.isReported" style="color: red" class="fa fa-thumbs-o-down"> </i>
                 </div>
-
-                <hr class="hr-division">
-                <p (click)="openChatModal(chat)" class="chat-body">
-                    {{chat.body}}
-                </p>
+                <div>
+                 
+           <hr class="hr-division">
+                    <p (click)="openChatModal(chat)" class="chat-body">
+                        {{chat.body}}
+                    </p>
+                </div>
                 <div class="outer-comment-div">
                     <div *ngIf="chat.post.length > 0" style="overflow-y: auto">
                         <div class="comment-main-div" *ngFor="let item of chat.post">

@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from
 import { User } from '../../../models/user';
 import { RegisterComponent } from '../register/register.component'
 import { from } from 'rxjs/observable/from';
+import { RegisterService } from '../register/register.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,8 @@ import { from } from 'rxjs/observable/from';
 })
 
 export class LoginComponent implements OnInit {
-  constructor(private loginService: LoginService, private router: Router, private reg: RegisterComponent) { }
+  constructor(private loginService: LoginService, private router: Router,
+    private regService: RegisterService, private reg: RegisterComponent) { }
   loginForm: FormGroup;
   username: String;
   password: String;
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
   };
 
   ngOnInit() {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('id');
     this.validateForm();
     if (this.loginService.isUserLoggedin()) {
       this.router.navigate(['/landing']);
@@ -64,8 +68,10 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.code === "401") {
           alert("Your account has not been verified yet");
-          this.reg.verify_id = data.uid;
-          this.reg.verificationCodeModal();
+          this.regService.verify_id += data.uid;
+          alert(this.regService.verify_id);
+          this.reg.verify_id += data.uid;
+          
         }
         else if (data.token) {
           window.localStorage.setItem('token', data.token);
@@ -80,12 +86,12 @@ export class LoginComponent implements OnInit {
       () => console.log('request complete'));
   }
 
-  showPassword(){
+  showPassword() {
     let modal = document.getElementById('login_txtpassword');
     if (modal.attributes.getNamedItem('type').value === 'password') {
       modal.attributes.getNamedItem('type').value = 'text';
       return;
     }
-    modal.attributes.getNamedItem('type').value="password";
+    modal.attributes.getNamedItem('type').value = "password";
   }
 }
