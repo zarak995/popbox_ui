@@ -23,9 +23,6 @@ import { from } from 'rxjs/observable/from';
 import { RegisterService } from './api/component/register/register.service';
 import { ProfileService } from '../app/api/component/profile/profile.service';
 import { Route } from '../app/router';
-import { UserverificationComponent } from './api/component/userverification/userverification.component'
-import { UserverificationService } from './api/component/userverification/userverification.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +35,6 @@ import { UserverificationService } from './api/component/userverification/userve
     RightnavComponent,
     LeftnavComponent,
     FooterComponent,
-    UserverificationComponent,
   ],
   imports: [
     RouterModule.forRoot(Route, { useHash: true }),
@@ -50,7 +46,6 @@ import { UserverificationService } from './api/component/userverification/userve
   ],
   exports: [RouterModule],
   providers: [ChatService,
-    UserverificationService,
     ProfileService,
     LandingService,
     LeftnavService,
