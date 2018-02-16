@@ -103,7 +103,6 @@ export class RegisterComponent implements OnInit {
     regCPass.attributes.getNamedItem('type').value = 'password';
   }
   addNewUser() {
-    alert("something");
     this.confirmPasswordChange();
     if (this.registerForm.valid && this.registerForm.get('pass').value === this.registerForm.get('cpass').value) {
       this.newuser = new User();
@@ -144,11 +143,6 @@ export class RegisterComponent implements OnInit {
   }
 
   verificationCodeModal() {
-    if(this.registerService.verify_id!=" "){
-      alert("This is verify idea from reg comp "+ this.registerService.verify_id);
-      this.verify_id = this.registerService.verify_id;
-      alert("VerficationModal "+ this.verify_id) 
-    }
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
     if (modal.length != 0) {
       modal[0].style.display = "block";
@@ -156,8 +150,6 @@ export class RegisterComponent implements OnInit {
   }
 
   validateUser() {
-    alert("Verify_Id on validate User " +this.registerService.verify_id)
-    alert(this.verify_id + " " + this.verificatioCode);
     let verification_data = { userId: this.verify_id, code: this.verificatioCode }
     this.registerService.verifyUser(verification_data)
       .subscribe(data => { alert(JSON.stringify(data)) });

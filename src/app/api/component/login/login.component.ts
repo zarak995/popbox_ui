@@ -68,10 +68,6 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.code === "401") {
           alert("Your account has not been verified yet");
-          this.regService.verify_id += data.uid;
-          alert(this.regService.verify_id);
-          this.reg.verify_id += data.uid;
-          
         }
         else if (data.token) {
           window.localStorage.setItem('token', data.token);
