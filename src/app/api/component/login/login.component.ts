@@ -6,7 +6,6 @@ import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from
 import { User } from '../../../models/user';
 import { RegisterComponent } from '../register/register.component'
 import { from } from 'rxjs/observable/from';
-import { RegisterService } from '../register/register.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +15,7 @@ import { RegisterService } from '../register/register.service';
 
 export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router,
-    private regService: RegisterService, private reg: RegisterComponent) { }
+     private reg: RegisterComponent) { }
   loginForm: FormGroup;
   username: String;
   password: String;
@@ -30,8 +29,9 @@ export class LoginComponent implements OnInit {
     window.localStorage.removeItem('id');
     this.validateForm();
     if (this.loginService.isUserLoggedin()) {
-      this.router.navigate(['/landing']);
+      this.router.navigate(['']);
     }
+    this.router.navigate(['/login'])
   }
 
   validateForm() {
@@ -68,14 +68,17 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.code === "401") {
           alert("Your account has not been verified yet");
+          window.localStorage.setItem('verify',data.uid) ;          
+          this.reg.verificationCodeModal();
+          return;
         }
-        else if (data.token) {
+        else if (data.token != null) {
           window.localStorage.setItem('token', data.token);
           window.localStorage.setItem('id', data.user);
-          this.router.navigate(['/landing']);
-        } else {
-          alert(JSON.stringify(data));
           this.router.navigate(['']);
+        } else {
+          alert(data.message);
+          this.router.navigate(['/login']);
         }
       },
       err => console.log(err),

@@ -6,10 +6,8 @@ import { RegisterComponent } from './api/component/register/register.component';
 import { LandingComponent } from './api/component/landing/landing.component';
 
 export const Route: Routes = [
-    { path: 'chat', component: ChatComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'landing', component: LandingComponent },
-    { path: '', component: LoginComponent }
+    { path: '', component: LandingComponent },
+    { path: 'login', component: LoginComponent }
 ];
 
 export const Routing = RouterModule.forRoot(Route);

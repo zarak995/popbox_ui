@@ -24,13 +24,14 @@ import { from } from 'rxjs/observable/from';
 })
 export class LandingComponent implements OnInit {
   token: String = window.localStorage.getItem('token');
-
   constructor(private http: Http, private loginService: LoginService, private landingService: LandingService, private router: Router) { }
   loggedInUser: User;
   headers: Headers = new Headers({ 'content-type': 'application/json', 'authorization': this.token });
 
   ngOnInit() {
-    
+    if (this.token == null) {
+      this.router.navigate(['/login']);
+    }
   }
 
   getData() {
@@ -40,13 +41,15 @@ export class LandingComponent implements OnInit {
         if (data === null || data._id === "") {
           console.log(data);
           console.log('Something is wrong');
+
         }
       })
   }
 
   logout() {
+    this.router.navigate(['/login']);
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('id');
-    this.router.navigate(['']);
+
   }
 }

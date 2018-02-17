@@ -121,8 +121,7 @@ export class RegisterComponent implements OnInit {
           if (data.code === '11000') {
             alert(JSON.stringify(data.message));
           } else {
-            alert("your account has been created. Please login");
-            alert(JSON.stringify(data));
+            alert("your account has been created. Please enter validation code sent to your email");
             this.verify_id += data;
             this.verificationCodeModal();
           }
@@ -134,7 +133,12 @@ export class RegisterComponent implements OnInit {
     }
   }
   resendToUserEmail() {
-    this.registerService.resendToEmail(this.verify_id)
+    alert(this.verify_id)
+    let verID = window.localStorage.getItem('verify');
+    if (verID != null) {
+      this.verify_id = verID;
+    }
+    this.registerService.resendToEmail({ "userId": this.verify_id })
       .subscribe((data) => { console.log(data) })
   }
 
@@ -151,10 +155,16 @@ export class RegisterComponent implements OnInit {
 
   validateUser() {
     let verification_data = { userId: this.verify_id, code: this.verificatioCode }
+    let verID = window.localStorage.getItem('verify');
+    if (verID != null) {
+      verification_data.userId = verID;
+    }
     this.registerService.verifyUser(verification_data)
-      .subscribe(data => { alert(JSON.stringify(data)) });
-    this.closeModal();
-    this.router.navigate(['/landing']);
+      .subscribe(data =>  console.log(data));
+    this.closeModal(); 
+    window.localStorage.removeItem('verify');    
+    alert("Your email address has been verfied. Please login");
+    this.router.navigate(['']);
   }
 
   closeModal() {

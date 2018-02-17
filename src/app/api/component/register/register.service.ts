@@ -6,10 +6,7 @@ import { environment } from '../../../../environments/environment.prod';
 export class RegisterService {
 
   constructor(private http: Http) { }
-
-  verify_id:String = "";
   registerNewUser(newUser: User) {
-    alert("Service");
     return this.http.options(environment.host + environment.loginRoute + environment.registerRoute, {
       method: 'POST',
       body: newUser
@@ -17,7 +14,6 @@ export class RegisterService {
   }
 
   verifyUser(data) {
-    alert(JSON.stringify(data));
     return this.http.options(environment.host + environment.loginRoute + environment.userVerification, {
       method: 'POST',
       body: data
