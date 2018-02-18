@@ -1,6 +1,6 @@
 <div class="header-main-header">
   <div style="margin: 13px; float: left">
-    <div class="mainHeaderLogo"> <strong>o</strong>O<strong>xet</strong>.com</div>
+    <div [routerLink]="['/']" class="mainHeaderLogo"> <strong>o</strong>O<strong>xet</strong>.com</div>
   </div>
   
   <div (click)="headerMenu()" style="margin: 10px; float: right;">
@@ -18,8 +18,8 @@
       <li class="userMenuMobileOnly btn-primary" style="padding-left: 15px; list-style: none">
         <i (click)="openProfileModal()" class="fa fa-user"> Profile </i>
       </li>
-      <li class="btn-primary" (click)="logout()" style="padding-left: 15px; list-style: none">
-        <i class="fa fa-sign-out"> Sign out </i>
+      <li class="btn-primary" style="padding-left: 15px; list-style: none">
+        <i [routerLink]="['/login']" class="fa fa-sign-out"> Sign out </i>
       </li>
     </ul>
   </div>

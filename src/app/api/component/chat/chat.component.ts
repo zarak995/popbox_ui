@@ -59,7 +59,7 @@ export class ChatComponent implements OnInit {
   isProfileSet: Boolean = false;
   updateProfileForm: FormGroup;
   changePasswordForm: FormGroup;
-
+  deleteSelectedChat: any = {};
   constructor(private http: Http, private loginService: LoginService,
     private router: Router, private chatservice: ChatService) {
   }
@@ -292,7 +292,6 @@ export class ChatComponent implements OnInit {
   }
 
   createNewChat() {
-
     this.chat = new Chat(this.chatBody, this.currentAvatar.id);
     this.chatservice.saveNewChat(this.chat, this.headers)
       .map(res => res.json())
@@ -311,7 +310,7 @@ export class ChatComponent implements OnInit {
   }
 
   deleteChat(chat: any) {
-    this.chatservice.removeChat(this.headers, chat._id)
+    this.chatservice.removeChat(this.headers, this.deleteSelectedChat._id)
       .map(res => res.json())
       .subscribe(data => {
         let chatl = this.listOfChats.length;
@@ -321,6 +320,7 @@ export class ChatComponent implements OnInit {
             if (this.isChatModal === true) {
               this.isChatModal = false;
             }
+            this.closeDeleteModal();
             return;
           }
         }
@@ -350,6 +350,28 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  unreportChat(chat: any) {
+    chat.isReported = false;
+    let reportsMax = chat.reports.length;
+    for (var x = 0; x < reportsMax; x++) {
+      if (chat.reports[x].user === this.id ||
+        chat.reports[x] === this.currentAvatar.id) {
+        chat.reports.splice(x, 1);
+        break;
+      }
+    }
+    chat.reports.pop(this.currentAvatar.id);
+    this.chatservice.updateChat(chat, this.headers)
+      .map(res => res.json())
+      .subscribe(data => {
+        chat = data;
+        chat.createdDate = moment(chat.createdDate).fromNow();
+        chat.post.forEach(element => {
+          element.createdDate = moment(element.createdDate).fromNow();
+        });
+      })
+  }
+
   reportChat(chat: any) {
     chat.isReported = true;
     chat.reports.push(this.currentAvatar.id);
@@ -364,26 +386,41 @@ export class ChatComponent implements OnInit {
         });
       })
   }
-  createNewChatlike(chatID: any) {
-    let max = this.listOfChats.length;
-    for (var i = 0; i < max; i++) {
-      if (this.listOfChats[i]._id === chatID) {
-        this.listOfChats[i].isLiked = true;
-        this.listOfChats[i].likes.push(this.currentAvatar.id);
-        this.chatservice.updateChat(this.listOfChats[i], this.headers)
-          .map(res => res.json())
-          .subscribe(data => {
-            this.listOfChats[i] = data;
-            this.listOfChats[i].isLiked = true;
-            this.listOfChats[i].createdDate = moment(this.listOfChats[i].createdDate).fromNow();
 
-            this.listOfChats[i].post.forEach(element => {
-              element.createdDate = moment(element.createdDate).fromNow();
-            });
-          });
-        break;
+  removeChatLike(chat: any) {
+    chat.isLiked = false;
+    let maxlikes = chat.likes.length;
+    for (var x = 0; x < maxlikes; x++) {
+      if (chat.likes[x].user === this.id || chat.likes[x] === this.currentAvatar.id) {
+        chat.likes.splice(x, 1);
       }
     }
+    this.chatservice.updateChat(chat, this.headers)
+      .map(res => res.json())
+      .subscribe(data => {
+        chat = data;
+        chat.isLiked = false;
+        chat.createdDate = moment(chat.createdDate).fromNow();
+        chat.post.forEach(element => {
+          element.createdDate = moment(element.createdDate).fromNow();
+        });
+      });
+  }
+
+  createNewChatlike(chat) {
+    chat.isLiked = true;
+    let maxlikes = chat.likes.length;
+    chat.likes.push(this.currentAvatar.id);
+    this.chatservice.updateChat(chat, this.headers)
+      .map(res => res.json())
+      .subscribe(data => {
+        chat = data;
+        chat.isLiked = true;
+        chat.createdDate = moment(chat.createdDate).fromNow();
+        chat.post.forEach(element => {
+          element.createdDate = moment(element.createdDate).fromNow();
+        });
+      });
   }
 
   postMessageChanged($event, chatId: any) {
@@ -457,6 +494,15 @@ export class ChatComponent implements OnInit {
       modal[0].style.display = "block";
     }
   }
+
+  openDeleteModal(chat) {
+    this.deleteSelectedChat = chat;
+    let modal = document.getElementsByClassName('delete-modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "block";
+    }
+  }
+
   openProfileModal() {
     this.validateUpdateForm();
     let modal = document.getElementsByClassName('profile-modal') as HTMLCollectionOf<HTMLElement>;
@@ -473,6 +519,14 @@ export class ChatComponent implements OnInit {
       modal[0].style.display = "none";
     }
   }
+
+  closeDeleteModal() {
+    let modal = document.getElementsByClassName('delete-modal') as HTMLCollectionOf<HTMLElement>;
+    if (modal.length != 0) {
+      modal[0].style.display = "none";
+    }
+  }
+
 
   closeModal() {
     let modal = document.getElementsByClassName('modal') as HTMLCollectionOf<HTMLElement>;
@@ -496,7 +550,7 @@ export class ChatComponent implements OnInit {
       'cpass': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)])
     })
   }
-  
+
   showPassword() {
     let updateFrmPass = document.getElementById('pass');
     let updateFrmCPass = document.getElementById('cpass');

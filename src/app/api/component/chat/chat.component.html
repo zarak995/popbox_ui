@@ -12,15 +12,24 @@
     </div>
 </div>
 
-<div style="border:solid green 1px; text-align: center; width: 100%">
-    <div class="navMenuForMobile">
-        <i *ngIf="!isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
-        <i *ngIf="isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem_col fa fa-newspaper-o"></i>
-        <i *ngIf="!isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
-        <i *ngIf="isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem_col fa fa-fire"></i>
-        <i *ngIf="!isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem fa fa-user-o"></i>
-        <i *ngIf="isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem_col fa fa-user-o"></i>
+<div id="myModal" class="delete-modal">
+    <div id="myCont" class="delete-modal-content">
+        <header class="avatar-modal-header"> Are you sure you want to delete this Post ? </header>
+        <body class="avatar-modal-outer">
+            <button class="btn btn-danger" (click)="deleteChat()"> Delete </button>
+            <button class="btn" (click)="closeDeleteModal()"> Cancel </button>
+        </body>
     </div>
+</div>
+
+
+<div class="navMenuForMobile">
+    <i *ngIf="!isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem fa fa-newspaper-o"></i>
+    <i *ngIf="isMobileLanding" [routerLink]="['/']" class="navMenuForMobileItem_col fa fa-newspaper-o"></i>
+    <i *ngIf="!isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem fa fa-fire"></i>
+    <i *ngIf="isMobileTrending" (click)="getTopChats()" class="navMenuForMobileItem_col fa fa-fire"></i>
+    <i *ngIf="!isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem fa fa-user-o"></i>
+    <i *ngIf="isMobileUserChats" (click)="getUserChat()" class="navMenuForMobileItem_col fa fa-user-o"></i>
 </div>
 <div id="profModal" class="profile-modal">
     <div id="myCont" style="border: solid lightgray 1px;" class="profile-modal-content">
@@ -124,7 +133,6 @@
             <input class="chat-modal-input" id="chat-modal-input" [ngModel]="message" (ngModelChange)="postMessageChanged($event,selectedChat._id)"
                 placeholder="Enter your comment" type="text" />
         </body>
-
         <footer class="chat-modal-footer-buttons">
             <button class="btn btn-primary" (click)="createNewPost(selectedChat)"> Comment </button>
             <button class="btn btn-primary" (click)="closeChatModal()"> Cancel </button>
@@ -149,24 +157,20 @@
         <div *ngFor="let chat of listOfChats">
             <div class="chat-card-main-div">
                 <div class="chat-card-main-div-header">
-                    <div class="chat-header-tittle" style="margin-left:0px; width:100%; background-color: crimson; opacity:0.3; height:120px; border: solid red 1px;background-color:darkred">
-                        <button > Cancel </button>
-                        <button class="btn btn-danger btn-sm"> Delete </button>
-                    </div>
-           <!--         <div class="chat-header-tittle"> {{chat.owner.name}} </div>-->
-                    <div class="avatar-name">
-                    </div>
-                </div>
-                <div class="chat-created-date"> {{chat.createdDate}} </div>
-                <div class="chatMenu">
-                    <!--<i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>-->
-                    <i *ngIf="chat.owner.user === id" (click)="deleteChat(chat)" class="fa fa-remove"> </i>
-                    <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
-                    <i *ngIf="chat.owner.user !== id && chat.isReported" style="color: red" class="fa fa-thumbs-o-down"> </i>
+                    <div class="chat-header-tittle"> {{chat.owner.name}} </div>
                 </div>
                 <div>
-                 
-           <hr class="hr-division">
+                    <label class="chat-created-date"> {{chat.createdDate}}</label>
+                    <div class="chatMenu">
+                        <!--<i *ngIf="chat.owner.user === id" class="fa fa-edit"> </i>-->
+                        <i *ngIf="chat.owner.user === id" (click)="openDeleteModal(chat)" class="fa fa-remove"> </i>
+                        <i *ngIf="chat.owner.user !== id && !chat.isReported" (click)="reportChat(chat)" class="fa fa-thumbs-o-down"> </i>
+                        <i *ngIf="chat.owner.user !== id && chat.isReported" (click)="unreportChat(chat)" style="color: red" class="fa fa-thumbs-o-down">
+                        </i>
+                    </div>
+                </div>
+                <div>
+                    <hr class="hr-division">
                     <p (click)="openChatModal(chat)" class="chat-body">
                         {{chat.body}}
                     </p>
@@ -190,8 +194,8 @@
                     <label *ngIf="chat.likes.length > 0 && chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
                     <label *ngIf="chat.likes.length > 0 && !chat.isLiked" class="chat-likes-comment-labels">{{chat.likes.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.likes.length == 0"></label>
-                    <i *ngIf="chat.isLiked" style="color: red;" class="fa fa-heart"></i>
-                    <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat._id)" class="fa fa-heart-o"></i>
+                    <i *ngIf="chat.isLiked" (click)="removeChatLike(chat)" style="color: red;" class="fa fa-heart"></i>
+                    <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat)" class="fa fa-heart-o"></i>
                     <label class="chat-likes-comment-labels" *ngIf="chat.post.length > 0">{{chat.post.length}} </label>
                     <label class="chat-likes-comment-labels" *ngIf="chat.post.length == 0"> </label>
                     <i class="fa fa-comment-o fa-1x"></i>
