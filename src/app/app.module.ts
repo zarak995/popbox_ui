@@ -1,56 +1,52 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ProfileComponent } from './api/component/profile/profile.component';
-import { ChatComponent } from './api/component/chat/chat.component';
-import { LoginComponent } from './api/component/login/login.component';
-import { Routing } from './router';
-import { RegisterComponent } from './api/component/register/register.component';
-import { LandingComponent } from './api/component/landing/landing.component';
-import { HeaderComponent } from './api/component/header/header.component';
-import { ChatService } from './api/component/chat/chat.service';
-import { RightnavComponent } from './api/component/rightnav/rightnav.component';
-import { LeftnavComponent } from './api/component/leftnav/leftnav.component';
-import { LoginService } from '../app/api/component/login/login.service';
-import { LeftnavService } from './api/component/leftnav/leftnav.service';
-import { FooterComponent } from './api/component/footer/footer.component'
-import { LandingService } from '../app/api/component/landing/landing.service'
-import { from } from 'rxjs/observable/from';
-import { RegisterService } from './api/component/register/register.service';
-import { ProfileService } from '../app/api/component/profile/profile.service';
-import { Route } from '../app/router';
+import { LandingComponent } from './component/landing/landing.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { HeaderComponent } from './component/header/header.component';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
+import { LoginService } from './component/login/login.service';
+import { LoginModule } from '../app/component/login/login.module';
+import { VerificationComponent } from './component/verification/verification.component'
+import { VerificationModule } from './component/verification/verification.module';
+import { RegisterModule } from './component/register/register.module';
+import { LandingModule } from './component/landing/landing.module';
+import { ViewchatComponent } from './component/viewchat/viewchat.component';
+import { ViewchatModule } from './component/viewchat/viewchat.module';
+import { ChatService } from './component/chat.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ChatComponent,
-    ProfileComponent,
-    RegisterComponent,
     LandingComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
     HeaderComponent,
-    RightnavComponent,
-    LeftnavComponent,
-    FooterComponent,
+    VerificationComponent,
+    ViewchatComponent,
   ],
   imports: [
-    RouterModule.forRoot(Route, { useHash: true }),
+    ViewchatModule,
+    LandingModule,
+    RegisterModule,
+    VerificationModule,
+    LoginModule,
     BrowserModule,
-    HttpModule,
+    ReactiveFormsModule,
     FormsModule,
-    Routing,
-    ReactiveFormsModule
+    RouterModule.forRoot([
+      { path: 'landing', component: LandingComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'verify', component: VerificationComponent },
+      { path: 'post', component: ViewchatComponent }
+    ], {useHash:true})
   ],
-  exports: [RouterModule],
-  providers: [ChatService,
-    ProfileService,
-    LandingService,
-    LeftnavService,
-    RegisterService,
-    RegisterComponent],
+  providers: [FormBuilder,ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

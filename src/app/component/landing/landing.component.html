@@ -1,0 +1,86 @@
+<div id="columns">
+  <div *ngIf="listAllChats.length > 0">
+    <div *ngFor="let chat of listAllChats">
+      <figure>
+        <header class="chat_card_header">
+          <label style="margin:0px; padding:5px;"> {{chat.owner.name}} </label>
+        </header>
+        <div style="width:100%; display: inline-block;">
+          <label style="font-size:50%"> {{chat.createdDate}} </label>
+          <div style="float:right;">
+            <select style="border:none; outline:none; background-color: transparent">
+              <option>pg</option>
+              <option> S </option>
+              <option>N</option>
+              <option>L</option>
+              <option>X</option>
+            </select>
+          </div>
+
+        </div>
+        <div>
+          <p style="border:none; margin-top:0px;" (click)="viewOneChat(chat)">
+            {{chat.body}}
+          </p>
+          <div style="margin-left:5px; margin-bottom:5px; width:80%">
+            <div style="display:inline-block;">
+              <label *ngIf="chat.post.length > 0" style="margin:0px">{{chat.post.length}}</label>
+              <label *ngIf="chat.post.length == 0" style="margin:0px"></label>              
+              <i class="fa fa-comment-o"></i>
+            </div>
+            <div style="margin-left:30px; display:inline-block; padding:0px;">
+                <label *ngIf="chat.likes.length == 0" style="margin:0px"> </label>
+                <label *ngIf="chat.likes.length > 0" style="margin:0px"> {{chat.likes.length}}</label>    
+              <i *ngIf="chat.isLiked" (click)="removeChatLike(chat)" style="color:#428bca;" class="fa fa-thumbs-o-up"></i>
+              <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat)" class="fa fa-thumbs-o-up"></i>
+            </div>
+            <div style="margin-left:30px; display:inline-block; padding:0px;">
+              <i *ngIf="!chat.isReported" class="fa fa-thumbs-o-down" (click)="reportChat(chat)"></i>
+              <i *ngIf="chat.isReported" style="color:red" class=" fa fa-thumbs-down" (click)="unreportChat(chat)"></i>
+            </div>
+          </div>
+          <div style="width:100%; display:block; margin-top:0px;" class="Chat_Comments_Div" *ngIf="chat.post.length > 0">
+            <div *ngFor="let item of chat.post">
+              <label style="display:block; font-size:70%; margin:0px;">
+                <strong>{{item.avatar.name}}</strong>
+                <label style="font-size:40%; float:right">{{item.createdDate}}</label>
+              </label>
+              <label style="font-size:70%">{{item.body}}</label>
+              <hr style="margin:0px">
+            </div>
+          </div>
+        </div>
+
+        <figcaption>
+          <input class="form-control comment_box" (ngModelChange)="postMessageChanged($event,chat)" [ngModel]="message" type="text"
+            placeholder="Comment as {{currentAvatar.name}}">
+          <i (click)='createNewPost(chat)' style="color:#428bca;" class="fa fa-send"></i>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+  <div style="position: fixed; ">
+    <ul>
+      <li style="margin-bottom:5px; padding-bottom:20px; border-bottom: solid grey 3px;">
+        <strong>oOxet.com</strong>
+      </li>
+      <li style="margin-top:10px;">
+        <i [routerLink]="['/landing']" class="fa fa-home fa-3x"></i>
+      </li>
+      <li>
+        <i class="fa fa-phone fa-3x"></i>
+      </li>
+      <li>
+        <i class="fa fa-facebook fa-3x"></i>
+      </li>
+      <li>
+        <i [routerLink]="['/profile']" class="fa fa-user fa-3x"></i>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main_post_input">
+  <input class="form-control newchat_input" *ngIf="currentAvatar.name!=null" type="text"
+    [(ngModel)]="chatBody" placeholder="Posting as {{currentAvatar.name}}">
+  <button (click)="createNewChat()" class=" newchat_btn btn btn-primary">Post</button>
+</div>

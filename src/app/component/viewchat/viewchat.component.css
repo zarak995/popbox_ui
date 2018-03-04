@@ -1,0 +1,185 @@
+@font-face{font-family:'Calluna';
+    src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
+   }
+   body {
+       background: url(//subtlepatterns.com/patterns/scribble_light.png);
+     font-family: Calluna, Arial, sans-serif;
+     min-height: 1000px;
+   }
+   #columns {
+       justify-content: center;
+       display: flex;
+       align-items: center;
+       margin:10px;
+       column-width: 85%;
+       column-gap: 10px;
+      width: 85%;
+       margin-left: 150px;
+       margin-right : 10px;
+       box-shadow: 0px 1px 1px 1px;
+       border: solid blue 1px;
+   } 
+
+   .Chat_Comments_Div{
+     margin-left: 25px;
+    max-height: 300px;
+   }
+
+   .Chat_Body_Div{
+     padding: 5px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow: auto;
+   }
+
+   div#columns figure {
+       background: #fefefe;
+       padding: 15px;
+       padding-bottom: 10px;
+       width: 100%;
+       border: solid red 1px;
+       display: inline-block;
+   }
+   
+   div#columns figure p {
+       width: 100%; 
+       height: auto;
+       border-bottom: 1px solid #ccc;
+       padding-bottom: 15px;
+       margin-bottom: 5px;
+   }
+
+   div#columns figure img {
+    width: 100%; height: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+   
+   div#columns figure figcaption {
+     font-size: .9rem;
+       color: #444;
+     line-height: 1.5;
+   }
+   
+   div#columns small { 
+     font-size: 1rem;
+     float: right; 
+     text-transform: uppercase;
+     color: #aaa;
+   } 
+   
+   div#columns small a { 
+     color: #666; 
+     text-decoration: none; 
+     transition: .4s color;
+   }
+   
+   @media screen and (max-width: 750px) { 
+     #columns { column-gap: 0px; }
+     #columns figure { width: 100%; }
+   }
+ul{
+  text-decoration: none;
+  text-decoration-style: none;
+  padding: 10px;
+  
+}
+
+   li {
+     list-style: none;
+     text-decoration:none;
+     margin: 10px;
+   }
+
+   .navMenu{
+    text-align: left; 
+    background-color:khaki; 
+    color:grey; 
+    position:fixed; 
+    height:100vh; 
+    top:0px; 
+    left:0px;
+   }
+
+   .thumbsStyle{
+    padding:5px; 
+    border:solid 1px black; 
+    margin:10px; 
+    float:right;
+   }
+
+   .headerIcons{
+     float: right;
+   }
+   .chat_card_header{
+    width:100%;
+    display: inline-block;
+    border-bottom:1px solid grey
+  }
+
+  .main_post_input{
+    right:0px; 
+    position:fixed; 
+    height: 70px; 
+    bottom:0px; 
+    width:93%; 
+    border: solid 1px khaki; 
+    border-radius:10px
+  }
+
+  .comment_box{
+    display:inline-block;
+     width:90%;
+     margin-top: 10px;
+  }
+
+  
+  @media screen and (max-width:800px) {
+    div#columns figure{
+      padding: 5px;
+    }
+    
+    #columns{
+      margin:20px;
+    }
+    .navMenu {
+      display: none;
+    }
+    .thumbsStyle{
+      display: inline-block;
+      float: none;
+    }
+    .main_post_input{
+      margin: 0px;
+      height: 50px;
+      width: 100%;
+      bottom: 0px;
+    }
+  }
+  @media screen and (max-width:414){
+    #columns{
+      margin-left:2px;
+    }
+    .main_post_input{
+      width: 100%;
+      bottom: 25px;
+      height: 32vh;
+    }
+  }
+
+  @media screen and (max-width:375px) {
+    .headerIcons{
+      float: none;
+      display: block;
+    }
+  }
+    
+  @media screen and (max-width: 320) {
+
+    .main_post_input{
+      width: 100%;
+      bottom: 0px;
+      height: 40px;
+    }
+  }

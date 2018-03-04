@@ -1,0 +1,148 @@
+.dobDiv{
+    margin-bottom:5px;
+    margin-left:20px; 
+    width:90%;
+}
+
+.dobItem{
+    display:inline-block; 
+    width:32%
+}
+.showPasswordDiv{
+    margin-left:20px; 
+    margin-bottom:5px; 
+    float:left;
+}
+.row{
+    display: inline-block;
+    width: 45%;
+    margin-left:20px;
+    margin-bottom: 5px;
+ }
+
+ .footerLiBtn{
+    border:solid whitesmoke 1px; 
+    border-radius:10px;
+ }
+
+ li {
+    display: inline-block;
+    border-right: solid whitesmoke 2px;
+    margin-right: 10px;
+    padding: 10px; 
+}
+
+li:last-child{
+    border-right: none;
+}
+.mainDiv {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+}
+
+.mainDiv2 {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+    background-image: url('../../../assets/maxresdefault.jpg');
+}
+
+.innerMainDiv{
+    width:60%;
+    justify-content: center; 
+    align-items: center; 
+    height:70vh; 
+    background-color: transparent;
+    background-color: whitesmoke;
+}
+
+.innerDiv{
+    width:40%;
+    padding: 5%;
+    height:60vh; 
+    box-shadow: 0px 0px 3px 3px;
+    background-color: whitesmoke;
+    border: solid green 1px;
+}
+.nrtLog{
+    width:40px;
+}
+
+.inputText{
+    font-size:120%; 
+    margin-bottom:3%;
+}
+.titleDiv{
+    font-size:120%; 
+    margin-top: 30px;
+    margin-bottom:30px; 
+    text-align:center;
+    border-bottom: solid transparent 1px;
+ 
+}
+.footerDiv{
+    bottom:5px; 
+    color:whitesmoke;
+    right:15px; 
+    position:absolute;
+}
+
+@media screen and (max-width:800px){
+    .titleDiv{
+        margin-bottom: 10px;
+        margin-top: 10px; 
+    }
+    .innerMainDiv{
+        height: 70vh;
+        width: 70%;
+    }
+    .titleDiv{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width:414px) {
+    legend{
+        font-size: 80%;
+    }
+    .row{
+        display: block;
+        width: 90%;
+    }
+    .innerDiv{
+        height: 100vh;
+        width: 80%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .innerMainDiv{
+        width: 100%;
+        height: 100vh;
+    }
+    .nrtLog{
+        width: 15px;
+    }
+    .footerDiv{
+        right: 0px;
+        bottom: 0px;
+        font-size: 60%;
+        float: none;
+        display: none;
+    }
+
+    li{
+        padding: 3px;
+        margin: 1px;
+    }
+    .titleDiv{
+        margin-bottom: 10px;
+        margin-top: 5px; 
+    }
+}

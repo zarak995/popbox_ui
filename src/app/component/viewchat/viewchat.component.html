@@ -1,0 +1,65 @@
+<div id="columns">
+  <div *ngIf="viewSelectedChat != null">
+    <figure>
+      <header class="chat_card_header">
+        <div class="headerIcons">
+          <i *ngIf="!viewSelectedChat.isReported" class="thumbsStyle fa fa-thumbs-down" (click)="reportChat(viewSelectedChat)"></i>
+          <i *ngIf="viewSelectedChat.isReported" style="color:red" class="thumbsStyle fa fa-thumbs-down" (click)="unreportChat(viewSelectedChat)"></i>
+          <i *ngIf="viewSelectedChat.isLiked" (click)="removeChatLike(viewSelectedChat)" style="color:red" class="thumbsStyle fa fa-heart"></i>
+          <i *ngIf="!viewSelectedChat.isLiked" (click)="createNewChatlike(viewSelectedChat)" class="thumbsStyle fa fa-thumbs-up"></i>
+        </div>
+        <label style="padding:5px;"> {{viewSelectedChat.owner.name}} </label>
+      </header>
+      <label style="margin-bottom:20px;font-size:70%"> {{viewSelectedChat.dateCreated}} </label>
+      <div style="display: inline-block;"> </div>
+      <article>
+        <p class="Chat_Body_Div">
+          {{viewSelectedChat.body}}
+        </p>
+        <div *ngIf="viewSelectedChat.post.length > 0" style="margin-top:10px; display: block">
+          <label> {{viewSelectedChat.post.length}} </label>
+          <i class="fa fa-comment"></i>
+        </div>
+        <div *ngIf="viewSelectedChat.post.length == 0" style="margin-top:10px; display: block">
+          <label> </label>
+          <i class="fa fa-comment"></i>
+        </div>
+        <div *ngIf="viewSelectedChat.post.length > 0">
+          <div class="Chat_Comments_Div" *ngFor="let item of viewSelectedChat.post">
+            <label style="font-size:70%; margin-right:5px">
+              <strong>{{item.avatar.name}}</strong>
+            </label>
+            <label>{{item.body}}</label>
+          </div>
+        </div>
+
+        <div *ngIf="viewSelectedChat.post.length == 0">
+          <label style="font-size:50%;"> Be the first to comment on this post </label>
+        </div>
+      </article>
+      <figcaption>
+        <input class="form-control comment_box" [(ngModel)]='comment' type="text" placeholder="Comment as {{currentAvatar.name}}">
+        <i (click)='createNewPost()' class="fa fa-send"></i>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="navMenu">
+    <ul>
+      <li style="margin-bottom:5px; padding-bottom:20px;  border-bottom: solid grey 3px;">
+        <strong>oOxet.com</strong>
+      </li>
+      <li style="margin-top:10px;">
+        <i [routerLink]="['/landing']" class="fa fa-home fa-3x"></i>
+      </li>
+      <li>
+        <i class="fa fa-phone fa-3x"></i>
+      </li>
+      <li>
+        <i class="fa fa-facebook fa-3x"></i>
+      </li>
+      <li>
+        <i [routerLink]="['/profile']" class="fa fa-user fa-3x"></i>
+      </li>
+    </ul>
+  </div>
+</div>

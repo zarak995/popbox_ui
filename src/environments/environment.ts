@@ -15,6 +15,7 @@ export const environment = {
   loginRoute: 'login/',
   registerRoute: 'reg/',
   userVerification: 'ver/',
-  userChangePasswordRoute:'users/change_pass/',
-  resendToEmail:'login/reg/resendEmail'
+  userChangePasswordRoute: 'users/change_pass/',
+  resendToEmail: 'login/reg/resendEmail',
+  resendToSMS: 'login/reg/resendSMS'
 };

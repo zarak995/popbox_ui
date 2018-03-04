@@ -1,0 +1,86 @@
+<div class="footerDiv">
+  <ul>
+    <li class="footerLiBtn" [routerLink]="['/login']"> Login </li>
+    <li> Thank you for visiting oOxet.com </li>
+  </ul>
+</div>
+<div class="mainDiv2">
+  <div class="innerMainDiv">
+    <div class="titleDiv">
+      <h1 class="titleHeadingh1"> Ooxet.com </h1>
+    </div>
+    <form [formGroup]="registerForm" (submit)="addNewUser()">
+      <fieldset style="margin:5px;">
+        <legend style="margin-left:30px">New Registration</legend>
+        <div style="padding:10px">
+          <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.email.invalid && registerForm.controls.email.dirty,
+            'has-success': registerForm.controls.email.valid && registerForm.controls.email.dirty}">
+            <input class="form-control" formControlName="email" placeholder="james@example.com">
+          </div>
+          <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.phone.invalid && registerForm.controls.phone.dirty,
+          'has-success': registerForm.controls.phone.valid && registerForm.controls.phone.dirty}">
+            <input class="form-control" formControlName="phone" placeholder="+27910372585">
+          </div>
+          <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
+          'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
+            <select formControlName="gender" class="form-control" name="reg_gender">
+              <option selected>--Select Gender--</option>
+              <option value="M"> Male </option>
+              <option value="F">Female</option>
+              <option value="O"> Other</option>
+            </select>
+          </div>
+
+          <div class="dobDiv">
+            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.year.invalid && 
+            registerForm.controls.year.dirty,'has-success': registerForm.controls.year.valid &&
+             registerForm.controls.year.dirty}">
+              <select options="years" formControlName="year" class="form-control" id="reg_year">
+                <option>--Year--</option>
+                <option *ngFor="let item of years">{{item}}</option>
+              </select>
+            </div>
+
+            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.month.invalid && 
+            registerForm.controls.month.dirty,'has-success': registerForm.controls.month.valid &&
+             registerForm.controls.month.dirty}">
+              <select options="months" formControlName="month" class="form-control" id="reg_month">
+                <option>--Month--</option>
+                <option *ngFor="let item of months">{{item}}</option>
+              </select>
+            </div>
+            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.day.invalid && 
+            registerForm.controls.day.dirty,'has-success': registerForm.controls.day.valid &&
+             registerForm.controls.day.dirty}">
+              <select formControlName="day" class="form-control" name="reg_day">
+                <option>--Day--</option>
+                <option *ngFor="let item of days">{{item}}</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.pass.invalid && 
+              registerForm.controls.pass.dirty,'has-success': registerForm.controls.pass.valid &&
+               registerForm.controls.pass.dirty}">
+              <input class="form-control" id="pass" type="password" formControlName="pass" placeholder="Enter Password">
+            </div>
+            <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.cpass.invalid && 
+            registerForm.controls.cpass.dirty,'has-success': registerForm.controls.cpass.valid &&
+             registerForm.controls.cpass.dirty}">
+              <input class="form-control" id="cpass" formControlName="cpass" type="password" name="reg_cpass" placeholder="Confirm Password">
+            </div>
+          </div>
+          <div class="showPasswordDiv">
+            <input type="checkbox" (click)="showPassword()" />
+            <label style="font-size: 80%"> Show password </label>
+          </div>
+          <div style="float:right">
+            <button [routerLink]="['/login']" style="margin:10px;" class="cancelBtn btn btn-primary"> Cancel </button>
+            <input type="submit" style="margin:10px; float:right;" [disabled]="!registerForm.valid" class="btn btn-primary btn-action"
+              value="Register">
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

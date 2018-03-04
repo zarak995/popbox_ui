@@ -1,0 +1,125 @@
+li {
+    display: inline-block;
+    border-right: solid khaki 2px;
+    margin-right: 10px;
+    padding: 10px; 
+}
+
+.footerLiBtn{
+    border:solid whitesmoke 1px; 
+    border-radius:10px;
+ }
+
+
+li:last-child{
+    border-right: none;
+}
+.mainDiv {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+    background-color: khaki;
+    opacity: 0.4;
+}
+
+.mainDiv2 {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+    background-image: url('../../../assets/maxresdefault.jpg');
+}
+
+.innerMainDiv{
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:80vh; 
+    background-color: transparent;
+}
+
+.innerDiv{
+    width:40%;
+    padding: 5%;
+    height:65vh; 
+    box-shadow: 0px 0px 3px 3px;
+    background-color: whitesmoke;
+
+}
+.nrtLog{
+    width:40px;
+}
+
+.inputText{
+    font-size:120%; 
+    margin-bottom:3%;
+}
+.titleDiv{
+    font-size:120%; 
+    margin-bottom:30px; 
+    text-align:center;
+}
+.footerDiv{
+    bottom:5px; 
+    color:whitesmoke;
+    right:15px; 
+    position:absolute;
+}
+
+@media screen and (max-width:425px) {
+    .mainDiv2{
+        height: 100vh;
+        width: 100%;
+    }
+    .innerMainDiv{
+        width: 100%;
+        height: 80vh;
+    }
+    .innerDiv{
+        width: 100%;
+        height: 80vh;
+    }
+    .nrtLog{
+        width: 15px;
+    }
+    .footerDiv{
+        right: 0px;
+        bottom: 0px;
+        font-size: 60%;
+        float: none;
+    }
+
+    li{
+        padding: 3px;
+        margin: 1px;
+    }
+}
+
+@media screen and (max-width:240px) {
+    .innerMainDiv{
+        width: 100%;
+        height: 100vh;
+    }
+    .innerDiv{
+        width: 100%;
+        height: 100vh;
+    }
+    .nrtLog{
+        width: 15px;
+    }
+    .footerDiv{
+        right: 0px;
+        bottom: 0px;
+        font-size: 60%;
+        float: none;
+    }
+
+    li{
+        padding: 3px;
+        margin: 1px;
+    }
+}

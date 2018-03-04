@@ -1,0 +1,48 @@
+.mainDiv {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+    background-color: khaki;
+    opacity: 0.4;
+}
+
+.mainDiv2 {
+    width:100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height:100vh; 
+    background-image: url('../../../assets/maxresdefault.jpg');
+}
+
+.innerMainDiv{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width:100%;
+    height:60vh; 
+    background-color: transparent;
+    background-color: whitesmoke;
+    border: lightgray solid 3px;
+    padding: 10px;
+}
+
+.btnVerify{
+    float:right; 
+    width:50%; 
+    margin-top: 10px;
+}
+@media screen and (max-width: 800px){
+    .innerMainDiv{
+        height: 90vh;
+    }
+}
+
+@media screen and (max-width: 414px){
+    .innerMainDiv{
+        height: 100vh;
+    }
+}
+

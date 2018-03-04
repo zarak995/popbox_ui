@@ -1,0 +1,26 @@
+<div class="mainDiv2">
+  <div class="innerMainDiv">
+    <div>
+      <div>
+        <h1 class="titleHeadingh1"> Ooxet.com </h1>
+      </div>
+      <div style="margin-top:30px;">
+        <label> Did not receive a verification code ? resend as: </label>
+        <button (click)="resendVercodeToEMAIL()" class="btn btn-primary">Email</button>
+        <button (click)="resendVercodeToSMS()" class="btn btn-primary"> SMS </button>
+      </div>
+
+      <div style="margin-top:30px;">
+        <label> Enter 4-digit validation code sent to you by EMAIL or SMS </label>
+      </div>
+      <form [formGroup]="verificationForm">
+        <div class="form-group" [ngClass]="{'has-danger': verificationForm.controls.vercode.invalid && verificationForm.controls.vercode.dirty,
+          'has-success': verificationForm.controls.vercode.valid && verificationForm.controls.vercode.dirty}">
+          <input formControlName="vercode" maxlength="5" class="form-control" style="display:inline-block; text-align:center; font-size: 400%;"
+            type="text">
+        </div>
+      </form>
+      <button [disabled]='!verificationForm.valid' (click)="verfifyUser()" class="btnVerify btn btn-primary form-control"> Verify </button>
+    </div>
+  </div>
+</div>

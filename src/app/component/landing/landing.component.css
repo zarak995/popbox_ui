@@ -1,0 +1,225 @@
+@font-face{font-family:'Calluna';
+    src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
+   }
+   body {
+       background: url(//subtlepatterns.com/patterns/scribble_light.png);
+     font-family: Calluna, Arial, sans-serif;
+     min-height: 1000px;
+   }
+   #columns {
+    column-width: 320px;
+    column-gap: 10px;
+    width: 90%;
+    max-width: 1920px;
+    margin: 50px auto;
+    
+    /*
+    justify-content: center;
+    column-width: 320px;
+    display: flex;
+    align-items: center;
+    margin:10px;
+    column-gap: 10px;
+    margin-left: 150px;
+    margin-right : 10px;*/
+   }
+   
+   div#columns figure {
+    background: #fefefe;
+    border: 2px solid #fcfcfc;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    margin: 0 2px 15px;
+    padding: 15px;
+    min-width: 360px;
+    padding-bottom: 10px;
+    transition: opacity .4s ease-in-out;
+    display: inline-block;
+    column-break-inside: avoid;
+    /*box-shadow: 0px 0.5px 0.5px 0.5px;
+       background: #fefefe;
+       padding-bottom: 10px;
+       min-width: 30%;
+       max-width: 100%;*/
+   }
+   
+   
+   div#columns figure p {
+       width: 100%; 
+       height: auto;
+       border-bottom: 1px solid #ccc;
+       padding-bottom: 15px;
+       margin-bottom: 5px;
+   }
+
+   div#columns figure img {
+    width: 100%; height: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+   
+   div#columns figure figcaption {
+     font-size: .9rem;
+       color: #444;
+     line-height: 1.5;
+   }
+   
+   div#columns small { 
+     font-size: 1rem;
+     float: right; 
+     text-transform: uppercase;
+     color: #aaa;
+   } 
+   
+   div#columns small a { 
+     color: #666; 
+     text-decoration: none; 
+     transition: .4s color;
+   }   
+
+   .Chat_Comments_Div{
+    margin: 0px;
+    padding: 2px;
+     max-height: 100px;
+    overflow-y: auto;  
+    border:solid lightgrey 1px;  
+   }
+
+   .Chat_Body_Div{
+     padding: 5px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow: auto;
+   }
+
+   .newchat_input{
+    display:inline-block; 
+    height:10vh; 
+    width:93%;
+   }
+   .newchat_btn{
+    width:6%; 
+    display:inline-block; 
+    height:10vh;
+   }
+
+   
+   /*div#columns:hover figure:not(:hover) {
+       opacity: 0.4;
+   }*/
+   
+   @media screen and (max-width: 750px) { 
+     #columns { column-gap: 3px; }
+     #columns figure { width: 100%; }
+   }
+ul{
+  text-decoration: none;
+  text-decoration-style: none;
+  padding: 10px;
+  
+}
+
+   li {
+     list-style: none;
+     text-decoration:none;
+     margin: 10px;
+   }
+
+   .navMenu{
+    text-align: left; 
+    background-color:khaki; 
+    color:grey; 
+    position:fixed; 
+    height:100vh; 
+    top:0px; 
+    left:0px;
+   }
+
+   .thumbsStyle{
+    padding:5px; 
+    border:solid 1px black; 
+    margin:10px; 
+    float:right;
+   }
+
+   .headerIcons{
+     float: right;
+   }
+
+   .chat_card_header{
+     margin: 0px;
+     padding: 0px;
+    width:100%;
+    display: inline-block;
+    border-bottom:1px solid grey
+  }
+
+  .main_post_input{
+    right:0px; 
+    position:fixed; 
+    height: 70px; 
+    bottom:0px; 
+    width:90%; 
+    background-color:  #fefefe;
+    border-radius:10px
+  }
+
+  .comment_box{
+    display:inline-block;
+     width:90%; 
+     font-size: 80%;
+  }
+
+  @media screen and (max-width:1024px) {
+    .navMenu {
+      display: none;
+    }
+  
+  }
+
+  @media screen and (max-width:800px) {
+    div#columns figure{
+      padding: 5px;
+    }
+    
+    .navMenu {
+      display: none;
+    }
+    .thumbsStyle{
+      display: inline-block;
+      float: none;
+    }
+    .main_post_input{
+      margin: 0px;
+      height: 50px;
+      width: 100%;
+      bottom: 0px;
+    }
+  }
+  @media screen and (max-width:414){
+    .newchat_btn{
+      width: 2%;
+    }
+    
+    .main_post_input{
+      width: 100%;
+      bottom: 25px;
+      height: 32vh;
+    }
+  }
+
+  @media screen and (max-width:375px) {
+    .headerIcons{
+      float: none;
+      display: block;
+    }
+  }
+    
+  @media screen and (max-width: 320) {
+
+    .main_post_input{
+      width: 100%;
+      bottom: 0px;
+      height: 40px;
+    }
+  }
