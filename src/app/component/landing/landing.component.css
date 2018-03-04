@@ -96,6 +96,7 @@
     display:inline-block; 
     height:10vh; 
     width:93%;
+    border: solid green 1px;
    }
    .newchat_btn{
     width:6%; 
@@ -126,13 +127,9 @@ ul{
    }
 
    .navMenu{
-    text-align: left; 
-    background-color:khaki; 
-    color:grey; 
-    position:fixed; 
-    height:100vh; 
-    top:0px; 
-    left:0px;
+    position: fixed; 
+    left:0px; 
+    top:0px;
    }
 
    .thumbsStyle{
@@ -159,9 +156,8 @@ ul{
     position:fixed; 
     height: 70px; 
     bottom:0px; 
-    width:90%; 
+    width:100%; 
     background-color:  #fefefe;
-    border-radius:10px
   }
 
   .comment_box{
@@ -171,8 +167,11 @@ ul{
   }
 
   @media screen and (max-width:1024px) {
-    .navMenu {
+    .navMenu{
       display: none;
+    }
+    .mobNavMenu{
+      display: block;
     }
   
   }
@@ -180,10 +179,18 @@ ul{
   @media screen and (max-width:800px) {
     div#columns figure{
       padding: 5px;
+    }    
+    .mobNavMenu{
+      width: 100%;
+      top: 92%;
+      height: 8vh;
+      bottom: 0px;
+      border: solid blue 1px;
+      position: fixed;
+      background-color: black;
     }
-    
-    .navMenu {
-      display: none;
+    .mobNavMenu li{
+      display: inline-block;
     }
     .thumbsStyle{
       display: inline-block;
@@ -192,34 +199,34 @@ ul{
     .main_post_input{
       margin: 0px;
       height: 50px;
-      width: 100%;
-      bottom: 0px;
+      bottom: 40px;
     }
-  }
-  @media screen and (max-width:414){
+    .newchat_input{
+      border: solid red 1px;
+    }
     .newchat_btn{
-      width: 2%;
-    }
-    
-    .main_post_input{
-      width: 100%;
-      bottom: 25px;
-      height: 32vh;
+      padding: 0px;
     }
   }
 
-  @media screen and (max-width:375px) {
-    .headerIcons{
-      float: none;
-      display: block;
-    }
-  }
-    
-  @media screen and (max-width: 320) {
-
+  @media screen and (max-width:414px) {
     .main_post_input{
-      width: 100%;
-      bottom: 0px;
+      margin: 0px;
+      bottom: 20px;    
+    }
+    .newchat_input{
+      width: 88%;
+     font-size: 90%;
+     height: 40px;
+     padding: 0px;
+      border: solid red 1px;
+      margin-bottom: 0px;
+    }
+    .newchat_btn{
+      padding: 0px;
+      width: 10%;
       height: 40px;
     }
+  
+  
   }

@@ -53,28 +53,25 @@
 
         <figcaption>
           <input class="form-control comment_box" (ngModelChange)="postMessageChanged($event,chat)" [ngModel]="message" type="text"
-            placeholder="Comment as {{currentAvatar.name}}">
+            placeholder="Say something.....">
           <i (click)='createNewPost(chat)' style="color:#428bca;" class="fa fa-send"></i>
         </figcaption>
       </figure>
     </div>
   </div>
-  <div style="position: fixed; ">
+  <div class="navMenu mobNavMenu">
     <ul>
-      <li style="margin-bottom:5px; padding-bottom:20px; border-bottom: solid grey 3px;">
-        <strong>oOxet.com</strong>
-      </li>
-      <li style="margin-top:10px;">
-        <i [routerLink]="['/landing']" class="fa fa-home fa-3x"></i>
+      <li style="margin-top:30px;">
+        <i [routerLink]="['/landing']" class="fa fa-home fa-2x"></i>
       </li>
       <li>
-        <i class="fa fa-phone fa-3x"></i>
+        <i class="fa fa-phone fa-2x"></i>
       </li>
       <li>
-        <i class="fa fa-facebook fa-3x"></i>
+        <i class="fa fa-facebook fa-2x"></i>
       </li>
       <li>
-        <i [routerLink]="['/profile']" class="fa fa-user fa-3x"></i>
+        <i [routerLink]="['/profile']" class="fa fa-user fa-2x"></i>
       </li>
     </ul>
   </div>
