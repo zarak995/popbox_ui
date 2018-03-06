@@ -22,8 +22,8 @@ export class ViewchatComponent implements OnInit {
   };
   user = window.localStorage.getItem('accesstoken_pcs1')
   ngOnInit() {
-    this.getSelectedChat();
     this.getCurrentAvatar();
+    this.getSelectedChat();
   }
 
   getCurrentAvatar() {
@@ -42,18 +42,23 @@ export class ViewchatComponent implements OnInit {
   getSelectedChat() {
     this.viewChatService.getSelectedViewChat()
       .subscribe(data => {
+        alert(JSON.stringify(data));
         this.viewSelectedChat = data;
-        this.viewSelectedChat.likes.forEach(element => {
-          if (element.user == this.user) {
+        alert(JSON.stringify(this.viewSelectedChat));
+        let maxLikes = this.viewSelectedChat.likes.length;
+        for (var xl = 0; xl < maxLikes; xl++) {
+          if (this.viewSelectedChat.likes[xl].user === this.user) {
             this.viewSelectedChat.isLiked = true;
+            break;
           }
-        });
-
-        this.viewSelectedChat.reports.forEach(element => {
-          if (element.user == this.user) {
+        }
+        let maxReports = this.viewSelectedChat.reports.length;
+        for (var xl = 0; xl < maxReports; xl++) {
+          if (this.viewSelectedChat.reports[xl].user === this.user) {
             this.viewSelectedChat.isReported = true;
+            break;
           }
-        });
+        }
       },
       err => { },
       () => { console.log('Request Complete: Get selected chat') })

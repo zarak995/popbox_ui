@@ -59,9 +59,6 @@ export class VerificationComponent implements OnInit {
   }
 
   resendVercodeToSMS() {
-    let data = {
-      userId: '5a91a226b3aad7446dd314cf'
-    }
     this.verificationService.resendVercodeAsSMS({ userId: this.loginService.verifyId })
       .subscribe(
       data => {
@@ -78,7 +75,6 @@ export class VerificationComponent implements OnInit {
   }
 
   resendVercodeToEMAIL() {
-    alert(this.loginService.verifyId);
     this.verificationService.resendVercodeAsEmail({ userId: this.loginService.verifyId })
       .subscribe(
       data => {

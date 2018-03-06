@@ -6,6 +6,7 @@ import { LandingService } from './landing.service';
 import { ViewchatService } from '../viewchat/viewchat.service';
 import { ChatService } from '../chat.service';
 import * as moment from 'moment';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -54,7 +55,6 @@ export class LandingComponent implements OnInit {
       this.chatService.saveNewPost(new Post(chat._id, this.currentAvatar.id,
         this.comment.commentBody))
         .subscribe(data => {
-          alert(data);
           if (data.status != null) {
             alert(data.message);
           } else {
@@ -97,9 +97,7 @@ export class LandingComponent implements OnInit {
       })
   }
 
-
   createNewChatlike(chat) {
-    alert('liked');
     chat.isLiked = true;
     let maxlikes = chat.likes.length;
     chat.likes.push(this.currentAvatar.id);

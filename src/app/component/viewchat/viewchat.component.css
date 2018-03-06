@@ -16,8 +16,6 @@
       width: 85%;
        margin-left: 150px;
        margin-right : 10px;
-       box-shadow: 0px 1px 1px 1px;
-       border: solid blue 1px;
    } 
 
    .Chat_Comments_Div{
@@ -31,13 +29,21 @@
     overflow-y: auto;
     overflow: auto;
    }
-
+   .Chat_Comments_Div{
+    margin: 0px;
+    padding: 2px;
+     max-height: 100px;
+    overflow-y: auto;  
+    border:solid lightgrey 1px;  
+   }
+   
    div#columns figure {
        background: #fefefe;
        padding: 15px;
        padding-bottom: 10px;
        width: 100%;
-       border: solid red 1px;
+       min-width: 500px;
+       box-shadow: 0px 1px 1px 1px;
        display: inline-block;
    }
    
@@ -94,8 +100,7 @@ ul{
 
    .navMenu{
     text-align: left; 
-    background-color:khaki; 
-    color:grey; 
+
     position:fixed; 
     height:100vh; 
     top:0px; 
@@ -165,6 +170,10 @@ ul{
       width: 100%;
       bottom: 25px;
       height: 32vh;
+    }
+
+    div#columns figure {
+      min-width: 200px;
     }
   }
 

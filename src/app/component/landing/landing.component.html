@@ -7,16 +7,6 @@
         </header>
         <div style="width:100%; display: inline-block;">
           <label style="font-size:50%"> {{chat.createdDate}} </label>
-          <div style="float:right;">
-            <select style="border:none; outline:none; background-color: transparent">
-              <option>pg</option>
-              <option> S </option>
-              <option>N</option>
-              <option>L</option>
-              <option>X</option>
-            </select>
-          </div>
-
         </div>
         <div>
           <p style="border:none; margin-top:0px;" (click)="viewOneChat(chat)">
@@ -25,12 +15,12 @@
           <div style="margin-left:5px; margin-bottom:5px; width:80%">
             <div style="display:inline-block;">
               <label *ngIf="chat.post.length > 0" style="margin:0px">{{chat.post.length}}</label>
-              <label *ngIf="chat.post.length == 0" style="margin:0px"></label>              
+              <label *ngIf="chat.post.length == 0" style="margin:0px"></label>
               <i class="fa fa-comment-o"></i>
             </div>
             <div style="margin-left:30px; display:inline-block; padding:0px;">
-                <label *ngIf="chat.likes.length == 0" style="margin:0px"> </label>
-                <label *ngIf="chat.likes.length > 0" style="margin:0px"> {{chat.likes.length}}</label>    
+              <label *ngIf="chat.likes.length == 0" style="margin:0px"> </label>
+              <label *ngIf="chat.likes.length > 0" style="margin:0px"> {{chat.likes.length}}</label>
               <i *ngIf="chat.isLiked" (click)="removeChatLike(chat)" style="color:#428bca;" class="fa fa-thumbs-o-up"></i>
               <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat)" class="fa fa-thumbs-o-up"></i>
             </div>
@@ -59,9 +49,9 @@
       </figure>
     </div>
   </div>
-  <div class="navMenu mobNavMenu">
+  <div class="navMenu">
     <ul>
-      <li style="margin-top:30px;">
+      <li>
         <i [routerLink]="['/landing']" class="fa fa-home fa-2x"></i>
       </li>
       <li>
@@ -73,11 +63,32 @@
       <li>
         <i [routerLink]="['/profile']" class="fa fa-user fa-2x"></i>
       </li>
+      <li>
+        <i [routerLink]="['/login']" class="fa fa-sign-out fa-2x"></i>
+      </li>
+    </ul>
+  </div>
+  <div class="mobNavMenu">
+    <ul>
+      <li>
+        <i [routerLink]="['/landing']" class="fa fa-home fa-2x"></i>
+      </li>
+      <li>
+        <i class="fa fa-phone fa-2x"></i>
+      </li>
+      <li>
+        <i class="fa fa-facebook fa-2x"></i>
+      </li>
+      <li>
+        <i [routerLink]="['/profile']" class="fa fa-user fa-2x"></i>
+      </li>
+      <li>
+        <i [routerLink]="['/login']" class="fa fa-sign-out fa-2x"></i>
+      </li>
     </ul>
   </div>
 </div>
 <div class="main_post_input">
-  <input class="form-control newchat_input" *ngIf="currentAvatar.name!=null" type="text"
-    [(ngModel)]="chatBody" placeholder="Posting as {{currentAvatar.name}}">
+  <input class="form-control newchat_input" *ngIf="currentAvatar.name!=null" type="text" [(ngModel)]="chatBody" placeholder="Posting as {{currentAvatar.name}}">
   <button (click)="createNewChat()" class=" newchat_btn btn btn-primary">Post</button>
 </div>
