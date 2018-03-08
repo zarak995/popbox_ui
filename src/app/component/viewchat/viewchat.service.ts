@@ -28,6 +28,5 @@ export class ViewchatService {
       headers: this.headers
     })
     .map(data => data.json())
-
   }
 }

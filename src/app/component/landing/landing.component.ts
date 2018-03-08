@@ -6,6 +6,8 @@ import { LandingService } from './landing.service';
 import { ViewchatService } from '../viewchat/viewchat.service';
 import { ChatService } from '../chat.service';
 import * as moment from 'moment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Avatar } from '../../models/Avatar';
 
 @Component({
   selector: 'app-landing',
@@ -13,28 +15,32 @@ import * as moment from 'moment';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
   constructor(private router: Router, private viewChatService: ViewchatService,
-    private landingService: LandingService, private chatService: ChatService) { }
+    private landingService: LandingService, private chatService: ChatService,
+    private fr: FormBuilder) { }
+
   token = window.localStorage.getItem("accesstoken");
   user = window.localStorage.getItem('accesstoken_pcs1');
   listAllChats: Chat[];
   message: String = '';
   chat: Chat;
   chatBody: String = '';
-
   comment = {
     chatId: '',
     commentBody: '',
+    commentAvatarId: ''
   }
+
   currentAvatar: {
     id: '',
     name: '',
     user: ''
   };
-
+  newAvatarName: String = "";
+  avatarForm: FormGroup;
   isTrue = false
   viewSelectedChat: Chat;
+  avatar: Avatar;
   ngOnInit() {
     if (this.token == null) {
       this.router.navigate(['/login']);
@@ -43,16 +49,37 @@ export class LandingComponent implements OnInit {
     }
     this.getAllChats();
     this.getCurrentAvatar();
+    this.validateNewAvatar();
+  }
+
+  validateNewAvatar() {
+    this.avatarForm = this.fr.group({
+      avatarName: ['', [Validators.required]]
+    })
   }
 
   postMessageChanged(event, chat) {
     this.comment.commentBody = event;
-    this.comment.chatId = chat._id
+    this.comment.chatId = chat._id;
+    this.comment.commentAvatarId = this.currentAvatar.id;
   }
 
   createNewPost(chat) {
+    var maxPosts = chat.post.length;
+    for (var x = 0; x < maxPosts; x++) {
+      if (chat.post[x].avatar.user === this.user) {
+        this.comment.commentAvatarId = chat.post[x].avatar._id;
+        break;
+      }
+
+      if (chat.post[x].avatar.user === chat.owner.user) {
+        this.comment.commentAvatarId = chat.owner._id;
+        break;
+      }
+    }
+
     if (chat._id === this.comment.chatId) {
-      this.chatService.saveNewPost(new Post(chat._id, this.currentAvatar.id,
+      this.chatService.saveNewPost(new Post(chat._id, this.comment.commentAvatarId,
         this.comment.commentBody))
         .subscribe(data => {
           if (data.status != null) {
@@ -177,6 +204,22 @@ export class LandingComponent implements OnInit {
     }
   }
 
+  createNewAvatar() {
+    if (this.newAvatarName != "") {
+      this.avatar = new Avatar(this.newAvatarName, this.user);
+      if (this.avatar !== null) {
+        this.landingService.saveNewAvatar(this.avatar, this.user)
+          .map(res => res.json())
+          .subscribe(data => {
+            this.currentAvatar = { id: data._id, name: data.name, user: data.user }
+          });
+        this.newAvatarName = "";
+        this.getCurrentAvatar();
+        this.openCloseAvatarModal();
+      }
+    }
+  }
+
   getAllChats() {
     this.listAllChats = [];
     this.landingService.getChats()
@@ -222,5 +265,16 @@ export class LandingComponent implements OnInit {
           err => { console.log(err); },
           () => console.log('Request complete'));
       })
+  }
+
+  openCloseAvatarModal() {
+    alert("Crawl");
+    let modal = document.getElementById('modal')
+    if (modal.style.display == "none") {
+      modal.style.display = "block";
+      return;
+    }
+    this.newAvatarName = "";
+    modal.style.display = "none";
   }
 }

@@ -1,3 +1,29 @@
+<div id="modal" class="modal">
+  <div id="myCont" class="modal-content">
+    <header style="width:100%; padding-bottom:10px; border-bottom:solid darkgray 1px">
+      <i class="fa fa-edit fa-2x"></i>
+      <label> Change Avatar Name </label>
+    </header>
+    <div [formGroup]="avatarForm">
+      <div class="form-group" [ngClass]="{'has-danger': avatarForm.controls.avatarName.invalid && avatarForm.controls.avatarName.dirty,
+        'has-success': avatarForm.controls.avatarName.valid && avatarForm.controls.avatarName.dirty}">
+        <input minlength="3" maxlength="25" formControlName="avatarName" class="form-control avatarInput"
+          type="text" [(ngModel)]="newAvatarName" placeholder="Enter new name">
+      </div>
+    </div>
+    <footer style="text-align: right; margin-top:20px">
+      <button [disabled]="!avatarForm.valid" (click)="createNewAvatar()" class="btn btn-primary"> Save Avatar </button>
+      <button (click)="openCloseAvatarModal()" class="btn"> Cancel </button>
+    </footer>
+
+    <!--
+      <footer style="text-align: right">
+          <button class="btn btn-primary" (click)="createNewAvatar()"> Submit </button>
+          <button class="btn" (click)="closeModal()"> Cancel </button>
+      </footer> -->
+  </div>
+</div>
+
 <div id="columns">
   <div *ngIf="listAllChats.length > 0">
     <div *ngFor="let chat of listAllChats">
@@ -42,8 +68,8 @@
         </div>
 
         <figcaption>
-          <input class="form-control comment_box" (ngModelChange)="postMessageChanged($event,chat)" [ngModel]="message" type="text"
-            placeholder="Say something.....">
+          <input class="form-control comment_box" (ngModelChange)="postMessageChanged($event,chat)" 
+          [ngModel]="message" type="text" placeholder="Say something.....">
           <i (click)='createNewPost(chat)' style="color:#428bca;" class="fa fa-send"></i>
         </figcaption>
       </figure>
@@ -55,7 +81,7 @@
         <i [routerLink]="['/landing']" class="fa fa-home fa-2x"></i>
       </li>
       <li>
-        <i class="fa fa-phone fa-2x"></i>
+        <i class="fa fa-edit fa-2x" (click)="openCloseAvatarModal()"></i>
       </li>
       <li>
         <i class="fa fa-facebook fa-2x"></i>
@@ -74,7 +100,7 @@
         <i [routerLink]="['/landing']" class="fa fa-home fa-2x"></i>
       </li>
       <li>
-        <i class="fa fa-phone fa-2x"></i>
+        <i (click)="openCloseAvatarModal()" class="fa fa-edit fa-2x"></i>
       </li>
       <li>
         <i class="fa fa-facebook fa-2x"></i>

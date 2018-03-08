@@ -10,6 +10,14 @@ export class LandingService {
     'authorization': window.localStorage.getItem('accesstoken')
   });
 
+  saveNewAvatar(avatar, userId) {
+    return this.http.options(environment.host + environment.avatarRoute + userId, {
+      method: 'POST',
+      body: avatar,
+      headers: this.headers
+    })
+  }
+
   getChats() {
     return this.http.options(environment.host + environment.chatsRoute, {
       method: 'GET',

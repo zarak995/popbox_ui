@@ -42,9 +42,7 @@ export class ViewchatComponent implements OnInit {
   getSelectedChat() {
     this.viewChatService.getSelectedViewChat()
       .subscribe(data => {
-        alert(JSON.stringify(data));
         this.viewSelectedChat = data;
-        alert(JSON.stringify(this.viewSelectedChat));
         let maxLikes = this.viewSelectedChat.likes.length;
         for (var xl = 0; xl < maxLikes; xl++) {
           if (this.viewSelectedChat.likes[xl].user === this.user) {

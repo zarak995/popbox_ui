@@ -6,22 +6,47 @@
      font-family: Calluna, Arial, sans-serif;
      min-height: 1000px;
    }
+
+   .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 150px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 250px;
+    font-size: 120%;
+    text-align: center;
+}
+
    #columns {
     column-width: 310px;
     column-gap: 10px;
     width: 90%;
     max-width: 1920px;
-    margin: 50px auto;
-    
-    /*
-    justify-content: center;
-    column-width: 320px;
-    display: flex;
-    align-items: center;
-    margin:10px;
-    column-gap: 10px;
-    margin-left: 150px;
-    margin-right : 10px;*/
+    margin: 50px auto;    
    }
    
    div#columns figure {
@@ -33,7 +58,7 @@
     min-width: 360px;
     padding-bottom: 10px;
     transition: opacity .4s ease-in-out;
-    display: inline-block;
+    display: inline-block; 
     column-break-inside: avoid;
     /*box-shadow: 0px 0.5px 0.5px 0.5px;
        background: #fefefe;
@@ -94,10 +119,11 @@
 
    .newchat_input{
     display:inline-block; 
-    height:10vh; 
+    height:10vh;
     width:93%;
     border: solid green 1px;
    }
+   
    .newchat_btn{
     width:6%; 
     display:inline-block; 
@@ -108,6 +134,11 @@
      display: none;
    }
 
+   .avatarInput{
+    font-size:150%; 
+    text-align: center; 
+    margin-top:15px;
+   }
    
    /*div#columns:hover figure:not(:hover) {
        opacity: 0.4;
@@ -161,7 +192,11 @@ ul{
     display: inline-block;
     border-bottom:1px solid grey
   }
-
+  
+  .webheader{
+  text-align: center;
+   width:10%;
+}
   .main_post_input{
     right:0px; 
     position:fixed; 
@@ -178,20 +213,39 @@ ul{
   }
 
   @media screen and (max-width:1024px) {
-    
+    .main_post_input{
+      margin: 0px;
+      height: 50px;
+      bottom: 11px;
+    }
+    .newchat_input {
+      margin:0px;
+    }
+    .newchat_btn {
+      padding: 0px;
+    }
   }
   @media screen and (max-width:800px) {
+    #columns{
+      width: 100%;
+      padding: 5px;      
+    }
+    .modal{
+      padding-top: 70px;
+    }
+
+    div#columns figure{
+      margin-left: 5px;
+      max-width: 440px;
+    }
     .navMenu{
       display: none;
     }
-
+    
     .mobNavMenu{
       display: block;
     }
 
-    div#columns figure{
-      padding: 5px;
-    }    
     .mobNavMenu {
       background-color:darkgray;   
       width: 100%;
@@ -202,17 +256,18 @@ ul{
       color: white;
     }
     
-    .mobNavMenu li {
+  .mobNavMenu li {
       display: inline-block;
       padding-top:0px; 
       margin-top: 0px;
       margin-bottom: 0px;
+      margin-left: 14%; 
       }
-
+      
     .mobNavMenu li:first-child {
       margin-left: 5px; 
     }
-      
+
     .thumbsStyle{
       display: inline-block;
       float: none;
@@ -220,68 +275,85 @@ ul{
     .main_post_input{
       margin: 0px;
       height: 50px;
-      bottom: 20px;
-      border: solid red 1px;
-      padding-bottom:0px; 
+      bottom: 40px;
     }
-    .newchat_input{
-      border: solid darkgray 1px;
+    .newchat_input {
+      margin:0px; 
     }
-    .newchat_btn{
+    .newchat_btn {
       padding: 0px;
     }
   }
 
   @media screen and (max-width:414px) {
+    #columns{
+      width: 100%;
+    }
+    
+    div#columns figure{
+      margin-left: 5px;
+      max-width: 404px;
+    }
+    .modal{
+      padding-top: 200px;       
+    }
     .main_post_input{
       margin: 0px;
-      bottom: 50px;   
-      margin-bottom: 0px; 
+      height: 40px;
+      bottom: 33px;
     }
-    .newchat_input{
-      width: 88%;
+    .newchat_input {
+     width: 87%;
      font-size: 90%;
      height: 40px;
-     padding: 0px;
-     margin-bottom: 0px;
     }
-    .newchat_btn{
-      padding: 0px;
+    .newchat_btn {
       width: 10%;
-      height: 40px;
-      margin-bottom: 0px; } 
-    .mobNavMenu{
-      border: solid blue 1px;
-      top:94%;
-      height: 40px;
-      font-size: 80%;
-      margin-left:0px; 
+      height: 35px;
+    } 
+    .mobNavMenu {
+      top:95%;
+      height: 35px;
+      font-size: 60%;
       margin-top: 5px;
+    }
+    .avatarInput{
+font-size: 100%;
     }
   }
 
   @media screen and (max-width: 375px) {
-    .mobNavMenu{
-      margin-top:5px; 
+    .mobNavMenu {
+      margin-top:0px; 
     }
    
 
-    div#columns figure{
-      min-width: 260px;
+    div#columns figure {
+      max-width: 365px;
     }    
   }
 
   @media screen and (max-width: 320px) {
-    .mobNavMenu{
+    .mobNavMenu {
       margin-top:0px; 
-
+      height: 35px;
     }  
+
+    div#columns figure {
+      min-width: 310px;
+      max-width: 310px;
+    }
+    .mobNavMenu li{
+      margin-left:35px;
+    }
   }
+
   @media screen and (max-width:240px) {
-    .mobNavMenu{
+    .mobNavMenu {
       margin-top: 5px; 
     }
-    div#columns figure{
-      min-width: 200px;
+    
+    div#columns figure {
+      max-width: 230px;
     }
   }
