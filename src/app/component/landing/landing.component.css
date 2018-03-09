@@ -148,12 +148,13 @@
      #columns { column-gap: 3px; }
      #columns figure { width: 100%; }
    }
-ul{
+
+  ul{
   text-decoration: none;
   text-decoration-style: none;
-  padding: 10px;
-  
-}
+  padding: 10px;  
+  }
+
    li {
      list-style: none;
      text-decoration:none;
@@ -225,8 +226,9 @@ ul{
       padding: 0px;
     }
   }
+  
   @media screen and (max-width:800px) {
-    #columns{
+    #columns {
       width: 100%;
       padding: 5px;      
     }
@@ -256,7 +258,7 @@ ul{
       color: white;
     }
     
-  .mobNavMenu li {
+    .mobNavMenu li {
       display: inline-block;
       padding-top:0px; 
       margin-top: 0px;
@@ -272,11 +274,13 @@ ul{
       display: inline-block;
       float: none;
     }
+    
     .main_post_input{
       margin: 0px;
       height: 50px;
       bottom: 40px;
     }
+    
     .newchat_input {
       margin:0px; 
     }
@@ -286,22 +290,25 @@ ul{
   }
 
   @media screen and (max-width:414px) {
-    #columns{
+    #columns {
       width: 100%;
     }
     
     div#columns figure{
       margin-left: 5px;
-      max-width: 404px;
+      max-width: 390px;
     }
+    
     .modal{
       padding-top: 200px;       
     }
-    .main_post_input{
+    
+    .main_post_input {
       margin: 0px;
       height: 40px;
       bottom: 33px;
     }
+    
     .newchat_input {
      width: 87%;
      font-size: 90%;
@@ -317,8 +324,8 @@ ul{
       font-size: 60%;
       margin-top: 5px;
     }
-    .avatarInput{
-font-size: 100%;
+    .avatarInput {
+      font-size: 100%;
     }
   }
 
@@ -329,22 +336,43 @@ font-size: 100%;
    
 
     div#columns figure {
-      max-width: 365px;
+      min-width: 355px;
+      max-width: 355px;
     }    
+  }
+
+  @media screen and (max-width: 360px) {
+    div#columns figure {
+      min-width: 340px;
+      max-width: 340px;
+    }
   }
 
   @media screen and (max-width: 320px) {
     .mobNavMenu {
       margin-top:0px; 
       height: 35px;
-    }  
+    }
+    
+    .main_post_input {
+      margin: 0px;
+      height: 40px;
+      bottom: 30px;
+    }
 
     div#columns figure {
-      min-width: 310px;
-      max-width: 310px;
+      min-width: 300px;
+      max-width: 300px;
     }
+
     .mobNavMenu li{
-      margin-left:35px;
+      margin-left: 35px;
+      margin-top: -12px;
+    }
+
+    .newchat_btn {
+      padding: 0px;
+      font-size: 70%; 
     }
   }
 

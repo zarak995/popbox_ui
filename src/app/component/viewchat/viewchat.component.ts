@@ -14,7 +14,12 @@ export class ViewchatComponent implements OnInit {
 
   constructor(private viewChatService: ViewchatService, private chatService: ChatService) { }
   viewSelectedChat: Chat;
-  comment: String = "";
+  comment = {
+    chatId: '',
+    commentBody: '',
+    commentAvatarId: ''
+  }
+
   currentAvatar: {
     id: '',
     name: '',
@@ -26,6 +31,15 @@ export class ViewchatComponent implements OnInit {
     this.getSelectedChat();
   }
 
+  sortChatsAndPosts(chat: Chat) {
+    chat.createdDate = moment(chat.createdDate).fromNow();
+    if (chat.post.length > 0) {
+      for (var i = 0; i < chat.post.length; i++) {
+        chat.post[i].createdDate = moment(chat.post[i].createdDate).fromNow();
+      }
+    }
+    return chat;
+  }
   getCurrentAvatar() {
     this.viewChatService.getCurrentAvatar(this.user)
       .subscribe(data => {
@@ -57,18 +71,44 @@ export class ViewchatComponent implements OnInit {
             break;
           }
         }
+        this.sortChatsAndPosts(this.viewSelectedChat);
       },
       err => { },
       () => { console.log('Request Complete: Get selected chat') })
   }
 
-  createNewPost() {
-    this.chatService.saveNewPost(new Post(this.viewSelectedChat._id, '5a933aea35457b50ade40bfd', this.comment))
-      .subscribe(data => {
-        this.viewSelectedChat = data;
-      },
-      err => { },
-      () => { console.log('Request Complete: Save new post') })
+  createNewPost(chat) {
+    var maxPosts = chat.post.length;
+    for (var x = 0; x < maxPosts; x++) {
+      if (chat.post[x].avatar.user === this.user) {
+        this.comment.commentAvatarId = chat.post[x].avatar._id;
+        this.comment.chatId = chat._id;
+        break;
+      }
+
+      if (chat.post[x].avatar.user === chat.owner.user) {
+        this.comment.commentAvatarId = chat.owner._id;
+        this.comment.chatId = chat._id;
+        break;
+      }
+    }
+
+    if (this.comment.chatId != "") {
+      this.chatService.saveNewPost(new Post(chat._id, this.comment.commentAvatarId,
+        this.comment.commentBody))
+        .subscribe(data => {
+          if (data.status != null) {
+            alert(data.message);
+          } else {
+            this.viewSelectedChat = data;
+            this.sortChatsAndPosts(this.viewSelectedChat);
+            this.comment = null;
+          }
+        },
+        err => { },
+        () => { console.log('Request Complete: Save new post') })
+      return;
+    }
   }
 
   removeChatLike(chat) {
@@ -89,10 +129,7 @@ export class ViewchatComponent implements OnInit {
         } else {
           chat = data;
           chat.isLiked = false;
-          chat.createdDate = moment(this.viewSelectedChat.createdDate).fromNow();
-          chat.post.forEach(element => {
-            element.createdDate = moment(element.createdDate).fromNow();
-          })
+          this.sortChatsAndPosts(chat);
         }
       })
   }
@@ -111,10 +148,7 @@ export class ViewchatComponent implements OnInit {
         } else {
           chat = data;
           chat.isLiked = true;
-          chat.createdDate = moment(chat.createdDate).fromNow();
-          chat.post.forEach(element => {
-            element.createdDate = moment(element.createdDate).fromNow();
-          })
+          this.sortChatsAndPosts(chat);
         }
       })
   }
@@ -134,10 +168,7 @@ export class ViewchatComponent implements OnInit {
       .subscribe(data => {
         chat = data;
         chat.isReported = false;
-        chat.createdDate = moment(chat.createdDate).fromNow();
-        chat.post.forEach(element => {
-          element.createdDate = moment(element.createdDate).fromNow();
-        });
+        this.sortChatsAndPosts(chat);
       })
   }
 
@@ -149,10 +180,7 @@ export class ViewchatComponent implements OnInit {
       .subscribe(data => {
         chat = data;
         chat.isReported = true;
-        chat.createdDate = moment(chat.createdDate).fromNow();
-        chat.post.forEach(element => {
-          element.createdDate = moment(element.createdDate).fromNow();
-        });
+        this.sortChatsAndPosts(chat);
       })
   }
 }
