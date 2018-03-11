@@ -17,6 +17,7 @@ import { LandingModule } from './component/landing/landing.module';
 import { ViewchatComponent } from './component/viewchat/viewchat.component';
 import { ViewchatModule } from './component/viewchat/viewchat.module';
 import { ChatService } from './component/chat.service';
+import { AvatarService } from './component/avatar.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,9 +45,9 @@ import { ChatService } from './component/chat.service';
       { path: 'register', component: RegisterComponent },
       { path: 'verify', component: VerificationComponent },
       { path: 'post', component: ViewchatComponent }
-    ], {useHash:true})
+    ], { useHash: true })
   ],
-  providers: [FormBuilder,ChatService],
+  providers: [FormBuilder, ChatService, AvatarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
