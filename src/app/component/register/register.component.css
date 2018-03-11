@@ -59,6 +59,7 @@ li:last-child{
     height:70vh; 
     background-color: transparent;
     background-color: whitesmoke;
+   
 }
 
 .innerDiv{
@@ -98,7 +99,7 @@ li:last-child{
         margin-top: 10px; 
     }
     .innerMainDiv{
-        height: 70vh;
+        height: 80vh;
         width: 70%;
     }
     .titleDiv{

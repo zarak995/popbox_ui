@@ -9,15 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
-  years = [];
-  months = [];
-  days = [];
   newuser: User;
   constructor(private router: Router, private regForm: FormBuilder, private registerService: RegisterService) { }
+  
   ngOnInit() {
-    this.populateDateControls();
     this.validateregisterForm();
     this.confirmPasswordChange();
   }
@@ -30,9 +26,8 @@ export class RegisterComponent implements OnInit {
       this.newuser.password = this.registerForm.get('pass').value;
       this.newuser.gender = this.registerForm.get('gender').value;
       this.newuser.phone = this.registerForm.get('phone').value;
-      this.newuser.dateOfBirth = new Date();
-      this.newuser.dateOfBirth.setFullYear(this.registerForm.get('year').value,
-        this.registerForm.get('month').value, this.registerForm.get('day').value);
+      this.newuser.dateOfBirth = this.registerForm.get('dob').value;
+      
       this.registerService.registerNewUser(this.newuser)
         .subscribe(
         data => {
@@ -55,9 +50,7 @@ export class RegisterComponent implements OnInit {
       pass: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]],
       cpass: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*?]+$/i)]],
       gender: ['', [Validators.required, this.forbiddenValueValidator(/--Select Gender--/i)]],
-      year: ['', [Validators.required, this.forbiddenValueValidator(/--Year--/i)]],
-      month: ['', [Validators.required, this.forbiddenValueValidator(/--Month--/i)]],
-      day: ['', [Validators.required, this.forbiddenValueValidator(/--Day--/i)]],
+      dob: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern(/^[+][0-9]+$/i)]]
     })
   }
@@ -75,20 +68,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.controls['cpass'].setErrors({ 'incorrect': true });
       }
     })
-  }
-
-  populateDateControls() {
-    for (var x = 1930; x < 2006; x++) {
-      this.years.push(x);
-    }
-
-    for (var x = 1; x < 32; x++) {
-      this.days.push(x);
-    }
-
-    for (var x = 1; x < 13; x++) {
-      this.months.push(x);
-    }
   }
 
   showPassword() {

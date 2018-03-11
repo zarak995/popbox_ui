@@ -21,6 +21,12 @@
           'has-success': registerForm.controls.phone.valid && registerForm.controls.phone.dirty}">
             <input class="form-control" formControlName="phone" placeholder="+27910372585">
           </div>
+
+          <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.dob.invalid && registerForm.controls.dob.dirty,
+          'has-success': registerForm.controls.dob.valid && registerForm.controls.dob.dirty}">
+            <input class="form-control" formControlName="dob"  min="1939-01-01" max="2006-01-01" type="date">
+          </div>
+
           <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
           'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
             <select formControlName="gender" class="form-control" name="reg_gender">
@@ -31,33 +37,7 @@
             </select>
           </div>
 
-          <div class="dobDiv">
-            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.year.invalid && 
-            registerForm.controls.year.dirty,'has-success': registerForm.controls.year.valid &&
-             registerForm.controls.year.dirty}">
-              <select options="years" formControlName="year" class="form-control" id="reg_year">
-                <option>--Year--</option>
-                <option *ngFor="let item of years">{{item}}</option>
-              </select>
-            </div>
-
-            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.month.invalid && 
-            registerForm.controls.month.dirty,'has-success': registerForm.controls.month.valid &&
-             registerForm.controls.month.dirty}">
-              <select options="months" formControlName="month" class="form-control" id="reg_month">
-                <option>--Month--</option>
-                <option *ngFor="let item of months">{{item}}</option>
-              </select>
-            </div>
-            <div class="dobItem form-group" [ngClass]="{'has-danger': registerForm.controls.day.invalid && 
-            registerForm.controls.day.dirty,'has-success': registerForm.controls.day.valid &&
-             registerForm.controls.day.dirty}">
-              <select formControlName="day" class="form-control" name="reg_day">
-                <option>--Day--</option>
-                <option *ngFor="let item of days">{{item}}</option>
-              </select>
-            </div>
-          </div>
+          
           <div>
             <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.pass.invalid && 
               registerForm.controls.pass.dirty,'has-success': registerForm.controls.pass.valid &&
