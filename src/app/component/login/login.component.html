@@ -25,6 +25,7 @@
                         <input (click)="showPassword()" type="checkbox">
                     </div>
                     <button [disabled]="!loginForm.valid" style="margin:7% 0 3% 0" class=" btn btn-primary form-control">Sign In</button>
+                    <li class="mobRegLink" [routerLink]="['/register']">Register</li>
                 </div>
             </form>
         </div>

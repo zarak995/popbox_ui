@@ -10,6 +10,9 @@ li {
     border-radius:10px;
  }
 
+ .mobRegLink{
+     display: none;
+ }
 
 li:last-child{
     border-right: none;
@@ -78,9 +81,15 @@ li:last-child{
         width: 100%;
         height: 80vh;
     }
+    .mobRegLink {
+        display: block;
+        margin:0px; 
+        float: right;
+        color: blue;
+    }
     .innerDiv{
         width: 100%;
-        height: 80vh;
+        height: 70vh;
     }
     .nrtLog{
         width: 15px;
