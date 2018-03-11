@@ -4,7 +4,9 @@ import { Chat } from '../../models/Chat';
 import { Post } from '../../models/Post';
 import * as moment from 'moment';
 import { ChatService } from '../../../app/component/chat.service';
-import { max } from 'rxjs/operator/max';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Avatar } from '../../models/Avatar';
+import { AvatarService } from '../avatar.service';
 @Component({
   selector: 'app-viewchat',
   templateUrl: './viewchat.component.html',
@@ -12,23 +14,51 @@ import { max } from 'rxjs/operator/max';
 })
 export class ViewchatComponent implements OnInit {
 
-  constructor(private viewChatService: ViewchatService, private chatService: ChatService) { }
+  constructor(private avatarService: AvatarService,
+    private viewChatService: ViewchatService, private chatService: ChatService, private fr: FormBuilder) { }
+  avatarForm: FormGroup;
   viewSelectedChat: Chat;
+  message = '';
   comment = {
     chatId: '',
     commentBody: '',
     commentAvatarId: ''
   }
 
+  newAvatarName: String = "";
   currentAvatar: {
     id: '',
     name: '',
     user: ''
   };
+  avatar: Avatar;
   user = window.localStorage.getItem('accesstoken_pcs1')
   ngOnInit() {
     this.getCurrentAvatar();
     this.getSelectedChat();
+    this.validateNewAvatar();
+  }
+
+  createNewAvatar() {
+    if (this.newAvatarName != "") {
+      this.avatar = new Avatar(this.newAvatarName, this.user);
+      if (this.avatar !== null) {
+        this.avatarService.saveNewAvatar(this.avatar, this.user)
+          .map(res => res.json())
+          .subscribe(data => {
+            this.currentAvatar = { id: data._id, name: data.name, user: data.user }
+          });
+        this.newAvatarName = "";
+        this.getCurrentAvatar();
+        this.openCloseAvatarModal();
+      }
+    }
+  }
+
+  validateNewAvatar() {
+    this.avatarForm = this.fr.group({
+      avatarName: ['', [Validators.required]]
+    })
   }
 
   sortChatsAndPosts(chat: Chat) {
@@ -41,7 +71,7 @@ export class ViewchatComponent implements OnInit {
     return chat;
   }
   getCurrentAvatar() {
-    this.viewChatService.getCurrentAvatar(this.user)
+    this.avatarService.getCurrentAvatar(this.user)
       .subscribe(data => {
         data.forEach(element => {
           this.currentAvatar = {
@@ -78,22 +108,27 @@ export class ViewchatComponent implements OnInit {
   }
 
   createNewPost(chat) {
+    this.comment.commentBody = this.message;
+    this.message = '';
     var maxPosts = chat.post.length;
+    this.comment.chatId = chat._id;
+    this.comment.commentAvatarId = this.currentAvatar.id;
+
     for (var x = 0; x < maxPosts; x++) {
       if (chat.post[x].avatar.user === this.user) {
         this.comment.commentAvatarId = chat.post[x].avatar._id;
-        this.comment.chatId = chat._id;
         break;
       }
-
       if (chat.post[x].avatar.user === chat.owner.user) {
         this.comment.commentAvatarId = chat.owner._id;
-        this.comment.chatId = chat._id;
         break;
       }
     }
 
+
+    alert(JSON.stringify(this.comment));
     if (this.comment.chatId != "") {
+
       this.chatService.saveNewPost(new Post(chat._id, this.comment.commentAvatarId,
         this.comment.commentBody))
         .subscribe(data => {
@@ -101,6 +136,7 @@ export class ViewchatComponent implements OnInit {
             alert(data.message);
           } else {
             this.viewSelectedChat = data;
+            alert(JSON.stringify(chat));
             this.sortChatsAndPosts(this.viewSelectedChat);
             this.comment = null;
           }
@@ -170,6 +206,17 @@ export class ViewchatComponent implements OnInit {
         chat.isReported = false;
         this.sortChatsAndPosts(chat);
       })
+  }
+
+  openCloseAvatarModal() {
+    let modal = document.getElementById('modal')
+    if (modal.style.display == "none"
+      || modal.style.display == "") {
+      modal.style.display = "block";
+      return;
+    }
+    this.newAvatarName = "";
+    modal.style.display = "none";
   }
 
   reportChat(chat: any) {

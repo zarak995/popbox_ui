@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment.prod';
 
 @Injectable()
 export class ViewchatService {
-
   viewchatid: String = "";
   constructor(private http: Http) { }
   headers = new Headers({
@@ -18,15 +17,5 @@ export class ViewchatService {
       headers: this.headers
     })
       .map(res => res.json())
-  }
-
-  
-
-  getCurrentAvatar(userId) {
-    return this.http.options(environment.host + environment.avatarRoute + userId, {
-      method: 'GET',
-      headers: this.headers
-    })
-    .map(data => data.json())
   }
 }

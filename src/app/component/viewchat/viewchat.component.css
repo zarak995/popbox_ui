@@ -1,26 +1,50 @@
 @font-face{font-family:'Calluna';
     src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
    }
-   body {
-       background: url(//subtlepatterns.com/patterns/scribble_light.png);
-     font-family: Calluna, Arial, sans-serif;
-     min-height: 1000px;
-   }
+
+   .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 150px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 250px;
+    font-size: 120%;
+    text-align: center;
+}
+
    #columns {
        justify-content: center;
        display: flex;
        align-items: center;
-       margin:10px;
-       column-width: 85%;
+       column-width: 95%;
        column-gap: 10px;
-       width: 85%;
-       margin-left: 150px;
-       margin-right : 10px;
-   } 
-
-   .Chat_Comments_Div{
-     margin-left: 25px;
-    max-height: 300px;
+       max-width: 95%;
+       margin: 10px auto; 
+       margin-top:10px;  
    }
 
    .Chat_Body_Div{
@@ -29,10 +53,10 @@
     overflow-y: auto;
     overflow: auto;
    }
-   .Chat_Comments_Div{
+   .Chat_Comments_Div {
     margin: 0px;
     padding: 2px;
-     max-height: 100px;
+     max-height: 350px;
     overflow-y: auto;  
     border:solid lightgrey 1px;  
    }
@@ -41,10 +65,10 @@
        background: #fefefe;
        padding: 15px;
        padding-bottom: 10px;
-       width: 100%;
-       min-width: 100%;
-       box-shadow: 0px 1px 1px 1px;
-       display: inline-block;
+       margin-left: 50px;
+       margin-top:30px; 
+      min-width: 95%;
+       box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
    }
    
    div#columns figure p {
@@ -82,114 +106,271 @@
    }
    
    @media screen and (max-width: 750px) { 
-     #columns { column-gap: 0px; }
-     #columns figure { width: 100%; }
+    #columns { column-gap: 3px; }
+    #columns figure { width: 100%; }
+  }
+
+ ul{
+ text-decoration: none;
+ text-decoration-style: none;
+ padding: 10px;  
+ }
+
+  li {
+    list-style: none;
+    text-decoration:none;
+    margin: 10px;
+  }
+
+  .navMenu{
+   position: fixed; 
+   width: 60px;
+   left:0px; 
+   top:0px;
+   background-color:darkgray;
+   color: white;
+   height: 100vh;
+  }
+
+  .navMenu li{
+    margin-top: 50px;
+  }
+  .mobNavMenu{
+    display: none;
+  }
+  .avatarInput{
+    font-size:150%; 
+    text-align: center; 
+    margin-top:15px;
    }
-ul{
-  text-decoration: none;
-  text-decoration-style: none;
-  padding: 10px;
-  
+   .change-avatar-tittle {
+    width:100%; 
+    padding-bottom:10px; 
+    border-bottom:solid darkgray 1px
+  }
+
+  .chat_card_header{
+    margin: 0px;
+    padding: 0px;
+   width:100%;
+   display: inline-block;
+   border-bottom:1px solid grey
+ }
+ 
+ .webheader{
+ text-align: center;
+  width:10%;
+}
+.main_post_input{
+  right:0px; 
+  position:fixed; 
+  height: 70px; 
+  bottom:0px; 
+  width:100%; 
+  background-color:  #fefefe;
 }
 
-   li {
-     list-style: none;
-     text-decoration:none;
-     margin: 10px;
+.newchat_input{
+  display:inline-block; 
+  height:10vh;
+  width:93%;
+  border: solid green 1px;
+ }
+ 
+ .newchat_btn{
+  width:6%; 
+  display:inline-block; 
+  height:10vh;
+ }
+ .comment_box{
+  margin-top: 5px; 
+  display:inline-block;
+    width:90%; 
+    font-size: 80%;
+ }
+
+ @media screen and (max-width:1024px) {
+   .main_post_input{
+     margin: 0px;
+     height: 50px;
+     bottom: 11px;
+   }
+   .newchat_input {
+     margin:0px;
+   }
+   .newchat_btn {
+     padding: 0px;
+   }
+ }
+ 
+ @media screen and (max-width:800px) {
+   #columns {
+     width: 100%;
+     padding: 5px;      
+   }
+   .modal{
+     padding-top: 70px;
    }
 
+   div#columns figure{
+     margin-left: 5px;
+     max-width: 440px;
+   }
    .navMenu{
-    text-align: left; 
+     display: none;
+   }
+   
+   .mobNavMenu{
+     display: block;
+   }
 
-    position:fixed; 
-    height:100vh; 
-    top:0px; 
-    left:0px;
+   .mobNavMenu {
+     background-color:darkgray;   
+     width: 100%;
+     position: fixed;
+     height: 50px;
+     left: 0px;
+     top: 90%;
+     color: white;
+   }
+   
+   .mobNavMenu li {
+     display: inline-block;
+     padding-top:0px; 
+     margin-top: 0px;
+     margin-bottom: 0px;
+     margin-left: 14%; 
+     }
+     
+   .mobNavMenu li:first-child {
+     margin-left: 5px; 
    }
 
    .thumbsStyle{
-    padding:5px; 
-    border:solid 1px black; 
-    margin:10px; 
-    float:right;
+     display: inline-block;
+     float: none;
    }
-
-   .headerIcons{
-     float: right;
+   
+   .main_post_input{
+     margin: 0px;
+     height: 50px;
+     bottom: 40px;
    }
-   .chat_card_header{
-    width:100%;
-    display: inline-block;
-    border-bottom:1px solid grey
-  }
+   
+   .newchat_input {
+     margin:0px; 
+   }
+   .newchat_btn {
+     padding: 0px;
+   }
+ }
 
-  .main_post_input{
-    right:0px; 
-    position:fixed; 
-    height: 70px; 
-    bottom:0px; 
-    width:93%; 
-    border: solid 1px khaki; 
-    border-radius:10px
-  }
+ @media screen and (max-width:414px) {
+   #columns {
+     width: 100%;
+   }
+   
+   div#columns figure{
+     margin-left: 5px;
+     max-width: 390px;
+   }
+   
+   .modal{
+     padding-top: 200px;       
+   }
+   
+   .main_post_input {
+     margin: 0px;
+     height: 40px;
+     bottom: 33px;
+   }
+   
+   .newchat_input {
+    width: 87%;
+    font-size: 90%;
+    height: 40px;
+   }
+   .newchat_btn {
+     width: 10%;
+     height: 35px;
+   } 
+   .mobNavMenu {
+     top:95%;
+     height: 35px;
+     font-size: 60%;
+     margin-top: 5px;
+   }
+   .avatarInput {
+     font-size: 100%;
+   }
+ }
 
-  .comment_box{
-    display:inline-block;
-     width:90%;
-     margin-top: 10px;
-  }
-
+ @media screen and (max-width: 375px) {
+   .mobNavMenu {
+     margin-top:0px; 
+   }
   
-  @media screen and (max-width:800px) {
-    div#columns figure{
-      padding: 5px;
-    }
-    
-    #columns{
-      margin:20px;
-    }
-    .navMenu {
-      display: none;
-    }
-    .thumbsStyle{
-      display: inline-block;
-      float: none;
-    }
-    .main_post_input{
-      margin: 0px;
-      height: 50px;
-      width: 100%;
-      bottom: 0px;
-    }
-  }
-  @media screen and (max-width:414){
-    #columns{
-      margin-left:2px;
-    }
-    .main_post_input{
-      width: 100%;
-      bottom: 25px;
-      height: 32vh;
-    }
 
-    div#columns figure {
-      min-width: 200px;
-      max-width: 400px;
-    }
-  }
+   div#columns figure {
+     min-width: 355px;
+     max-width: 355px;
+   }    
+ }
 
-  @media screen and (max-width:375px) {
-    .headerIcons{
-      float: none;
-      display: block;
-    }
-  }
-    
-  @media screen and (max-width: 320) {
+ @media screen and (max-width: 360px) {
+   div#columns figure {
+     min-width: 340px;
+     max-width: 340px;
+   }
+ }
 
-    .main_post_input{
-      width: 100%;
-      bottom: 0px;
-      height: 40px;
-    }
+ @media screen and (max-width: 320px) {
+   .mobNavMenu {
+     margin-top:0px; 
+     height: 35px;
+   }
+   
+   .main_post_input {
+     margin: 0px;
+     height: 40px;
+     bottom: 25px;
+   }
+
+   div#columns figure {
+     min-width: 300px;
+     max-width: 300px;
+     margin: 0px;
+   }
+
+   .mobNavMenu li{
+     margin-left: 35px;
+     margin-top: -12px;
+   }
+
+   .newchat_btn {
+     padding: 0px;
+     font-size: 70%; 
+   }
+
+   .change-avatar-tittle {
+    font-size: 80%;
   }
+  
+   .avatar-modal-btn{
+    width:45%;
+    font-size: 70%;
+  }
+  .avatarInput{
+    font-size: 70%;
+  }
+ }
+
+ @media screen and (max-width:240px) {
+   .mobNavMenu {
+     margin-top: 5px; 
+   }
+   
+   div#columns figure {
+     max-width: 230px;
+   }
+ }
