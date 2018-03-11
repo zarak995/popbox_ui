@@ -126,7 +126,6 @@ export class ViewchatComponent implements OnInit {
     }
 
 
-    alert(JSON.stringify(this.comment));
     if (this.comment.chatId != "") {
 
       this.chatService.saveNewPost(new Post(chat._id, this.comment.commentAvatarId,
@@ -136,7 +135,6 @@ export class ViewchatComponent implements OnInit {
             alert(data.message);
           } else {
             this.viewSelectedChat = data;
-            alert(JSON.stringify(chat));
             this.sortChatsAndPosts(this.viewSelectedChat);
             this.comment = null;
           }
