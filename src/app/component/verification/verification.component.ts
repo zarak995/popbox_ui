@@ -64,9 +64,8 @@ export class VerificationComponent implements OnInit {
       data => {
         if (data.status == 'failed' || data.status === 'error') {
           alert(data.message);
-        } else if (data.status == 'success') {
+        } else if (data.status === "success") {
           alert(data.message);
-          this.router.navigate(['/login']);
         }
 
       },
