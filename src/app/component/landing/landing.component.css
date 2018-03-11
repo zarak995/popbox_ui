@@ -1,11 +1,6 @@
 @font-face{font-family:'Calluna';
     src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
-   }
-   body {
-       background: url(//subtlepatterns.com/patterns/scribble_light.png);
-     font-family: Calluna, Arial, sans-serif;
-     min-height: 1000px;
-   }
+}
 
    .modal {
     display: none;
@@ -40,13 +35,12 @@
     font-size: 120%;
     text-align: center;
 }
-
    #columns {
     column-width: 310px;
     column-gap: 10px;
     width: 90%;
     max-width: 1920px;
-    margin: 50px auto;    
+    margin: 10px auto;    
    }
    
    div#columns figure {
@@ -57,7 +51,6 @@
     padding: 15px;
     min-width: 360px;
     padding-bottom: 10px;
-    transition: opacity .4s ease-in-out;
     display: inline-block; 
     column-break-inside: avoid;
     /*box-shadow: 0px 0.5px 0.5px 0.5px;
@@ -65,8 +58,7 @@
        padding-bottom: 10px;
        min-width: 30%;
        max-width: 100%;*/
-   }
-   
+   }  
    
    div#columns figure p {
        width: 100%; 
@@ -75,13 +67,6 @@
        padding-bottom: 15px;
        margin-bottom: 5px;
    }
-
-   div#columns figure img {
-    width: 100%; height: auto;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
-    margin-bottom: 5px;
-}
    
    div#columns figure figcaption {
      font-size: .9rem;
@@ -121,7 +106,7 @@
     display:inline-block; 
     height:10vh;
     width:93%;
-    border: solid green 1px;
+    border: solid darkgrey 3px;
    }
    
    .newchat_btn{
@@ -134,6 +119,11 @@
      display: none;
    }
 
+   .change-avatar-tittle {
+    width:100%; 
+    padding-bottom:10px; 
+    border-bottom:solid darkgray 1px
+  }
    .avatarInput{
     font-size:150%; 
     text-align: center; 
@@ -166,8 +156,9 @@
     width: 60px;
     left:0px; 
     top:0px;
-    background-color:darkgray;
-    color: white;
+    background-color: #993366;
+    opacity: 0.8;
+    color: whitesmoke;
     height: 100vh;
    }
 
@@ -191,7 +182,7 @@
      padding: 0px;
     width:100%;
     display: inline-block;
-    border-bottom:1px solid grey
+    border-bottom: solid #993366 1px;
   }
   
   .webheader{
@@ -209,8 +200,10 @@
 
   .comment_box{
     display:inline-block;
-     width:90%; 
+     width:90%;
      font-size: 80%;
+     margin-top: 5px;
+     border: solid darkgray 3px;
   }
 
   @media screen and (max-width:1024px) {
@@ -249,7 +242,7 @@
     }
 
     .mobNavMenu {
-      background-color:darkgray;   
+      background-color: #993366;   
       width: 100%;
       position: fixed;
       height: 50px;
@@ -263,7 +256,7 @@
       padding-top:0px; 
       margin-top: 0px;
       margin-bottom: 0px;
-      margin-left: 14%; 
+      margin-left: 20%; 
       }
       
     .mobNavMenu li:first-child {
@@ -324,6 +317,7 @@
       font-size: 60%;
       margin-top: 5px;
     }
+
     .avatarInput {
       font-size: 100%;
     }
@@ -352,12 +346,11 @@
     .mobNavMenu {
       margin-top:0px; 
       height: 35px;
-    }
-    
+    }    
     .main_post_input {
       margin: 0px;
       height: 40px;
-      bottom: 30px;
+      bottom: 25px;
     }
 
     div#columns figure {
@@ -366,13 +359,24 @@
     }
 
     .mobNavMenu li{
-      margin-left: 35px;
+      margin-left: 55px;
       margin-top: -12px;
     }
 
     .newchat_btn {
       padding: 0px;
       font-size: 70%; 
+    } 
+
+    .change-avatar-tittle {
+      font-size: 80%;
+    }
+    .avatar-modal-btn{
+      width:45%;
+      font-size: 70%;
+    }
+    .avatarInput{
+      font-size: 70%;
     }
   }
 
