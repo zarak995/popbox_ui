@@ -36,4 +36,12 @@ export class ChatService {
         headers: this.headers
       })
   }
+
+  getChats() {
+    return this.http.options(environment.host + environment.chatsRoute, {
+      method: 'GET',
+      headers: this.headers
+    })
+      .map(res => res.json());
+  }
 }
