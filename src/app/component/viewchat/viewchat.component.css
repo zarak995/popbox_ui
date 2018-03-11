@@ -78,13 +78,6 @@
        padding-bottom: 15px;
        margin-bottom: 5px;
    }
-
-   div#columns figure img {
-    width: 100%; height: auto;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
-    margin-bottom: 5px;
-}
    
    div#columns figure figcaption {
      font-size: .9rem;
@@ -127,7 +120,8 @@
    width: 60px;
    left:0px; 
    top:0px;
-   background-color:darkgray;
+   background-color: #993366;
+   opacity: 0.8;
    color: white;
    height: 100vh;
   }
@@ -142,19 +136,19 @@
     font-size:150%; 
     text-align: center; 
     margin-top:15px;
+    border: solid darkgray 3px;
    }
    .change-avatar-tittle {
-    width:100%; 
-    padding-bottom:10px; 
-    border-bottom:solid darkgray 1px
+    width:100%; padding-bottom:10px; 
+    border-bottom: solid #993366 1px;
   }
 
   .chat_card_header{
     margin: 0px;
     padding: 0px;
-   width:100%;
-   display: inline-block;
-   border-bottom:1px solid grey
+    width:100%;
+    display: inline-block;
+    border-bottom: solid #993366 1px;
  }
  
  .webheader{
@@ -174,7 +168,7 @@
   display:inline-block; 
   height:10vh;
   width:93%;
-  border: solid green 1px;
+  border: solid darkgray 3px;
  }
  
  .newchat_btn{
@@ -182,11 +176,13 @@
   display:inline-block; 
   height:10vh;
  }
+
  .comment_box{
   margin-top: 5px; 
   display:inline-block;
     width:90%; 
     font-size: 80%;
+    border: solid darkgray 3px;
  }
 
  @media screen and (max-width:1024px) {
@@ -225,11 +221,12 @@
    }
 
    .mobNavMenu {
-     background-color:darkgray;   
+    background-color:#993366;
      width: 100%;
      position: fixed;
      height: 50px;
      left: 0px;
+     border: green 1px solid;
      top: 90%;
      color: white;
    }
@@ -238,8 +235,8 @@
      display: inline-block;
      padding-top:0px; 
      margin-top: 0px;
-     margin-bottom: 0px;
-     margin-left: 14%; 
+     margin-bottom: 0px; 
+     margin-left: 25%; 
      }
      
    .mobNavMenu li:first-child {

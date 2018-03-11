@@ -1,14 +1,14 @@
 <div id="modal" class="modal">
   <div id="myCont" class="modal-content">
-    <header style="width:100%; padding-bottom:10px; border-bottom:solid darkgray 1px">
+    <header class="change-avatar-tittle">
       <i class="fa fa-edit fa-2x"></i>
       <label> Change Avatar Name </label>
     </header>
     <div [formGroup]="avatarForm">
       <div class="form-group" [ngClass]="{'has-danger': avatarForm.controls.avatarName.invalid && avatarForm.controls.avatarName.dirty,
         'has-success': avatarForm.controls.avatarName.valid && avatarForm.controls.avatarName.dirty}">
-        <input minlength="3" maxlength="25" formControlName="avatarName" class="form-control avatarInput"
-          type="text" [(ngModel)]="newAvatarName" placeholder="Enter new name">
+        <input minlength="3" maxlength="25" formControlName="avatarName" class="form-control avatarInput" type="text" [(ngModel)]="newAvatarName"
+          placeholder="Enter new name">
       </div>
     </div>
     <footer style="text-align: right; margin-top:20px">
@@ -35,13 +35,15 @@
           <div style="display:inline-block;">
             <label *ngIf="viewSelectedChat.post.length > 0" style="margin:0px">{{viewSelectedChat.post.length}}</label>
             <label *ngIf="viewSelectedChat.post.length == 0" style="margin:0px"></label>
-            <i class="fa fa-comment-o"></i>
+            <i *ngIf="viewSelectedChat.post.length > 0" style="color:#993366" class="fa fa-comment"></i>
+            <i *ngIf="viewSelectedChat.post.length == 0" class="fa fa-comment-o"></i>
           </div>
+
           <div style="margin-left:30px; display:inline-block; padding:0px;">
             <label *ngIf="viewSelectedChat.likes.length == 0" style="margin:0px"> </label>
             <label *ngIf="viewSelectedChat.likes.length > 0" style="margin:0px">
               {{viewSelectedChat.likes.length}}</label>
-            <i *ngIf="viewSelectedChat.isLiked" (click)="removeChatLike(viewSelectedChat)" style="color:#428bca;" class="fa fa-thumbs-o-up"></i>
+            <i *ngIf="viewSelectedChat.isLiked" (click)="removeChatLike(viewSelectedChat)" style="color:#669966;" class="fa fa-heart"></i>
             <i *ngIf="!viewSelectedChat.isLiked" (click)="createNewChatlike(viewSelectedChat)" class="fa fa-thumbs-o-up"></i>
           </div>
           <div style="margin-left:30px; display:inline-block; padding:0px;">

@@ -122,12 +122,13 @@
    .change-avatar-tittle {
     width:100%; 
     padding-bottom:10px; 
-    border-bottom:solid darkgray 1px
+    border-bottom: solid #993366 1px;
   }
    .avatarInput{
     font-size:150%; 
     text-align: center; 
     margin-top:15px;
+    border: solid darkgray 3px;
    }
    
    /*div#columns:hover figure:not(:hover) {
@@ -210,7 +211,7 @@
     .main_post_input{
       margin: 0px;
       height: 50px;
-      bottom: 11px;
+      bottom: 10px;
     }
     .newchat_input {
       margin:0px;
@@ -256,7 +257,7 @@
       padding-top:0px; 
       margin-top: 0px;
       margin-bottom: 0px;
-      margin-left: 20%; 
+      margin-left: 25%; 
       }
       
     .mobNavMenu li:first-child {
