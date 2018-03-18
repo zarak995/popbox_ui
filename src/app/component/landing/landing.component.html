@@ -32,7 +32,8 @@
           <p style="border:none; margin-top:0px;" (click)="viewOneChat(chat)">
             {{chat.body}}
           </p>
-          <div style="margin-left:5px; margin-bottom:5px; width:80%">
+          <hr style="width:100%">
+          <div style="margin-left:0px; margin-bottom:5px; width:100%">
             <div style="display:inline-block;">
               <label *ngIf="chat.post.length > 0" style="margin:0px">{{chat.post.length}}</label>
               <label *ngIf="chat.post.length == 0" style="margin:0px"></label>
@@ -45,9 +46,9 @@
               <i *ngIf="chat.isLiked" (click)="removeChatLike(chat)" style="color:#669966;" class="fa fa-heart"></i>
               <i *ngIf="!chat.isLiked" (click)="createNewChatlike(chat)" class="fa fa-thumbs-o-up"></i>
             </div>
-            <div style="margin-left:30px; display:inline-block; padding:0px;">
-              <i *ngIf="!chat.isReported" class="fa fa-thumbs-o-down" (click)="reportChat(chat)"></i>
-              <i *ngIf="chat.isReported" style="color:red" class=" fa fa-thumbs-down" (click)="unreportChat(chat)"></i>
+            <div style="margin-left:30px; float:right; padding:0px;">
+              <i *ngIf="!chat.isReported" style="float:right;" class="fa fa-flag-o" (click)="reportChat(chat)"></i>
+              <i *ngIf="chat.isReported" style="color:red" class=" fa fa-flag" (click)="unreportChat(chat)"></i>
             </div>
           </div>
           <div style="width:100%; display:block; margin-top:0px;" class="Chat_Comments_Div" *ngIf="chat.post.length > 0">

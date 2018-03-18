@@ -30,7 +30,7 @@
           <div class="row form-group" [ngClass]="{'has-danger': registerForm.controls.gender.invalid && registerForm.controls.gender.dirty,
           'has-success': registerForm.controls.gender.valid && registerForm.controls.gender.dirty}">
             <select formControlName="gender" class="form-control" name="reg_gender">
-              <option selected>--Select Gender--</option>
+              <option selected="selected">--Select Gender--</option>
               <option value="M"> Male </option>
               <option value="F">Female</option>
               <option value="O"> Other</option>
